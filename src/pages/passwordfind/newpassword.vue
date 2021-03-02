@@ -1,0 +1,144 @@
+<template>
+  <div class="newpassword">
+    <div class="phone">
+      <div class="phoneinput">
+        <input :type="pwdType" placeholder="请输入修改后的密码" class="input" maxlength="18" v-model="password"/>
+        <img src="src/assets/image/me/login/closeinput.svg" alt="" v-show="inputclose" class="close2" @click="inputclear">
+        <img :src="eye" alt="" class="close1" @click="changeType">
+      </div>
+      <div class="thinkbox">
+        <!--        input下的那条线-->
+      </div>
+    </div>
+    <div class="button-above" v-show="doubledisabled">
+    </div>
+    <van-button color="linear-gradient(to right, #ff6034, #ee0a24)" class="button" @click="messageGet">
+      获取验证码
+    </van-button>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "newpassword",
+  data() {
+    return {
+      pwdType: 'password',
+      passdisabled: false,
+      eye: require("../../assets/image/me/login/eyeclose.svg"),
+      password: '',
+      inputclose:false,
+
+    }
+  },
+  computed:{
+    doubledisabled(){
+      return !(this.passdisabled&&(!this.disabled))
+    }
+  },
+  props: ['disabled'],
+  watch: {
+    password() {
+      console.log(this.passdisabled)
+      console.log(this.disabled)
+
+      if (this.password.length === 0) {
+        this.passdisabled = false
+      } else {
+        this.passdisabled = true
+      }
+      if(this.password.length === 0){
+        this.inputclose=false
+      }else{
+        this.inputclose=true
+      }
+    }
+  },
+  methods: {
+    inputclear(){
+      this.password=""
+      this.inputclose=false
+      this.passdisabled=false
+    },
+    changeType() {
+      console.log(this.pwdType);
+      this.pwdType = this.pwdType === 'password' ? 'text' : 'password';
+      this.eye = this.eye == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
+    },
+    messageGet(){
+      this.$router.push('/loginmessage')
+    },
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+.newpassword
+  position absolute
+  width 100%
+  height 80%
+
+  .phone
+    position absolute
+    top 15%
+    left 9%
+    width 91%
+    height 7%
+
+    .phoneinput
+      position relative
+      width 82%
+      height 92%
+
+      .close1
+        position absolute
+        z-index 2
+        left 93%
+        top 20%
+        height 15px
+        width 15px
+      .close2
+        position absolute
+        z-index 1
+        left 75%
+        top -10%
+        height 30px
+        width 30px
+      .input
+        position relative
+        z-index 1
+        width 80%
+        height 90%
+        border none
+        outline: none
+        font-size 18px
+
+    .thinkbox
+      position: relative;
+      width: 410%;
+      height: 20%;
+      border-top: 1px solid black;
+      transform-origin: 0 0;
+      transform: scale(0.2, 0.2)
+
+  .button
+    position relative
+    top 25%
+    left 8%
+    width 82%
+    height 8%
+    font-size 14px
+    letter-spacing 1px
+    font-weight bold
+
+  .button-above
+    position absolute
+    top 25%
+    left 8%
+    width 82%
+    height 8%
+    background-color white
+    opacity 0.8
+    z-index 1
+
+</style>

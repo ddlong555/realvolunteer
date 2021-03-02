@@ -1,0 +1,140 @@
+<template>
+  <div class="me">
+    <div class="me-top">
+      <name></name>
+    </div>
+    <div class="main-bottom">
+      <div class="logo">
+        <div class="logo-img" :style="{backgroundImage:'url('+src+')'}">
+          <!--            <img class="ad-img" src="../../assets/image/me/boy.svg" alt=""/>-->
+        </div>
+        <div class="click-logo" v-if="!is_login" @click="gotologin">
+          <div class="click-logo-title">点击登录</div>
+        </div>
+        <div v-else class="click-logo">
+          <div>
+            <div>龙正武</div>
+            <div>硬币:{{ count }}</div>
+          </div>
+        </div>
+        <div class="toy">
+          <img :src="toy.boy" alt=""/>
+        </div>
+      </div>
+      <advertisement :src="this.src" class="ad">
+      </advertisement>
+      <me-bottom></me-bottom>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import advertisement from "@/components/common/advertisement/advertisement";
+import name from "@/pages/me/conent/name"
+import MeBottom from "@/pages/me/conent/MeBottom";
+
+export default {
+  name: "me",
+  components: {
+    advertisement,
+    name,
+    MeBottom,
+
+  },
+  data() {
+    return {
+      src: require("../../assets/image/test/ad.jpg"),
+      is_login: false,
+      toy:
+        {
+          boy: require('../../assets/image/me/boy.svg'),
+          girl: require('../../assets/image/me/girl.svg')
+        }
+    }
+  },
+  methods:{
+    gotologin(){
+      this.$router.push({
+        path: '/login',
+      });
+    },
+  }
+}
+</script>
+
+<style scoped>
+.me {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /*z-index: -1;*/
+}
+
+.me-top {
+  width: 100%;
+  height: 6%;
+  background-color: white;
+  margin: 0;
+}
+.main-bottom{
+  position: absolute;
+  width: 100%;
+  height: 86%;
+  margin: 0;
+  overflow: scroll;
+}
+.ad {
+  position: absolute;
+  width:90%;
+  height:13%;
+  left: 5%;
+  top:17%;
+  background-size: 100% 100%;
+  border-radius: 50px;
+}
+.logo {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 32%;
+}
+
+.click-logo {
+  position: absolute;
+  left: 25%;
+  top: 8%;
+  height: 60px;
+  width: 150px;
+}
+
+.click-logo-title {
+  position: absolute;
+  left: 8%;
+  height: 8%;
+  font-size: 17px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.logo-img {
+  position: absolute;
+  top: 8%;
+  left: 6%;
+  height: 65px;
+  width: 65px;
+  border-radius: 65px;
+  background-size: 100% 100%;
+}
+
+.toy {
+  position: absolute;
+  left: 70%;
+  top: 25%;
+}
+
+.toy img {
+  height: 50px;
+  width: 50px;
+}
+</style>
