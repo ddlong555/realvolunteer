@@ -28,17 +28,20 @@ export default {
       place:"上海普陀",
       declaration:"我志愿加入中国共产党，拥护党的纲领，遵守党的章程，履行党员义务，执行党的决定，严守党的纪律，保守党的秘密，对党忠诚，积极工作，为共产主义奋斗终身，随时准备为党和人民牺牲一切，永不叛党。",
     }
-  }
+  },
 }
 </script>
 
 <style scoped>
 .information{
-  border:black solid 2px;
+  dispaly: flex;
+  position:relative;
+  height: 35%;
+  width: 100%;
 }
 .inform{
   position:absolute;
-  top:23%;
+  top:10%;
   bottom:46%;
   left:1%;
   right:1%;
@@ -56,7 +59,7 @@ export default {
   border-color: darkgray;
   border-left:0px;
   border-right:0px;
-  margin:0.05px;
+  margin: 0.05px;
 }
 .inform1 li{
   list-style:url("../../../assets/image/teamdis/time.svg");
