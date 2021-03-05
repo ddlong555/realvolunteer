@@ -34,35 +34,25 @@
         推荐活动
       </div>
       <div class="act-gather">
-        <div class="act-single">
+        <div class="act-single" >
           <img src="../../../assets/image/test/ad.jpg" alt=""/>
           <div >
             华东师范大学志愿者招募
           </div>
         </div>
-        <div class="act-single">
-          <img src="../../../assets/image/test/ad.jpg" alt=""/>
-          <div >
-            华东师范大学志愿者招募
-          </div>
-        </div>
+
       </div>
       <div class="act-title">
         新闻专区
       </div>
       <div class="act-gather">
-        <div class="act-single" @click="newshow">
+        <div class="act-single" @click="newshow" v-for="(item,index) in msg" :key="index">
           <img src="../../../assets/image/test/ad.jpg" alt=""/>
           <div >
-            华东师范大学志愿者招募
+            {{ item.newsContent}}
           </div>
         </div>
-        <div class="act-single">
-          <img src="../../../assets/image/test/ad.jpg" alt=""/>
-          <div >
-            华东师范大学志愿者招募
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -75,6 +65,12 @@ export default {
   name: "top",
   components: {
     swiper
+  },
+  data(){
+    return {
+      activityId: 1,
+      msg:{}
+    }
   },
   methods:{
     newshow(){
@@ -89,7 +85,23 @@ export default {
     Gotoinforchange(){
       this.$router.push('/informationChange')
     }
-  }
+  },
+  created() {
+    this.$axios.get("/api/volunteer/activityNews/getActivityNewsByActivityId",
+        {
+          params:{
+            "activityId":1
+          }
+        })
+        .then((res) => {
+          if(res!=null)
+            this.msg=res.data.result;
+          console.log(this.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  },
 
 }
 </script>

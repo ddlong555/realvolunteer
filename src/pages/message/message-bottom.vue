@@ -16,7 +16,6 @@
         <message-single></message-single>
         <message-single></message-single>
         <message-single></message-single>
-
       </div>
     </div>
   </div>
