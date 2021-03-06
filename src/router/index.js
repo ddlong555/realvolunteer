@@ -138,7 +138,7 @@ const routes = [
     component: score
   },
   {
-    path:'/teamdisplay',
+    path:'/teamdis',
     component: teamdis
   },
   {

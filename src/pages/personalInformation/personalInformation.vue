@@ -74,7 +74,6 @@ export default {
       major:"软件工程",
       blood:"B",
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
-      background: require('../../assets/image/personalInformation/bg.jpeg'),
       plainLink: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 32
     }

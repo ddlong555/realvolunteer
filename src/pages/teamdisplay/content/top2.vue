@@ -57,35 +57,38 @@ export default {
   height :7%;
   width :100%;
   position:absolute;
-  background-color: darkgray;
+  box-shadow: 5px 5px 5px rgba(127,127,127,.4);
+  z-index: 2;
+  background-color: white;
 }
 .top2-img1{
   height:50px;
   width:50px;
   position:absolute;
-  top:2%;
+  top:20%;
   left:1%;
 }
-.top2-img1 img {
-  height:35px;
-  width:35px;
+.top2-img1 img{
+  height:25px;
+  width:25px;
 }
 .top2-title{
   position:absolute;
+  top: 10%;
   left:25%;
   right:10%;
 }
 .top2-title h{
   font-family: "siyuan";
-  font-size:35px;
+  font-size:25px;
 }
 .top2-img2{
   position:absolute;
-  top:1%;
-  left:93%;
+  top:20%;
+  right:1%;
 }
 .top2-img2 img{
-  height:37px;
-  width:37px;
+  height:25px;
+  width:25px;
 }
 </style>

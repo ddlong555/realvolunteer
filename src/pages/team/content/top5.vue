@@ -6,7 +6,6 @@
         <img @click="back" src="../../../assets/image/personalInformation/return.svg" alt=""/>
       </div>
     </div>
-    <div class="cross-line"></div>
   </div>
 </template>
 
@@ -31,14 +30,9 @@ export default {
   height :7%;
   width :100%;
   position:absolute;
+  box-shadow: 5px 5px 5px rgba(127,127,127,.4);
+  z-index: 2;
   background-color: white;
-}
-.cross-line{
-  position:absolute;
-  top:7%;
-  height:3%;
-  width:100%;
-  background:linear-gradient(darkgray,#f7f7f7);
 }
 .top-img1{
   height:50px;
@@ -48,8 +42,8 @@ export default {
   left:1%;
 }
 .top-img1 img {
-  height:40px;
-  width:40px;
+  height:25px;
+  width:25px;
 }
 .top h{
   position:absolute;
