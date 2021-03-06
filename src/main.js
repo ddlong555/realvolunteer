@@ -8,6 +8,13 @@ import "vue-dplayer/dist/vue-dplayer.css";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+import axios from 'axios'
+Vue.prototype.$axios = axios;
+console.log(Vue.prototype.$axios)
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios,axios)
+
 import './components.js'
 Vue.use(VueDPlayer);
 //图片放大
@@ -31,7 +38,6 @@ Vue.use(preview, option)
 //配置全局自定义设置
 import settings from '../src/assets/js/settings'
 //把settings赋值给Vue.prototype.$settings
-console.log(Vue.prototype)
 Vue.prototype.$settings=settings;
 
 import { Button } from 'vant';

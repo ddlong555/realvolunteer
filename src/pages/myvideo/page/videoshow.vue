@@ -61,6 +61,7 @@ export default {
   name: "about",
   data() {
     return {
+      msg:{},
       shlist:{
         appId: 1,
         timestamp: '2021.01.16',
@@ -114,6 +115,22 @@ export default {
   },
   mounted() {
     this.bodyHeight = document.documentElement.clientHeight
+  },
+  created() {
+    this.$axios.get("/api/volunteer/commentResponse/getVideoCommentResponseByCommentId",
+        {
+          params:{
+            commentId:1,
+          }
+        })
+        .then((res) => {
+          if(res!=null)
+            this.msg=res;
+          console.log(this.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   },
   methods: {
     videoreturn() {
