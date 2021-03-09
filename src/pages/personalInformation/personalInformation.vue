@@ -75,8 +75,25 @@ export default {
       blood:"B",
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
       plainLink: require('../../assets/image/personalInformation/xingzuo.svg'),
-      point: 32
+      point: 3,
+      msg:{},
     }
+  },
+  created() {
+    this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
+        {
+          params:{
+            "userId": 1
+          }
+        })
+        .then((res) => {
+          if(res!=null)
+            this.msg=res;
+          console.log(this.msg);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   },
   methods:{
     back(){
@@ -167,7 +184,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .plain li{
-  list-style:this.plainLink;
+  list-style:plainLink;
   font-size:20px;
 }
 .blood{
