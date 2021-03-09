@@ -29,16 +29,15 @@ export default {
       declaration:"我志愿加入中国共产党，拥护党的纲领，遵守党的章程，履行党员义务，执行党的决定，严守党的纪律，保守党的秘密，对党忠诚，积极工作，为共产主义奋斗终身，随时准备为党和人民牺牲一切，永不叛党。",
     }
   },
-
 }
 </script>
 
 <style scoped>
 .information{
-  dispaly: flex;
   position:relative;
-  height: 35%;
-  width: 100%;
+  left: 10%;
+  height: auto;
+  width: 80%;
 }
 .inform{
   position:absolute;
@@ -51,7 +50,7 @@ export default {
   color: black;
 }
 .inform1{
-  position:fixed;
+  position:relative;
   top:23%;
   left:1%;
   right:1%;
@@ -70,7 +69,7 @@ export default {
   border-bottom:0px;
 }
 .inform2{
-  position:fixed;
+  position:relative;
   top:27.5%;
   left:1%;
   right:1%;
@@ -90,7 +89,7 @@ export default {
   border-bottom:0px;
 }
 .inform3{
-  position:fixed;
+  position:relative;
   top:32%;
   left:1%;
   right:1%;
@@ -110,7 +109,7 @@ export default {
   border-bottom:0px;
 }
 .inform4{
-  position:fixed;
+  position:relative;
   top:38%;
   bottom:45%;
   left:1%;
@@ -123,6 +122,7 @@ export default {
   margin:0.1px;
 }
 .inform4 li{
+  display: flex;
   list-style:url("../../../assets/image/teamdis/declare.svg") ;
   border-style: none;
   border-right:0px;

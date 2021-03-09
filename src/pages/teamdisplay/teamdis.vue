@@ -1,11 +1,13 @@
 <template>
   <div class="teamdis">
-      <top2></top2>
-    <div class="bg-pic">
-      <img src="../../assets/image/teamdis/logo.svg">
+    <top2></top2>
+    <div class="overflow">
+      <div class="bg-pic">
+        <img src="../../assets/image/teamdis/logo.svg">
+      </div>
+      <information></information>
+      <volunteer></volunteer>
     </div>
-    <information></information>
-    <volunteer></volunteer>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default {
       top2,
       information,
       volunteer,
-    }
+    },
   }
 
 </script>
@@ -31,16 +33,22 @@ export default {
   height: 100%;
   width: 100%;
 }
+.overflow{
+  position: relative;
+  height: 90%;
+  width: 100%;
+  overflow: scroll;
+}
 .bg-pic{
-  position:absolute;
-  top:-10%;
-  left: 10%;
+  position:relative;
+  top: 0%;
+  left: 25%;
   height: 10%;
-  width: 80%;
+  width: 50%;
   z-index:0;
 }
 .bg-pic img{
-  height:300px;
-  width:300px;
+  height:100%;
+  width:100%;
 }
 </style>
