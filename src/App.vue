@@ -8,7 +8,7 @@
       </tab-bar-item>
       <tab-bar-item path="/activity">
         <img slot="item-icon" src="../src/assets/image/TabBar/activity.png" alt=""/>
-        <img slot="item-icon-active" src="../src/assets/image/TabBar/activity.png" alt=""/>
+        <img slot="item-icon-active" src="../src/assets/image/TabBar/activity1.png" alt=""/>
         <div slot="item-text">活动</div>
       </tab-bar-item>
       <tab-bar-item path="/myvideo">

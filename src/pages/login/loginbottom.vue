@@ -17,7 +17,7 @@
       </div>
     </div>
     <keep-alive>
-      <router-view :disabled="disabled"></router-view>
+      <router-view :disabled="disabled" :phone="mobile"></router-view>
     </keep-alive>
 
     <div class="file">

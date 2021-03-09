@@ -31,7 +31,7 @@ const team =() => import('../pages/team/team')
 const setting = () => import('../pages/setting/setting')
 const sendVideo = () => import('../pages/upload/sendVideo')
 const sendArticle = () => import('../pages/upload/sendArticle')
-
+const test = () => import('../pages/test')
 const routes = [
   {
     path: '',
@@ -164,6 +164,10 @@ const routes = [
   {
     path: '/setting',
     component: setting
+  },
+  {
+    path: '/test',
+    component: test
   },
 ]
 
