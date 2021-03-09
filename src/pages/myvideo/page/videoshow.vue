@@ -21,11 +21,8 @@
           <div class="blod">
             简介
           </div>
-          <button class="txt" >
+          <div class="txt">
             {{content}}
-          </button>
-          <div class="btn" @click="fold">
-            {{ videoactive ? '收起':'展示' }}
           </div>
         </div>
       </div>
@@ -68,7 +65,7 @@ export default {
         nonceStr: 'ddd',
         signature:'龙正武',
       },
-      content: '这个乐队我也不知道什么名字，但里面有个男生唱歌很好听。',
+      content: '这个乐队我也不知道什么名字，但里面有个男生唱歌很好听。这个乐队我也不知道什么名字，但里面有个男生唱歌很好听。',
       videoactive: false,
       src: require('../../../assets/image/test/b.jpg'),
       bodyHeight: 0,
@@ -294,21 +291,21 @@ export default {
   height: 60%;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
   top 15%
 }
 
-.btn {
-  position absolute
-  width: 10%;
-  height: 20%;
-  text-align center
-  z-index 1
-  left 50%
-  top: 200%;
-  color: #168bd0;
-}
+//.btn {
+//  position absolute
+//  width: 10%;
+//  height: 20%;
+//  text-align center
+//  z-index 1
+//  left 50%
+//  top: 200%;
+//  color: #168bd0;
+//}
 
 //.overhidden {
 //  display: -webkit-box;

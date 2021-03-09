@@ -22,17 +22,43 @@
 <script>
 export default {
   name: "login-phone-part",
-  data(){
-    return{
-
+  data() {
+    return {
+      response:{}
     }
   },
-  props: ['disabled'],
-  methods:{
-    messageget(){
-      this.$router.push('/loginmessage')
+  computed:{
+    phonenonews(){
+      return this.phone.replaceAll(" ","")
+    }
+  },
+  props: ['disabled', 'phone'],
+  methods: {
+    messageget() {
+      this.$axios.get('/api/volunteer/user/getVerifyCode', {
+        params:{
+          "tel":this.phonenonews
+        }
+      })
+          .then((res) => {
+            if(res!=null)
+              this.response=res;
+            console.log(this.response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      // this.$router.push({
+      //       path: '/loginmessage',
+      //       query:
+      //           {
+      //             phone: this.phone,
+      //             success:this.response.data.success
+      //           }
+      //     },
+      // )
     },
-    passfind(){
+    passfind() {
       this.$router.push('/passwordfind')
     }
   }

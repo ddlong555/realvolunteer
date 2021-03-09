@@ -7,7 +7,7 @@
           个人信息
         </div>
       </div>
-      <div class="widget-part">
+      <div class="widget-part" @click="test">
         <img src="../../../assets/image/me/score.svg" alt=""/>
         <div class="widget-part-title">
           我的积分
@@ -97,6 +97,9 @@ export default {
     },
     Gotoshop(){
       this.$router.push('/score')
+    },
+    test(){
+      this.$router.push('/test')
     }
 
   }

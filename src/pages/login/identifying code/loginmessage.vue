@@ -32,16 +32,33 @@ export default {
   },
   data() {
     return {
-      phone: "199 1654 1385",
+      phone: this.$route.query.phone,
       inputmessage:'',
-      bodyHeight:0
+      bodyHeight:0,
+      response:{}
     }
   },
   watch:{
     inputmessage(){
       if(this.inputmessage.length==4){
-        if(this.$route.query.code===0)
-         this.$router.push('/firstpage')
+        // this.$axios.post('/api/volunteer/user/login', {
+        //   phonename: this.phone,
+        //   identifying: this.inputmessage
+        // })
+        //     .then(function (response) {
+        //       this.response=response
+        //       console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //       console.log(error);
+        //     });
+        if(this.$route.query.code===0&&this.response.success)
+        {
+          this.$router.push('/firstpage')
+          // alert(this.response.result.userName+"登陆成功")
+        }
+
+
         else {
           this.$router.push('/newpassword')
         }
@@ -56,7 +73,7 @@ export default {
     this.bodyHeight=document.documentElement.clientHeight
   },
   created(){
-
+    console.log(this.$route.query.success)
   }
 }
 </script>
