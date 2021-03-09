@@ -50,7 +50,7 @@ export default {
 <style scoped>
 
 .top2{
-  height :10%;
+  height :7%;
   width :100%;
 }
 .top{

@@ -1,8 +1,9 @@
 <template>
 <div class="a1">
   <div class="a2">
-    dsafj;lkksadfjksjdflkajfdkjfdslfjds
+    dsafj;lkksadfjksjdflkajfdkjfdslfjds5466666666666666666666666666666666666666666666665555555555555555555555555555555555555555555555555555555555555555555555
   </div>
+
 </div>
 </template>
 
@@ -19,7 +20,9 @@ export default {
 }
 .a2{
   position: relative;
-  height:10%;
   width:100%;
+  white-space:normal;
+  word-break:break-all;
+  word-wrap:break-word;
 }
 </style>
