@@ -182,11 +182,13 @@ export default {
   margin-left: 5px;
   margin-bottom: 3px;
   float: left;
+
 }
 
 .dmain-single-photo-single img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .dmain-single-function {
@@ -200,14 +202,13 @@ export default {
   position: relative;
   width: 30%;
   heigth: 50%;
-  left: 15%;
+  margin-left: 12%;
   top: 30%;
-
 }
 
 .dmain-single-function-single img {
-  height: 15px;
-  width: 15px;
+  height: 18px;
+  width: 18px;
   float: left;
 }
 .dmain-single-function-single div{
@@ -215,7 +216,7 @@ export default {
   position:relative;
   left:9%;
   top:-2%;
-  font-size: 12px;
+  font-size: 17px;
   -webkit-transform-origin-x: 0;
   -webkit-transform: scale(0.80);
   color: #707070;

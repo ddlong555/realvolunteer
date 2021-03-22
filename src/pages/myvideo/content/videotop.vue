@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="videotop-children">
-      <div class="list" v-for="(item, index) in nav"  :key="index" >{{item}}</div>
+      <a href="#abc"><div class="list" v-for="(item, index) in nav"  :key="index" >{{item}}</div></a>
     </div>
   </div>
 </template>

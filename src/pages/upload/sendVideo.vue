@@ -57,7 +57,7 @@
     />
     <div class="sendBtn">
       <van-button type="info" round @click="send">发 布</van-button>
-      <van-button type="info" round plain>存草稿</van-button>
+<!--      <van-button type="info" round plain>存草稿</van-button>-->
     </div>
   </div>
 </template>
@@ -106,7 +106,18 @@ export default {
     saveTag() {
       this.tagShow = false;
     },
-    send() {},
+  //   send() {
+  //     this.$axios.post('/user', {
+  //       firstName: 'Fred',
+  //       lastName: 'Flintstone'
+  //     })
+  //         .then(function (response) {
+  //           console.log(response);
+  //         })
+  //         .catch(function (error) {
+  //           console.log(error);
+  //         });
+  //   },
   },
 };
 </script>
