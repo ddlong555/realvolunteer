@@ -35,6 +35,7 @@
     <transition>
       <router-view v-if="!$route.meta.keepalive"></router-view>
     </transition>
+    <lg-preview></lg-preview>
   </div>
 </template>
 

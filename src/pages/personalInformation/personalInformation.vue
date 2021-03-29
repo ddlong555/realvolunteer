@@ -97,7 +97,7 @@ export default {
   },
   methods:{
     back(){
-      this.$router.replace('/me')
+      this.$router.replace('/firstpage')
     }
   }
 }
@@ -123,31 +123,36 @@ export default {
 }
 .below{
   position:absolute;
-  top: 25%;
-  left: 5%;
+  top: 27%;
+  left: 10%;
   height:80%;
   width:80%;
 }
 .top3-img1{
-  margin-top: 10px;
-  margin-left: 10px;
+  height:50px;
+  width:50px;
+  position:absolute;
+  top:10%;
+  left:1%;
 }
 .top3-img1 img{
   height:25px;
   width:25px;
 }
 .top3-img2{
-  float: right;
-  margin-top: -30px;
-  margin-right: 10px;
+  position:absolute;
+  top:10%;
+  right:1%;
 }
 .top3-img2 img{
   height:25px;
   width:25px;
 }
 .circle{
-  margin-top: 60px;
-  margin-left: 20px;
+  position: absolute;
+  top: 8%;
+  left: 7%;
+  right: 50%;
 }
 .circle img{
   border-radius: 50%;
@@ -156,11 +161,12 @@ export default {
   height:100px;
 }
 .nickname{
-  margin-top: -120px;
-  margin-left: 27%;
+  position: absolute;
+  top: 8%;
+  left: 45%;
 }
 .nickname p{
-  font-size: 40px;
+  font-size: 30px;
   color: white;
 }
 .sexual{
@@ -168,6 +174,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .sexual li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/sexual.svg");
   font-size:20px;
 }
@@ -176,6 +183,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .age li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/age.svg");
   font-size:20px;
 }
@@ -184,6 +192,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .plain li{
+  padding: 5px 10px 5px;
   list-style:plainLink;
   font-size:20px;
 }
@@ -192,6 +201,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .blood li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/blood.svg");
   font-size:20px;
 }
@@ -200,6 +210,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .place li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/place.svg");
   font-size:20px;
 }
@@ -208,6 +219,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .major li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/major.svg");
   font-size:20px;
 }
@@ -216,6 +228,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .declaration li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/declare.svg");
   font-size:20px;
 }
@@ -224,6 +237,7 @@ export default {
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
 .point li{
+  padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/point.svg");
   font-size:20px;
 }
