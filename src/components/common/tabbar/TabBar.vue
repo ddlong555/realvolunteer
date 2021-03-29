@@ -39,6 +39,7 @@ export default {
 
 <style scoped>
 .tar-bar {
+  height:8%;
   display: flex;
   background-color: #ffffff;
   position: absolute;
