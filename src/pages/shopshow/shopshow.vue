@@ -82,26 +82,26 @@ export default {
 <style lang="stylus" scoped>
 .shopshow
   position absolute
+  background-color white
   width 100%
   height 100%
 
   .content
-    position absolute
-    top 7%
+    position relative
     width 100%
     height: 86%
     overflow scroll
 
     .swiper
-      position absolute
+      position relative
       width 100%
       height 39%
 
     .name
-      position absolute
+      position relative
       width 100%
       height: 13%
-      top: 38%
+      z-index 3
       background-color white
 
       .title
@@ -131,7 +131,6 @@ export default {
 
         .honey
           position relative
-          top -15%
           width 20px
           height 20px
 
@@ -147,10 +146,9 @@ export default {
           top 8%
 
     .introduction
-      position absolute
+      position relative
       width 100%
       height 62%
-      top 52%
 
     img
       width 100%

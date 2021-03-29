@@ -37,8 +37,7 @@ export default {
   data() {
     return {
       images: [
-        'http://img01.yzcdn.cn/vant/apple-1.jpg',
-        'http://img01.yzcdn.cn/vant/apple-2.jpg',
+        require("../../assets/image/test/d.jpg"),require("../../assets/image/test/b.jpg")
       ]
 
     };
