@@ -32,6 +32,7 @@ const setting = () => import('../pages/setting/setting')
 const sendVideo = () => import('../pages/upload/sendVideo')
 const sendArticle = () => import('../pages/upload/sendArticle')
 const test = () => import('../pages/test')
+const activityDisplay = () => import('../pages/activityDisplay/activityDisplay')
 const routes = [
   {
     path: '',
@@ -168,6 +169,10 @@ const routes = [
   {
     path: '/test',
     component: test
+  },
+  {
+    path: '/activityDisplay',
+    component: activityDisplay
   },
 ]
 

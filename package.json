@@ -29,6 +29,7 @@
     "vue-loader": "^15.9.6",
     "vue-pdf": "^4.2.0",
     "vue-photo-preview": "^1.1.3",
+    "vue-picture-preview": "^2.0.1",
     "vue-router": "^3.0.7",
     "vuex": "^3.6.0"
   },
