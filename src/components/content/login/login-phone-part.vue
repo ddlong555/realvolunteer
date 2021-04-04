@@ -24,7 +24,8 @@ export default {
   name: "login-phone-part",
   data() {
     return {
-      response:{}
+      response:{},
+      success: 1,
     }
   },
   computed:{
@@ -35,28 +36,28 @@ export default {
   props: ['disabled', 'phone'],
   methods: {
     messageget() {
-      this.$axios.get('/api/volunteer/user/getVerifyCode', {
-        params:{
-          "tel":this.phonenonews
-        }
-      })
-          .then((res) => {
-            if(res!=null)
-              this.response=res;
-            console.log(this.response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      // this.$router.push({
-      //       path: '/loginmessage',
-      //       query:
-      //           {
-      //             phone: this.phone,
-      //             success:this.response.data.success
-      //           }
-      //     },
-      // )
+      // this.$axios.get('/api/volunteer/user/getVerifyCode', {
+      //   params:{
+      //     "tel":this.phonenonews
+      //   }
+      // })
+      //     .then((res) => {
+      //       if(res!=null)
+      //         this.response=res;
+      //       console.log(this.response);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+      this.$router.push({
+            path: '/loginmessage',
+            query:
+                {
+                  phone: this.phone,
+                  success:this.success
+                }
+          },
+      )
     },
     passfind() {
       this.$router.push('/passwordfind')

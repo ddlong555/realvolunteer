@@ -1,10 +1,24 @@
 <template>
   <div class="newpassword">
-    <div class="phone">
+    <logintop></logintop>
+    <div class="title">
+      <div>修改密码</div>
+    </div>
+    <div class="codeChange">
       <div class="phoneinput">
-        <input :type="pwdType" placeholder="请输入修改后的密码" class="input" maxlength="18" v-model="password"/>
-        <img src="src/assets/image/me/login/closeinput.svg" alt="" v-show="inputclose" class="close2" @click="inputclear">
-        <img :src="eye" alt="" class="close1" @click="changeType">
+        <input :type="pwdType1" placeholder="请输入修改后的密码" class="input" maxlength="18"  v-model="password1"/>
+        <img src="../../assets/image/me/login/closeinput.svg" alt="" v-show="inputClose1" class="close2" @click="inputClear1">
+        <img :src="eye1" alt="" class="close1" @click="changeType1">
+      </div>
+      <div class="thinkbox">
+        <!--        input下的那条线-->
+      </div>
+    </div>
+    <div class="codeAgain">
+      <div class="phoneinput">
+        <input :type="pwdType2" placeholder="请再次输入密码" class="input" maxlength="18"  v-model="password2"/>
+        <img src="../../assets/image/me/login/closeinput.svg" alt="" v-show="inputClose2" class="close2" @click="inputClear2">
+        <img :src="eye2" alt="" class="close1" @click="changeType2">
       </div>
       <div class="thinkbox">
         <!--        input下的那条线-->
@@ -19,54 +33,80 @@
 </template>
 
 <script>
+import Logintop from "@/pages/login/logintop";
 export default {
   name: "newpassword",
+  components: {Logintop},
   data() {
     return {
-      pwdType: 'password',
-      passdisabled: false,
-      eye: require("../../assets/image/me/login/eyeclose.svg"),
-      password: '',
-      inputclose:false,
-
+      pwdType1: 'password',
+      pwdType2: 'password',
+      passDisabled1: false,
+      passDisabled2: false,
+      eye1: require("../../assets/image/me/login/eyeclose.svg"),
+      eye2: require("../../assets/image/me/login/eyeclose.svg"),
+      password1: '',
+      password2: '',
+      inputClose1:false,
+      inputClose2:false,
     }
   },
   computed:{
     doubledisabled(){
-      return !(this.passdisabled&&(!this.disabled))
+      return !((this.passDisabled1 && this.passDisabled2) && (this.password1 === this.password2))
     }
   },
-  props: ['disabled'],
   watch: {
-    password() {
-      console.log(this.passdisabled)
-      console.log(this.disabled)
-
-      if (this.password.length === 0) {
-        this.passdisabled = false
+    password1() {
+      console.log(this.passDisabled1)
+      if (this.password1.length === 0) {
+        this.passDisabled1 = false
       } else {
-        this.passdisabled = true
+        this.passDisabled1 = true
       }
-      if(this.password.length === 0){
-        this.inputclose=false
+      if(this.password1.length === 0){
+        this.inputClose1=false
       }else{
-        this.inputclose=true
+        this.inputClose1=true
+      }
+    },
+    password2() {
+      console.log(this.passDisabled2)
+      if (this.password2.length === 0) {
+        this.passDisabled2 = false
+      } else {
+        this.passDisabled2 = true
+      }
+      if(this.password2.length === 0){
+        this.inputClose2=false
+      }else{
+        this.inputClose2=true
       }
     }
   },
   methods: {
-    inputclear(){
-      this.password=""
-      this.inputclose=false
-      this.passdisabled=false
+    inputClear1(){
+      this.password1=""
+      this.inputclose1=false
+      this.passdisabled1=false
     },
-    changeType() {
-      console.log(this.pwdType);
-      this.pwdType = this.pwdType === 'password' ? 'text' : 'password';
-      this.eye = this.eye == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
+    inputClear2(){
+      this.password2=""
+      this.inputclose2=false
+      this.passdisabled2=false
+    },
+    changeType1() {
+      console.log(this.pwdType1);
+      this.pwdType1 = this.pwdType1 === 'password' ? 'text' : 'password';
+      this.eye1 = this.eye1 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
+    },
+    changeType2() {
+      console.log(this.pwdType2);
+      this.pwdType2 = this.pwdType2 === 'password' ? 'text' : 'password';
+      this.eye2 = this.eye2 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
     messageGet(){
-      this.$router.push('/loginmessage')
+      this.$router.push('/login/passwordlogin')
     },
   }
 }
@@ -78,9 +118,23 @@ export default {
   width 100%
   height 80%
 
-  .phone
+  .title
+    position relative
+    left: 9%
+    top 13%
+    width 80%
+    height 10%
+
+  .title div
     position absolute
-    top 15%
+    top 15%;
+    width: 100%;
+    font-size 22px;
+    letter-spacing 1px
+
+  .codeChange
+    position absolute
+    top 25%
     left 9%
     width 91%
     height 7%
@@ -112,6 +166,52 @@ export default {
         border none
         outline: none
         font-size 18px
+        background #f7f7f7
+
+    .thinkbox
+      position: relative;
+      width: 410%;
+      height: 20%;
+      border-top: 1px solid black;
+      transform-origin: 0 0;
+      transform: scale(0.2, 0.2)
+
+  .codeAgain
+    position absolute
+    top 35%
+    left 9%
+    width 91%
+    height 7%
+
+    .phoneinput
+      position relative
+      width 82%
+      height 92%
+      background-color #f7f7f7
+
+      .close1
+        position absolute
+        z-index 2
+        left 93%
+        top 20%
+        height 15px
+        width 15px
+      .close2
+        position absolute
+        z-index 1
+        left 75%
+        top -10%
+        height 30px
+        width 30px
+      .input
+        position relative
+        z-index 1
+        width 80%
+        height 90%
+        border none
+        outline: none
+        font-size 18px
+        background #f7f7f7
 
     .thinkbox
       position: relative;
@@ -122,8 +222,8 @@ export default {
       transform: scale(0.2, 0.2)
 
   .button
-    position relative
-    top 25%
+    position absolute
+    top 45%
     left 8%
     width 82%
     height 8%
@@ -133,7 +233,7 @@ export default {
 
   .button-above
     position absolute
-    top 25%
+    top 45%
     left 8%
     width 82%
     height 8%
