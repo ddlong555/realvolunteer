@@ -40,7 +40,6 @@ export default {
     advertisement,
     name,
     MeBottom,
-
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 
-// 接口测试
+//接口测试
 // module.exports = {
 //     outputDir: 'dist',   //build输出目录
 //     assetsDir: 'assets', //静态资源目录（js, css, img）
@@ -12,7 +12,8 @@
 //         hotOnly: false,
 //         proxy: {
 //             '/api': {
-//                 target: 'http://172.30.245.72:8080', //API服务器的地址
+//                 target: 'http://172.30.194.204:8080', //API服务器的地址
+
 //                 changeOrigin: true,
 //                 pathRewrite: {
 //                     '^/api': ''
@@ -26,7 +27,7 @@
 
 module.exports = {
     devServer: {
-        host: "172.30.204.113",
+        host: "172.30.253.27",
         port: 8080  //配置端口
     }
 }
