@@ -29,13 +29,26 @@
     </div>
     <div class="act-nav">
       <div class="router">
-        <div>已关注</div>
-        <div>已报名</div>
-        <div>已发布</div>
-        <div>已参加</div>
+        <a href="javascript:void(0);" @click="goAnchor('followed')">已关注</a>
+        <a href="javascript:void(0);" @click="goAnchor('booked')">已报名</a>
+        <a href="javascript:void(0);" @click="goAnchor('released')">已发布</a>
+        <a href="javascript:void(0);" @click="goAnchor('participated')">已参加</a>
       </div>
     </div>
     <div class="act">
+      <div class="Anchorpoint" id="followed"></div>
+      <div v-for="count in 5" :key="count">
+        <div class="act-part">
+          <img src="../../../assets/image/me/sun.svg" alt=""/>
+          <div class="act-part-title">
+            华师大垃圾分类监督员
+          </div>
+          <div class="act-part-number">
+            5
+          </div>
+        </div>
+      </div>
+      <div class="Anchorpoint" id="booked"></div>
       <div class="act-part">
         <img src="../../../assets/image/me/sun.svg" alt=""/>
         <div class="act-part-title">
@@ -45,6 +58,7 @@
           5
         </div>
       </div>
+      <div class="Anchorpoint" id="released"></div>
       <div class="act-part">
         <img src="../../../assets/image/me/sun.svg" alt=""/>
         <div class="act-part-title">
@@ -54,24 +68,7 @@
           5
         </div>
       </div>
-      <div class="act-part">
-        <img src="../../../assets/image/me/sun.svg" alt=""/>
-        <div class="act-part-title">
-          华师大垃圾分类监督员
-        </div>
-        <div class="act-part-number">
-          5
-        </div>
-      </div>
-      <div class="act-part">
-        <img src="../../../assets/image/me/sun.svg" alt=""/>
-        <div class="act-part-title">
-          华师大垃圾分类监督员
-        </div>
-        <div class="act-part-number">
-          5
-        </div>
-      </div>
+      <div class="Anchorpoint" id="participated"></div>
       <div class="act-part">
         <img src="../../../assets/image/me/sun.svg" alt=""/>
         <div class="act-part-title">
@@ -88,20 +85,25 @@
 <script>
 export default {
   name: "MeBottom",
-  methods:{
-    Gotoperson(){
+  methods: {
+    Gotoperson() {
       this.$router.push('/personalInformation')
     },
-    Gotomessage(){
+    Gotomessage() {
       this.$router.push('/message')
     },
-    Gotoshop(){
+    Gotoshop() {
       this.$router.push('/score')
     },
-    test(){
+    test() {
       this.$router.push('/test')
+    },
+    goAnchor(e) {
+      document.getElementById(e).scrollIntoView({
+        behavior: "smooth",  // 平滑过渡
+        block: "start"  // 上边框与视窗顶部平齐。默认值
+      });
     }
-
   }
 }
 </script>
@@ -110,7 +112,7 @@ export default {
 .me-bottom {
   width: 100%;
   position: absolute;
-  height:68%;
+  height: 68%;
 }
 
 .widget {
@@ -141,7 +143,7 @@ export default {
   left: 2%;
 }
 
-.router div {
+.router a {
   position: relative;
   left: 15px;
   margin-right: 15px;
@@ -152,10 +154,11 @@ export default {
 .act {
   width: 96%;
   height: 98%;
-  position: absolute;
+  position: relative;
   top: 32%;
   left: 2%;
 }
+
 .act-part {
   display: flex;
   width: 96%;
@@ -213,5 +216,11 @@ export default {
   font-size: 10px;
   height: 30px;
   width: 70px;
+}
+
+.Anchorpoint {
+  position: relative;
+  height: 0;
+  width: 100%;
 }
 </style>

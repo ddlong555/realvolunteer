@@ -32,6 +32,8 @@ export default {
   name: "passwordlogin",
   data() {
     return {
+      //pwdType为input的type值，passdisabled为密码是否填入的bool值，eye为密码遮盖图片url，
+      // password为密码值，inputclose为控制input的叉号是否展示bool值
       pwdType: 'password',
       passdisabled: false,
       eye: require("../../../assets/image/me/login/eyeclose.svg"),
@@ -45,11 +47,10 @@ export default {
       return !(this.passdisabled && (!this.disabled))
     }
   },
+  //disabled表示是否账号输入符合规定
   props: ['disabled'],
   watch: {
     password() {
-      console.log(this.passdisabled)
-      console.log(this.disabled)
 
       if (this.password.length === 0) {
         this.passdisabled = false
