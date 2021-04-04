@@ -15,7 +15,7 @@ export default {
   methods:{
     back() {
       // console.log(this.$router);
-      this.$router.replace('/me')
+      this.$router.back()
     }
   }
 }

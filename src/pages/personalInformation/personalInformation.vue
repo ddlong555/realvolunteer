@@ -26,8 +26,8 @@
       <ul class="age">
         <li>{{month}}月{{day}}日（公历）</li>
       </ul>
-      <ul class="plain" :style="{'list-style':'url('+plainLink+')'}">
-        <li>{{plain}} </li>
+      <ul class="sign" :style="{'list-style':'url('+sign+')'}">
+        <li>{{signWord}} </li>
       </ul>
       <ul class="blood">
         <li>{{blood}}型 </li>
@@ -70,11 +70,11 @@ export default {
       month:12,
       day:7,
       place:"中国-上海",
-      plain:"射手座",
+      signWord:"射手座",
       major:"软件工程",
       blood:"B",
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
-      plainLink: require('../../assets/image/personalInformation/xingzuo.svg'),
+      sign: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 3,
       msg:{},
     }
@@ -187,11 +187,11 @@ export default {
   list-style:url("../../assets/image/personalInformation/age.svg");
   font-size:20px;
 }
-.plain{
+.sign{
   border-radius:50px;
   box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
 }
-.plain li{
+.sign li{
   padding: 5px 10px 5px;
   list-style:plainLink;
   font-size:20px;
