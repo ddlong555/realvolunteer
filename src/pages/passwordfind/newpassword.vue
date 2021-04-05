@@ -27,7 +27,7 @@
     <div class="button-above" v-show="doubledisabled">
     </div>
     <van-button color="linear-gradient(to right, #ff6034, #ee0a24)" class="button" @click="messageGet">
-      获取验证码
+      修改密码
     </van-button>
   </div>
 </template>
@@ -106,7 +106,7 @@ export default {
       this.eye2 = this.eye2 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
     messageGet(){
-      this.$router.push('/login/passwordlogin')
+      this.$router.push('/firstpage')
     },
   }
 }
