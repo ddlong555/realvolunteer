@@ -63,7 +63,6 @@ export default {
                 }),)
                     .then(function (response) {
                       that.response = response;
-                      that.$store.commit('saveToken',response.headers.token)
                       console.log(response);
                     })
                     .catch(function (error) {

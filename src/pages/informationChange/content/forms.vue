@@ -2,12 +2,12 @@
   <div class="forms">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="昵称">
-        <el-col class="place" :span="12">
-          <el-input v-model="form.place" placeholder="请输入昵称"></el-input>
+        <el-col class="nickname" :span="20">
+          <el-input v-model="form.nickname" placeholder="" clearable></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="性别">
-        <el-select v-model="form.sexual" placeholder="请选择">
+        <el-select v-model="form.sexual" placeholder="" clearable>
           <el-option
             v-for="item in sexual"
             :key="item.value"
@@ -17,8 +17,8 @@
         </el-select>
       </el-form-item>
       <el-form-item label="生日">
-        <el-col class="month" :span="6">
-          <el-select v-model="form.month" placeholder="请选择">
+        <el-col class="month" :span="8">
+          <el-select v-model="form.month" placeholder="" clearable>
             <el-option
               v-for="item in month"
               :key="item.value"
@@ -27,9 +27,9 @@
             </el-option>
           </el-select>
         </el-col>
-        <el-col class="line" :span="1">月</el-col>
-        <el-col class="date" :span="6">
-          <el-select v-model="form.date" placeholder="请选择">
+        <el-col class="line" :span="2">月</el-col>
+        <el-col class="date" :span="8">
+          <el-select v-model="form.date" placeholder="" clearable>
             <el-option
               v-for="item in date"
               :key="item.value"
@@ -41,29 +41,32 @@
         <el-col class="line" :span="1">日</el-col>
       </el-form-item>
       <el-form-item label="地点">
-        <el-col class="place" :span="12">
-          <el-input v-model="form.place" placeholder="请输入地点"></el-input>
+        <el-col class="place" :span="20">
+          <el-input v-model="form.place" placeholder="" clearable></el-input>
         </el-col>
       </el-form-item>
-      <el-form-item label="宣言">
+      <el-form-item label="专业">
+        <el-col class="major" :span="20" clearable>
+          <el-input v-model="form.major" placeholder="" clearable></el-input>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="宣言" >
         <el-col class="declaration" :span="20">
           <el-input
             type="textarea"
             :rows="4"
             placeholder="请输入内容"
-            v-model="form.textarea">
+            v-model="form.textarea"
+            maxlength="50"
+            show-word-limit
+            clearable>
           </el-input>
-        </el-col>
-      </el-form-item>
-      <el-form-item label="修改密码">
-        <el-col class="place" :span="20">
-          <el-input v-model="form.code" placeholder="请输入密码" show-password></el-input>
         </el-col>
       </el-form-item>
     </el-form>
     <el-row class="buttons">
       <el-button type="primary" plain @click="success">保存信息</el-button>
-      <el-button type="info" plain @click="code">退出</el-button>
+      <el-button type="info" plain @click="code">重置</el-button>
     </el-row>
   </div>
 </template>
@@ -212,12 +215,13 @@ export default {
         label:'31'
       },],
       form:{
+        nickname:'',
         sexual:'',
         month:'',
         date:'',
         place:'',
+        major:'',
         textarea:'',
-        code:'',
       },
     }
   },
@@ -225,6 +229,16 @@ export default {
     success(){
       alert("保存成功！")
     },
+    code() {
+      // this.nickname = ''
+      // this.sexual = ''
+      // this.month = ''
+      // this.date = ''
+      // this.place = ''
+      // this.textarea = ''
+      // this.major = ''
+      location.reload()
+    }
   }
 }
 </script>
@@ -232,9 +246,10 @@ export default {
 <style scoped>
 .forms{
   position:absolute;
+  width: 100%;
   top:15%;
 }
 .buttons{
-  left:15%;
+  left:22%;
 }
 </style>

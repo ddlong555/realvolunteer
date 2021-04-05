@@ -34,6 +34,7 @@ export default {
       bodyHeight:0
     }
   },
+  props:["phone"],
   methods:{
     back(){
       this.$router.back();
@@ -45,7 +46,7 @@ export default {
       this.$router.push({
         path: '/loginmessage',
         query: {
-          phone: '19916541385',
+          phone: this.phone,
           code: 1            //1为找回密码，0为登录
         }
       });
