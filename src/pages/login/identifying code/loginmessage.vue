@@ -11,70 +11,93 @@
     <div class="title">
       输入验证码
     </div>
-    <div class="little-title">
+    <div class="little-title" @click="jkh">
       验证码已发送至{{ phone }}
     </div>
     <div class="inputmessage">
       <input class="input" maxlength="13" v-model="inputmessage" type="number"/>
-        <div v-for="index in 4" :key="index" class="line">
-        </div>
+      <div v-for="index in 6" :key="index" class="line">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import qs from "qs";
+
 export default {
   name: "passwordfind",
   methods: {
     back() {
       this.$router.back()
+    },
+    jkh(){
+      alert(this.phone)
     }
   },
   data() {
     return {
-      phone: this.$route.query.phone,
-      inputmessage:'',
-      bodyHeight:0,
-      response:{}
+      phone: this.$route.query.phone.replaceAll(' ',''),
+      inputmessage: '',
+      bodyHeight: 0,
+      response: {}
     }
   },
-  watch:{
-    inputmessage(){
-      if(this.inputmessage.length==4){
-        // this.$axios.post('/api/volunteer/user/login', {
-        //   phonename: this.phone,
-        //   identifying: this.inputmessage
-        // })
-        //     .then(function (response) {
-        //       this.response=response
-        //       console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //       console.log(error);
-        //     });
-        if(this.$route.query.code===0&&this.response.success)
-        {
-          this.$router.push('/firstpage')
-          // alert(this.response.result.userName+"登陆成功")
-        }
+  watch: {
+    inputmessage() {
+      if (this.inputmessage.length == 6) {
+        var that =this;
+        this.$axios.post("https://api2.bmob.cn/1/verifySmsCode/"+this.inputmessage, {
+          "mobilePhoneNumber": this.phone,
+            }, {
+              headers: {
+                "X-Bmob-Application-Id":"37449b43508f392a2a67166cd97d5334",
+                "X-Bmob-REST-API-Key":"b53e7354418986ef64d7e8b64a0174b6",
+                "Content-Type":"application/json"
+              }
+            })
+            .then(function (e) {
+              if (e.data.msg=='ok') {
+                that.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
+                  "tel": that.phone,
+                }),)
+                    .then(function (response) {
+                      that.response = response;
+                      console.log(response);
+                    })
+                    .catch(function (error) {
+                      console.log(that.phone);
+                      console.log(error);
+                    });
+                if(that.$route.query.code === 0)
+                   that.$router.push('/firstpage')
+                if(that.$route.query.code === 1)
+                  that.$router.push('/newpassword')
+              }
+              console.log(that.$route.query.code)
+              console.log(e);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
 
-
-        else {
-          this.$router.push('/newpassword')
-        }
+        // if (this.$route.query.code === 0 && this.response.success) {
+        //   this.$router.push('/firstpage')
+        //   // alert(this.response.result.userName+"登陆成功")
+        // } else {
+        //   this.$router.push('/newpassword')
+        // }
       }
     }
   },
-   mounted(){
-     if (location.href.indexOf("#reloaded") == -1) {
-       location.href = location.href + "#reloaded";
-       location.reload();
-     }
-    this.bodyHeight=document.documentElement.clientHeight
+  mounted() {
+    if (location.href.indexOf("#reloaded") == -1) {
+      location.href = location.href + "#reloaded";
+      location.reload();
+    }
+    this.bodyHeight = document.documentElement.clientHeight
   },
-  created(){
-    console.log(this.$route.query.success)
-  }
+
 }
 </script>
 

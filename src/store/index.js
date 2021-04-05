@@ -1,14 +1,31 @@
-import Vuex from 'vuex'
-import Vue from 'vue'
+import Vue from "vue"
+import Vuex from "vuex"
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const store = new Vuex.Store({
-  state: {
-
-  },       //状态管理
-  mutations: {},   //修改state
-  actions: {},    //异步操作
-  modules: {}     //模块
+export default new Vuex.Store({
+  state:{
+    pathName: "",
+    currDbSource: {},
+    currJobData: {},
+    Token:"",
+  },
+  mutations:{
+    // 保存当前菜单栏的路径
+    savePath(state,pathName){
+      state.pathName = pathName;
+    },
+    // 保存当前点击的数据源
+    saveCurrDbSource(state,currDbSource){
+      state.currDbSource = currDbSource;
+    },
+    // 保存当前点击的元数据
+    saveCurrJobData(state,currJobData){
+      state.currJobData = currJobData;
+    },
+    // 保存所有数据源
+    saveToken(state,Token){
+      state.Token = Token;
+    }
+  }
 })
-export default store
