@@ -13,11 +13,12 @@ export default {
       offsetTop: 0
     }
   },
-
+  mounted(){
+    console.log(this.$store.getters.getToken);
+  },
   methods: {
     //这里通过isFixed去控制你的吸顶效果得实现
     initHeight() {
-      this.$store.commit('saveToken',"2")
       console.log(this.$store.getters.getToken);
     }
 

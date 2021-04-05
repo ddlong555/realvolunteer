@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="videotop-children">
-      <a href="#abc"><div class="list" v-for="(item, index) in nav"  :key="index" >{{item}}</div></a>
+      <div class="list"  v-for="(item, index) in nav"  :key="index" @click="clicknav" :class="{'listClick' : isClick}">{{item}}</div>
     </div>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
   data() {
     return {
       nav: ['技术援助','教育','待定1','待定2','待定3','待定2','待定3'],
-      currentIndex: 1
+      currentIndex: 1,
+      isClick:true,
     }
   },
   created() {
@@ -29,6 +30,9 @@ export default {
   methods:{
     Gotosendvideo(){
       this.$router.push('/sendVideo')
+    },
+    clicknav(){
+
     }
   }
 }
@@ -40,6 +44,8 @@ export default {
   position: absolute;
   width:100%;
   height:12%;
+  /*background-color: #e04438;*/
+  /*color:white;*/
 }
 .videotop-top {
   position: absolute;
@@ -89,5 +95,8 @@ export default {
   height:100%;
   margin-right: 5%;
   margin-left: 5%;
+}
+.listClick{
+
 }
 </style>
