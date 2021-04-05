@@ -14,7 +14,6 @@ console.log(Vue.prototype.$axios)
 import VueAxios from 'vue-axios'
 import store from './store/index'
 Vue.use(VueAxios,axios)
-
 import './components.js'
 Vue.use(VueDPlayer);
 //图片放大
