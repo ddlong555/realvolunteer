@@ -3,8 +3,7 @@
     <div class="phone">
       <div class="phoneinput">
         <input :type="pwdType" placeholder="请输入修改后的密码" class="input" maxlength="18" v-model="password"/>
-        <img src="src/assets/image/me/login/closeinput.svg" alt="" v-show="inputclose" class="close2"
-             @click="inputclear">
+        <img src="src/assets/image/me/login/closeinput.svg" alt="" v-show="inputclose" class="close2" @click="inputclear">
         <img :src="eye" alt="" class="close1" @click="changeType">
       </div>
       <div class="thinkbox">
@@ -28,13 +27,13 @@ export default {
       passdisabled: false,
       eye: require("../../assets/image/me/login/eyeclose.svg"),
       password: '',
-      inputclose: false,
+      inputclose:false,
 
     }
   },
-  computed: {
-    doubledisabled() {
-      return !(this.passdisabled && (!this.disabled))
+  computed:{
+    doubledisabled(){
+      return !(this.passdisabled&&(!this.disabled))
     }
   },
   props: ['disabled'],
@@ -48,30 +47,26 @@ export default {
       } else {
         this.passdisabled = true
       }
-      if (this.password.length === 0) {
-        this.inputclose = false
-      } else {
-        this.inputclose = true
+      if(this.password.length === 0){
+        this.inputclose=false
+      }else{
+        this.inputclose=true
       }
     }
   },
   methods: {
-    inputclear() {
-      this.password = ""
-      this.inputclose = false
-      this.passdisabled = false
+    inputclear(){
+      this.password=""
+      this.inputclose=false
+      this.passdisabled=false
     },
     changeType() {
       console.log(this.pwdType);
       this.pwdType = this.pwdType === 'password' ? 'text' : 'password';
       this.eye = this.eye == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
-    messageGet() {
-      this.$router.push(
-          {
-            path: '/loginmessage',
-            code:1
-          })
+    messageGet(){
+      this.$router.push('/loginmessage')
     },
   }
 }
@@ -102,7 +97,6 @@ export default {
         top 20%
         height 15px
         width 15px
-
       .close2
         position absolute
         z-index 1
@@ -110,7 +104,6 @@ export default {
         top -10%
         height 30px
         width 30px
-
       .input
         position relative
         z-index 1
