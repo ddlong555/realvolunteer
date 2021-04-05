@@ -2,11 +2,11 @@
   <div class="pages">
     <div class="vadioBox" v-show="videoSrc == ''">
       <van-uploader
-          ref="upload"
-          :after-read="afterRead"
-          :uploadIcon="require('@/assets/image/activity/vadio.svg')"
-          upload-text="上传视频"
-          accept="video/*"
+        ref="upload"
+        :after-read="afterRead"
+        :uploadIcon="require('@/assets/image/activity/vadio.svg')"
+        upload-text="上传视频"
+        accept="video/*"
       />
     </div>
     <div class="vadioBox" v-show="videoSrc != ''">
@@ -17,30 +17,47 @@
     </div>
 
     <van-field
-        v-model="titles"
-        rows="2"
-        autosize
-        label="标题*"
-        type="textarea"
-        maxlength="80"
-        placeholder="请填写标题"
-        show-word-limit
+      v-model="titles"
+      rows="2"
+      autosize
+      label="标题*"
+      type="textarea"
+      maxlength="80"
+      placeholder="请填写标题"
+      show-word-limit
     />
-
-
+    <van-cell title="标签*" is-link @click="selTag" :value="tags" />
+    <van-popup v-model="tagShow" position="bottom" round>
+      <div class="tagBtn">
+        <van-button type="primary" size="small" @click="saveTag"
+          >确 定</van-button
+        >
+      </div>
+      <div class="bottomTag">
+        <van-tag
+          type="primary"
+          v-for="(item, index) in tagData"
+          :key="index"
+          :plain="item.check ? false : true"
+          :color="item.check ? '#1989fa' : '#666'"
+          @click="item.check = !item.check"
+          >{{ item.name }}</van-tag
+        >
+      </div>
+    </van-popup>
     <van-field
-        v-model="content"
-        rows="6"
-        autosize
-        label="发表动态"
-        type="textarea"
-        maxlength="233"
-        placeholder="请填写动态内容"
-        show-word-limit
+      v-model="content"
+      rows="6"
+      autosize
+      label="发表动态"
+      type="textarea"
+      maxlength="233"
+      placeholder="请填写动态内容"
+      show-word-limit
     />
     <div class="sendBtn">
       <van-button type="info" round @click="send">发 布</van-button>
-      <!--      <van-button type="info" round plain>存草稿</van-button>-->
+<!--      <van-button type="info" round plain>存草稿</van-button>-->
     </div>
   </div>
 </template>
