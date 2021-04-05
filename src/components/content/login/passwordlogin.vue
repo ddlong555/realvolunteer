@@ -86,7 +86,6 @@ export default {
           .then(function (response) {
             console.log(this)
             // this.$store.commit('saveToken',response.headers.Token)
-
             console.log(response);
           })
           .catch(function (error) {

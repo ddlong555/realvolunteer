@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import qs from "qs"
 export default {
   name: "score",
   data() {
@@ -106,18 +107,28 @@ export default {
     saveTag() {
       this.tagShow = false;
     },
-  //   send() {
-  //     this.$axios.post('/user', {
-  //       firstName: 'Fred',
-  //       lastName: 'Flintstone'
-  //     })
-  //         .then(function (response) {
-  //           console.log(response);
-  //         })
-  //         .catch(function (error) {
-  //           console.log(error);
-  //         });
-  //   },
+     send() {
+      this.$axios.post("/api/volunteer/video/addVideo", qs.stringify({
+         "videoTitle": this.titles,
+         "videoText":this.content,
+         "video_mp4": this.videoSrc,
+       }),
+           {
+             headers:{
+               token:this.$store.getters.getToken
+       }
+           })
+           .then(function (response) {
+             console.log(response);
+           })
+           .catch(function (error) {
+             console.log(error);
+           });
+       // console.log(this.titles)
+       // console.log(this.content)
+       // console.log(this.videoSrc)
+
+     },
   },
 };
 </script>
