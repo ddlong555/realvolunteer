@@ -62,6 +62,7 @@ export default {
         { text: '按时间', value: 2 },
       ],
       list: [],
+      activity:{},
       loading: false,
       finished: false,
     };
@@ -70,17 +71,32 @@ export default {
     onLoad() {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
-        }
-        // 加载状态结束
-        this.loading = false;
-        // 数据全部加载完成
-        if (this.list.length >= 30) {
-          this.finished = true;
-        }
-      }, 1000);
+      // this.$axios.get("/api/volunteer/activity/getActivityByNumber",
+      //     {
+      //       params:{
+      //         "number":10
+      //       }
+      //     })
+      //     .then((res) => {
+      //       if(res!=null)
+      //         this.activity=res;
+      //       console.log(this.activity);
+      //     })
+      //     .catch((error) => {
+      //       console.log(error);
+      //     });
+
+      // setTimeout(() => {
+      //   for (let i = 0; i < 10; i++) {
+      //     this.list.push(this.list.length + 1);
+      //   }
+      //   // 加载状态结束
+      //   this.loading = false;
+      //   // 数据全部加载完成
+      //   if (this.list.length >= 30) {
+      //     this.finished = true;
+      //   }
+      // }, 1000);
     },
   },
   watch: {//监听搜索

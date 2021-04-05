@@ -44,6 +44,7 @@
       <img src="../../../assets/image/video/goodblack.svg" alt=""/>
       <img src="../../../assets/image/video/share3.svg" alt="" @click="share()"/>
     </div>
+    <div class="clear"></div>
   </div>
 </template>
 
@@ -216,7 +217,6 @@ export default {
 
 .introduction {
   position: relative;
-  height: 20%;
   width: 92%;
   left: 5%;
   top: 2%;
@@ -225,7 +225,6 @@ export default {
 .title {
   position relative
   width: 100%;
-  height: 25%;
   color: #101010;
   font-size: 19px;
   font-weight: bolder
@@ -235,7 +234,7 @@ export default {
 .words {
   position relative
   width: 100%;
-  height: 75%;
+  margin-top 8px
   font-size: 12px;
   color: #9897a5;
   //overflow: hidden;
@@ -281,19 +280,17 @@ export default {
 .detail {
   position: relative;
   width: 100%;
-  height: 50%;
-  top: 20%;
+  margin-top 10px
 }
 
 .txt {
   position: relative;
   width: 100%;
-  height: 60%;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
-  overflow: hidden;
-  top 15%
+  margin-top 9px
+  overflow hidden
 }
 
 //.btn {
@@ -318,16 +315,14 @@ export default {
   position relative
   top: 3%;
   width: 100%;
-  height: 42%;
   border-top 1px solid #f2f2f2
 }
 
 .dis-title {
   position: relative;
   width: 95%;
-  height: 20%;
   left: 5%;
-  top: 3%
+  margin-top 10px
 }
 
 .dis-function {
@@ -343,24 +338,24 @@ export default {
 
 .dis-function img {
   position relative
-  top 28%
+  top 23%
   left 9%
   margin 0 0 0 7%
   height 22px
   width 22px
-
 }
 
 .input {
   position relative
+  display inline-block
   z-index 3
-  top 20%
+  top 5%
   left 7%
   background-color: #f2f3f5;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width 60%
-  height 60%
+  height 30px
   outline: none
   border: none
   border-radius 5px
@@ -370,5 +365,8 @@ export default {
   text-indent: 5px;
   font-size: 14px;
   font-weight: 500;
+}
+.clear{
+  clear:both
 }
 </style>

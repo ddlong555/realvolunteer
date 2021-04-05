@@ -88,6 +88,7 @@ export default {
             if(response.data.success===true){
               that.$store.commit('saveToken',response.headers.token)
               that.$store.commit('saveUser',response.data.result)
+              that.$store.commit('saveLogin',true)
               that.$router.push({
                 path: '/firstpage',
               })
