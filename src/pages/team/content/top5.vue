@@ -14,7 +14,7 @@ export default {
   name: "top5",
   methods:{
     back(){
-      this.$router.replace('/personalInformation')
+      this.$router.replace('/teamdis')
     },
   }
 }

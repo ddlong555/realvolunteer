@@ -14,7 +14,7 @@
         <h>{{ place }}</h>
       </div>
       <div class="evaluate">
-        <p>活动评价：</p>
+        <p>活动详情：</p>
         <p>{{ evaluate }}</p>
       </div>
     </div>
@@ -140,12 +140,12 @@ export default {
 }
 .like{
   position: absolute;
-  bottom: 3%;
-  left: 42%;
+  bottom: 5%;
+  left: 45%;
 }
 .like img{
   height: 300%;
-  width: 300%;
+  width: 200%;
 }
 .button2{
   position: absolute;

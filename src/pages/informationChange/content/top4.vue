@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 .top4{
-  height:10%;
+  height:7%;
   width:100%;
 }
 .top{
@@ -61,7 +61,7 @@ export default {
   height:50px;
   width:50px;
   position:absolute;
-  top:2%;
+  top:20%;
   left:1%;
 }
 .top-img1 img {
@@ -70,8 +70,8 @@ export default {
 }
 .top-img2{
   position:absolute;
-  top:2%;
-  left:93%;
+  top:20%;
+  right:1%;
 }
 .top-img2 img{
   height:25px;

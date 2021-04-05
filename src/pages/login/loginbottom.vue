@@ -34,7 +34,7 @@ export default {
   },
   data () {
     return {
-      mobile: '',
+      mobile: this.$route.query.phone,
       inputclose:false,
       disabled:true
     }
