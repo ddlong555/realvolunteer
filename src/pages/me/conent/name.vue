@@ -47,7 +47,7 @@ export default {
   width: 17%;
   height: 4%;
   display: flex;
-  position:absolute;
+  position:relative;
   left:80%;
   top: 15px;
 }

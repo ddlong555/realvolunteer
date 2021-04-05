@@ -1,5 +1,6 @@
 <template>
   <div class="me">
+    <div class="fixed"></div>
     <div class="me-top">
       <name></name>
     </div>
@@ -63,10 +64,18 @@ export default {
 </script>
 
 <style scoped>
-.me {
-  position: absolute;
+.fixed{
+  position: fixed;
   width: 100%;
-  height: 100%;
+  height:100%;
+  z-index: -5;
+  background-color: #f7f7f7;
+}
+.me {
+  position: relative;
+  width: 100%;
+  height: 91%;
+  background-color: #f7f7f7;
   /*z-index: -1;*/
 }
 
@@ -81,7 +90,6 @@ export default {
   width: 100%;
   height: 86%;
   margin: 0;
-  overflow: scroll;
 }
 .ad {
   position: absolute;

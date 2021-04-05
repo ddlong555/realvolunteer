@@ -27,7 +27,7 @@
     <div class="button-above" v-show="doubledisabled">
     </div>
     <van-button color="linear-gradient(to right, #ff6034, #ee0a24)" class="button" @click="messageGet">
-      修改密码
+      获取验证码
     </van-button>
   </div>
 </template>
@@ -84,18 +84,6 @@ export default {
       }
     }
   },
-  created() {
-    this.axios.post('/volunteer/user/updatePassword', {
-      tel: this.$route.query.phone,
-      newpassword: this.$route.query.password1
-    })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-  },
   methods: {
     inputClear1(){
       this.password1=""
@@ -118,7 +106,7 @@ export default {
       this.eye2 = this.eye2 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
     messageGet(){
-      this.$router.push('/firstpage')
+      this.$router.push('/login/passwordlogin')
     },
   }
 }
