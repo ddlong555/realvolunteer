@@ -225,27 +225,43 @@ export default {
       },
     }
   },
-  created(){
-    this.$axios.get("/api/volunteer/userInfo/updateUserInfoByUserId",
-        {
-          headers: {
-            token: this.$store.getters.getToken
-          }
-        })
-        .then((res) => {
-          if(res!=null){
-            alert("hgagdjs")
-            this.data=res;
-            console.log(res);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-  },
   methods:{
     success(){
-      alert("保存成功！")
+      var that = this;
+      let dat = new Date(that.form.month + ' ' + that.form.date + ',2000');
+      // var params = new URLSearchParams();
+      // params.append('birthday',dat);
+      this.$axios.post("/api/volunteer/userInfo/updateUserInfoByUserId",JSON.stringify({
+            "userName":that.form.nickname,
+            "priority":null,
+            "gender":that.form.sexual,
+            "mailaddress":null,
+            "headPicture":null,
+            "introduction":that.form.textarea,
+            "address":that.form.place,
+            "major":that.form.major,
+            "birthday": dat,
+            "fax":null,
+            "qq":null,
+            "tel":null,
+            "credits":0
+      }),{
+        headers: {token: that.$store.getters.getToken,"Content-Type": "application/json;charset=utf-8"}
+      }
+      )
+          .then(function (response) {
+            if(response.data.success == true){
+              alert("修改成功")
+              that.$router.push('/firstpage')
+            }
+            else{
+              alert("修改失败")
+            }
+            console.log(that)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
     code() {
       location.reload()

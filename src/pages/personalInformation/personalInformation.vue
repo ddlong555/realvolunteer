@@ -76,17 +76,26 @@ export default {
     }
   },
   created(){
+    var that = this
     this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
         {
           headers: {
-            token: this.$store.getters.getToken
+            token: that.$store.getters.getToken
           }
         })
         .then((res) => {
           if(res!=null){
-            alert("hgagdjs")
-            this.data=res;
             console.log(res);
+            that.nickname = res.data.result.userName
+            that.place = res.data.result.address
+            that.declaration = res.data.result.introduction
+            that.sexual = res.data.result.gender
+            that.major = res.data.result.major
+            that.avatar = res.data.result.headPicture
+            that.month = res.data.result.birthday.getMonth()
+            that.day = res.data.result.birthday.getDay()
+            that.point = ""
+            // alert("hgagdjs")
           }
         })
         .catch((error) => {
