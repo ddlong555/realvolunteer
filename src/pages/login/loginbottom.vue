@@ -65,6 +65,7 @@ export default {
       this.$emit('listenToChildEvent',this.disabled);
       this.formatMobile(e)
       this.mobile = this.$refs.mobile.value
+      this.$emit('listenToChildEvent2',this.mobile);
     },
     formatMobile (e) {
       let val = this.$refs.mobile.value // 不可直接用this.mobile，第一方便提取该方法降低代码耦合度，第二直接用this.mobile,在输入汉字时按下shift按键会导致无法再输入和删除内容

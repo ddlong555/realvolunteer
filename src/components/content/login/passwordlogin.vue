@@ -79,14 +79,22 @@ export default {
       this.$router.push('/passwordfind')
     },
     passlogin(){
-      this.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
+      var that=this;
+      this.$axios.post("/api/volunteer/user/signIn", qs.stringify({
         "tel": this.phone.replaceAll(" ",""),
         "password":this.password,
       }),)
           .then(function (response) {
-            console.log(this)
-            // this.$store.commit('saveToken',response.headers.Token)
-            console.log(response);
+            if(response.data.success===true){
+              that.$store.commit('saveToken',response.headers.token)
+              that.$store.commit('saveuser',response.data.result)
+              that.$router.push({
+                path: '/firstpage',
+              })
+            }
+            else
+              alert("密码错误")
+            console.log(response)
           })
           .catch(function (error) {
             console.log(error);
