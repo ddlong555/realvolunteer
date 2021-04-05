@@ -39,7 +39,7 @@
           v-for="(item, index) in tagData"
           :key="index"
           :plain="item.check ? false : true"
-          :color="item.check ? '#1989fa' : '#666'"
+          :color="item.check ? '#1989fa' : '#666666'"
           @click="item.check = !item.check"
           >{{ item.name }}</van-tag
         >
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import qs from "qs"
 export default {
   name: "score",
   data() {
@@ -108,22 +107,34 @@ export default {
       this.tagShow = false;
     },
      send() {
-      this.$axios.post("/api/volunteer/video/addVideo", qs.stringify({
-         "videoTitle": this.titles,
-         "videoText":this.content,
-         "video_mp4": this.videoSrc,
-       }),
-           {
-             headers:{
-               token:this.$store.getters.getToken
-       }
-           })
-           .then(function (response) {
-             console.log(response);
-           })
-           .catch(function (error) {
-             console.log(error);
-           });
+       let file=this.videoSrc
+       let formData = new FormData();
+       formData.append('videoText',"this.content")
+       formData.append('videoTitle',"this.titles")
+       formData.append('video_mp4',file)
+       this.$axios({
+         'url':"/api/volunteer/video/addVideo",
+         'method':'POST',
+         'data':formData,
+         headers:{ 'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN' }
+       });
+      // this.$axios.post("/api/volunteer/video/addVideo", qs.stringify({
+      //    "videoTitle": this.titles,
+      //    "videoText":this.content,
+      //    "video_mp4": this.videoSrc,
+      //  }),
+      //      {
+      //        headers:{
+      //          token:this.$store.getters.getToken,
+      //          "content-type":"multipart/form-data"
+      //        }
+      //      })
+      //      .then(function (response) {
+      //        console.log(response);
+      //      })
+      //      .catch(function (error) {
+      //        console.log(error);
+      //      });
        // console.log(this.titles)
        // console.log(this.content)
        // console.log(this.videoSrc)
