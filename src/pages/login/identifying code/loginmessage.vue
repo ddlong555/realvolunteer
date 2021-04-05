@@ -60,7 +60,7 @@ export default {
 
 
         else {
-          this.$router.push('/newpassword')
+          this.$router.push({path:'/newpassword',query:{phone:this.$route.query.phone}})
         }
       }
     }

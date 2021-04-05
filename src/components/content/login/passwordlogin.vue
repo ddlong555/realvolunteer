@@ -37,9 +37,8 @@ export default {
       pwdType: 'password',
       passdisabled: false,
       eye: require("../../../assets/image/me/login/eyeclose.svg"),
-      password: '',
+      password: this.$route.query.password,
       inputclose: false,
-
     }
   },
   computed: {

@@ -29,9 +29,6 @@
       <ul class="sign" :style="{'list-style':'url('+sign+')'}">
         <li>{{signWord}} </li>
       </ul>
-      <ul class="blood">
-        <li>{{blood}}型 </li>
-      </ul>
       <ul class="place">
         <li>{{place}}</li>
       </ul>
@@ -72,7 +69,6 @@ export default {
       place:"中国-上海",
       signWord:"射手座",
       major:"软件工程",
-      blood:"B",
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
       sign: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 3,
@@ -176,7 +172,7 @@ export default {
 .sexual li{
   padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/sexual.svg");
-  font-size:20px;
+  font-size:15px;
 }
 .age{
   border-radius:50px;
@@ -185,7 +181,7 @@ export default {
 .age li{
   padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/age.svg");
-  font-size:20px;
+  font-size:15px;
 }
 .sign{
   border-radius:50px;
@@ -194,16 +190,7 @@ export default {
 .sign li{
   padding: 5px 10px 5px;
   list-style:plainLink;
-  font-size:20px;
-}
-.blood{
-  border-radius:50px;
-  box-shadow: 0 8px 10px rgba(20, 20, 20, .1);
-}
-.blood li{
-  padding: 5px 10px 5px;
-  list-style:url("../../assets/image/personalInformation/blood.svg");
-  font-size:20px;
+  font-size:15px;
 }
 .place{
   border-radius:50px;
@@ -212,7 +199,7 @@ export default {
 .place li{
   padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/place.svg");
-  font-size:20px;
+  font-size:15px;
 }
 .major{
   border-radius:50px;
@@ -221,7 +208,7 @@ export default {
 .major li{
   padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/major.svg");
-  font-size:20px;
+  font-size:15px;
 }
 .declaration{
   border-radius:20px;
@@ -230,7 +217,7 @@ export default {
 .declaration li{
   padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/declare.svg");
-  font-size:20px;
+  font-size:15px;
 }
 .point{
   border-radius:20px;
@@ -239,6 +226,6 @@ export default {
 .point li{
   padding: 5px 10px 5px;
   list-style:url("../../assets/image/personalInformation/point.svg");
-  font-size:20px;
+  font-size:15px;
 }
 </style>
