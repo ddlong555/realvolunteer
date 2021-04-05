@@ -90,7 +90,20 @@ export default {
     saveTag() {
       this.tagShow = false;
     },
-    send() {},
+    send() {
+      // this.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
+      //   "commentText": this.content,
+      //   "commentPublisher":this.,
+      //   "commentLike":this.,
+      // }),)
+      //     .then(function (response) {
+      //       console.log(response);
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
+
+    },
   },
 };
 </script>
