@@ -4,18 +4,11 @@ import Vue from 'vue'
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state:{
+  state: {
 
-  },
-  mutations:{
-
-  },
-  actions:{
-
-  },
-  getters:{
-
-  }
-
+  },       //状态管理
+  mutations: {},   //修改state
+  actions: {},    //异步操作
+  modules: {}     //模块
 })
 export default store

@@ -42,7 +42,7 @@ export default {
   height:8%;
   display: flex;
   background-color: #ffffff;
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 0;

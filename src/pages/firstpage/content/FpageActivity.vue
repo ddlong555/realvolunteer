@@ -23,9 +23,9 @@
         </div>
       </div>
       <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt=""/>
+        <img src="../../../assets/image/me/score.svg" alt="" @click="GotoTest"/>
         <div class="main-widget-part-title">
-          我的积分
+          测试页面
         </div>
       </div>
     </div>
@@ -84,6 +84,10 @@ export default {
     },
     Gotoinforchange(){
       this.$router.push('/informationChange')
+    },
+    GotoTest(){
+      this.$router.push('/test')
+
     }
   },
   created() {
@@ -102,7 +106,6 @@ export default {
           console.log(error);
         });
   },
-
 }
 </script>
 
