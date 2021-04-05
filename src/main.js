@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "@/router";
-import store from './store'
 import './assets/styles/index.less'
 import VueDPlayer from "vue-dplayer";
 import "vue-dplayer/dist/vue-dplayer.css";
@@ -13,7 +12,7 @@ import axios from 'axios'
 Vue.prototype.$axios = axios;
 console.log(Vue.prototype.$axios)
 import VueAxios from 'vue-axios'
-
+import store from './store/index'
 Vue.use(VueAxios,axios)
 
 import './components.js'

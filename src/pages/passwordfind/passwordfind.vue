@@ -65,7 +65,7 @@ export default {
       this.$router.push({
         path: '/loginmessage',
         query: {
-          phone: this.phone,
+          phone: this.route.query.phone,
           code: 1            //1为找回密码，0为登录
         }
       });

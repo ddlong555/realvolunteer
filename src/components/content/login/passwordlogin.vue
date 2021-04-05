@@ -2,8 +2,8 @@
   <div class="passwordlogin">
     <div class="phone">
       <div class="phoneinput">
-        <input :type="pwdType" placeholder="请输入密码" class="input" maxlength="18" v-model="password"/>
-        <img src="src/assets/image/me/login/closeinput.svg" alt="" v-show="inputclose" class="close2"
+        <input :type="pwdType" placeholder="请输入密码" class="input" maxlength="18" v-model="password" />
+        <img src="../../../assets/image/me/login/closeinput.svg" alt="" v-show="inputclose" class="close2"
              @click="inputclear">
         <img :src="eye" alt="" class="close1" @click="changeType">
       </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import qs from "qs"
 export default {
   name: "passwordlogin",
   data() {
@@ -47,7 +48,7 @@ export default {
     }
   },
   //disabled表示是否账号输入符合规定
-  props: ['disabled'],
+  props: ['disabled','phone'],
   watch: {
     password() {
 
@@ -76,8 +77,22 @@ export default {
     },
     passfind() {
       this.$router.push('/passwordfind')
-    }
+    },
+    passlogin(){
+      this.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
+        "tel": this.phone.replaceAll(" ",""),
+        "password":this.password,
+      }),)
+          .then(function (response) {
+            console.log(this)
+            // this.$store.commit('saveToken',response.headers.Token)
 
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
   }
 }
 </script>
