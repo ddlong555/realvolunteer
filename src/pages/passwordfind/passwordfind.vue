@@ -8,7 +8,7 @@
         帮助
       </div>
     </div>
-    <loginbottom v-on:listenToChildEvent = 'showdisabled'>
+    <loginbottom v-on:listenToChildEvent = 'showdisabled' v-on:listenToChildEvent2 = 'showphone'>
       <div>
       忘记密码？
       </div>
@@ -28,17 +28,11 @@ export default {
   components:{
     loginbottom,
   },
-
   data () {
     return {
       disabled:true,
-      bodyHeight:0
-    }
-  },
-  props:["phone"],
-  computed:{
-    phonenonews(){
-      return this.phone.replaceAll(" ","")
+      bodyHeight:0,
+      phone:""
     }
   },
   methods:{
@@ -48,27 +42,35 @@ export default {
     showdisabled(disabled){
       this.disabled=disabled;
     },
+    showphone(mobile){
+      this.phone=mobile.replaceAll(" ","");
+    },
     messageget(){
-      this.$axios.get('/api/volunteer/user/getVerifyCode', {
-        params:{
-          "tel":this.phonenonews
-        }
-      })
-          .then((res) => {
-            if(res!=null)
-              this.response=res;
-            console.log(this.response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      this.$router.push({
-        path: '/loginmessage',
-        query: {
-          phone: this.phonenonews,
-          code: 1            //1为找回密码，0为登录
-        }
-      });
+        this.$axios.get('/api/volunteer/user/getVerifyCode', {
+          params: {
+            "tel": this.phone
+          }
+        })
+            .then((res) => {
+              if (res != null){
+                if(res.data.success===true){
+                  this.$router.push({
+                    path: '/loginmessage',
+                    query: {
+                      phone: this.phone,
+                      code: 1            //1为找回密码，0为登录
+                    }
+                  });
+                }
+                else{
+                  alert("发送次数太多，请十分钟后再发送")
+                }
+              }
+              console.log(this.response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
     },
   },
   mounted() {
