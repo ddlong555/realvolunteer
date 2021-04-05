@@ -1,6 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
-
+import createPersistedState from "vuex-persistedstate"
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -35,5 +35,8 @@ export default new Vuex.Store({
     saveToken(state,Token){
       state.Token = Token;
     }
-  }
+  },
+  plugins: [createPersistedState({
+    storage: window.localStorage
+  })]
 })
