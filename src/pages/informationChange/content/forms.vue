@@ -225,18 +225,29 @@ export default {
       },
     }
   },
+  created(){
+    this.$axios.get("/api/volunteer/userInfo/updateUserInfoByUserId",
+        {
+          headers: {
+            token: this.$store.getters.getToken
+          }
+        })
+        .then((res) => {
+          if(res!=null){
+            alert("hgagdjs")
+            this.data=res;
+            console.log(res);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  },
   methods:{
     success(){
       alert("保存成功！")
     },
     code() {
-      // this.nickname = ''
-      // this.sexual = ''
-      // this.month = ''
-      // this.date = ''
-      // this.place = ''
-      // this.textarea = ''
-      // this.major = ''
       location.reload()
     }
   }

@@ -75,24 +75,19 @@ export default {
       data:{},
     }
   },
-  created() {
+  created(){
     this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
         {
-          params:{
-            "userId": 1
-          }
-        },
-        {
-          headers:{
-            token:this.$store.getters.getToken
+          headers: {
+            token: this.$store.getters.getToken
           }
         })
         .then((res) => {
           if(res!=null){
-            this.data=res;                        
-            console.log(res.userName);
+            alert("hgagdjs")
+            this.data=res;
+            console.log(res);
           }
-
         })
         .catch((error) => {
           console.log(error);
@@ -100,7 +95,7 @@ export default {
   },
   methods:{
     back(){
-      this.$router.replace('/firstpage')
+      this.$router.back()
     }
   }
 }

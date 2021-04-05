@@ -63,7 +63,7 @@ export default {
                 }),)
                     .then(function (response) {
                       that.$store.commit('saveToken',response.headers.token)
-                      that.$store.commit('saveuser',response.data.result)
+                      that.$store.commit('saveUser',response.data.result)
                       console.log(that.$store.getters.getToken);
                       console.log(response);
                     })
@@ -73,7 +73,13 @@ export default {
                 if(that.$route.query.code == 0)
                    that.$router.push('/firstpage')
                 if(that.$route.query.code == 1)
-                  that.$router.push('/newpassword')
+                  that.$router.push(
+                      {
+                        path:'/newpassword',
+                        query:{
+                          phone:that.phone
+                        }
+                      })
               }
               console.log(that.$route.query.code)
               console.log(e);

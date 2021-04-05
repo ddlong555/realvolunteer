@@ -116,6 +116,7 @@ export default {
   },
   methods: {
     Gotoperson() {
+      console.log(this.$store.getters.getToken)
       this.$router.push('/personalInformation')
     },
     Gotomessage() {
