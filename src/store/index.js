@@ -10,6 +10,11 @@ export default new Vuex.Store({
     currJobData: {},
     Token:"",
   },
+  getters:{
+    getToken(state){
+      return state.Token
+    }
+  },
   mutations:{
     // 保存当前菜单栏的路径
     savePath(state,pathName){

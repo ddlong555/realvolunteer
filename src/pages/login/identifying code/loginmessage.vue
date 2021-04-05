@@ -62,16 +62,16 @@ export default {
                   "tel": that.phone,
                 }),)
                     .then(function (response) {
-                      that.response = response;
+                      that.$store.commit('saveToken',response.headers.token)
+                      console.log(that.$store.getters.getToken);
                       console.log(response);
                     })
                     .catch(function (error) {
-                      console.log(that.phone);
                       console.log(error);
                     });
-                if(that.$route.query.code === 0)
+                if(that.$route.query.code == 0)
                    that.$router.push('/firstpage')
-                if(that.$route.query.code === 1)
+                if(that.$route.query.code == 1)
                   that.$router.push('/newpassword')
               }
               console.log(that.$route.query.code)
