@@ -34,6 +34,7 @@
 
 <script>
 import Logintop from "@/pages/login/logintop";
+import qs from 'qs'
 export default {
   name: "newpassword",
   components: {Logintop},
@@ -106,6 +107,17 @@ export default {
       this.eye2 = this.eye2 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
     messageGet(){
+      this.$axios.post("/volunteer/user/updatePassword", qs.stringify({
+        "tel": this.$route.query.phone,
+      }),)
+          .then(function (response) {
+            response.tel = this.$route.query.phone;
+            response.newpassword = this.password1;
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       this.$router.push('/firstpage')
     },
   }
