@@ -63,6 +63,7 @@ export default {
                 }),)
                     .then(function (response) {
                       that.$store.commit('saveToken',response.headers.token)
+                      that.$store.commit('saveuser',response.data.result)
                       console.log(that.$store.getters.getToken);
                       console.log(response);
                     })

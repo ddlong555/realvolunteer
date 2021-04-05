@@ -25,26 +25,26 @@ export default {
   name: "login-phone-part",
   data() {
     return {
-      response:{},
+      response: {},
       success: 1,
     }
   },
-  computed:{
-    phonenonews(){
-      return this.phone.replaceAll(" ","")
+  computed: {
+    phonenonews() {
+      return this.phone.replaceAll(" ", "")
     }
   },
   props: ['disabled', 'phone'],
   methods: {
     messageget() {
       this.$axios.get('/api/volunteer/user/getVerifyCode', {
-        params:{
-          "tel":this.phonenonews
+        params: {
+          "tel": this.phonenonews
         }
       })
           .then((res) => {
-            if(res!=null)
-              this.response=res;
+            if (res != null)
+              this.response = res;
             console.log(this.response);
           })
           .catch((error) => {
@@ -55,14 +55,15 @@ export default {
             query:
                 {
                   phone: this.phone,
-                  success:this.success,
-                  code:0
+                  code: 0
                 }
           },
       )
     },
     passfind() {
-      this.$router.push('/passwordfind')
+      this.$router.push({
+        path: '/passwordfind',
+      })
     }
   }
 }
