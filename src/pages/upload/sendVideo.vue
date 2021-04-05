@@ -26,25 +26,8 @@
       placeholder="请填写标题"
       show-word-limit
     />
-    <van-cell title="标签*" is-link @click="selTag" :value="tags" />
-    <van-popup v-model="tagShow" position="bottom" round>
-      <div class="tagBtn">
-        <van-button type="primary" size="small" @click="saveTag"
-          >确 定</van-button
-        >
-      </div>
-      <div class="bottomTag">
-        <van-tag
-          type="primary"
-          v-for="(item, index) in tagData"
-          :key="index"
-          :plain="item.check ? false : true"
-          :color="item.check ? '#1989fa' : '#666666'"
-          @click="item.check = !item.check"
-          >{{ item.name }}</van-tag
-        >
-      </div>
-    </van-popup>
+
+
     <van-field
       v-model="content"
       rows="6"
@@ -63,6 +46,7 @@
 </template>
 
 <script>
+import qs from "qs"
 export default {
   name: "score",
   data() {
@@ -95,7 +79,7 @@ export default {
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
       console.log(file);
-      this.videoSrc = file.content;
+      this.videoSrc = file.file;
     },
     checkVadio() {
       this.$refs.upload.chooseFile();
@@ -109,14 +93,17 @@ export default {
      send() {
        let file=this.videoSrc
        let formData = new FormData();
-       formData.append('videoText',"this.content")
-       formData.append('videoTitle',"this.titles")
+       formData.append('videoText',this.content)
+       formData.append('videoTitle',this.titles)
        formData.append('video_mp4',file)
        this.$axios({
          'url':"/api/volunteer/video/addVideo",
          'method':'POST',
          'data':formData,
-         headers:{ 'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN' }
+         headers:{
+           "token":this.$store.getters.getToken,
+           'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
+         }
        });
       // this.$axios.post("/api/volunteer/video/addVideo", qs.stringify({
       //    "videoTitle": this.titles,
@@ -135,9 +122,9 @@ export default {
       //      .catch(function (error) {
       //        console.log(error);
       //      });
-       // console.log(this.titles)
-       // console.log(this.content)
-       // console.log(this.videoSrc)
+      //  console.log(this.titles)
+      //  console.log(this.content)
+      //  console.log(this.$store.getters.getToken)
 
      },
   },
