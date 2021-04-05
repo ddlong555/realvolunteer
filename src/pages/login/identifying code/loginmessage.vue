@@ -81,12 +81,12 @@ export default {
               console.log(error);
             });
 
-        if (this.$route.query.code === 0 && ) {
-          this.$router.push('/firstpage')
-          // alert(this.response.result.userName+"登陆成功")
-        } else {
-          this.$router.push('/newpassword')
-        }
+        // if (this.$route.query.code === 0 && ) {
+        //   this.$router.push('/firstpage')
+        //   // alert(this.response.result.userName+"登陆成功")
+        // } else {
+        //   this.$router.push('/newpassword')
+        // }
       }
     }
   },

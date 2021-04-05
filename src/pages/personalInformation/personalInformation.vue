@@ -72,18 +72,27 @@ export default {
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
       sign: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 3,
+      data:{},
     }
   },
   created() {
-    this.$axios.get("/volunteer/userInfo/getUserInfoByUserId",
+    this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
         {
           params:{
             "userId": 1
           }
+        },
+        {
+          headers:{
+            token:this.$store.getters.getToken
+          }
         })
         .then((res) => {
-          if(res!=null)
-          console.log(res);
+          if(res!=null){
+            this.data=res;                        
+            console.log(res.userName);
+          }
+
         })
         .catch((error) => {
           console.log(error);

@@ -38,7 +38,7 @@ export default {
   props:["phone"],
   computed:{
     phonenonews(){
-      return this.$route.query.phone.replaceAll(" ","")
+      return this.phone.replaceAll(" ","")
     }
   },
   methods:{
@@ -65,7 +65,7 @@ export default {
       this.$router.push({
         path: '/loginmessage',
         query: {
-          phone: this.route.query.phone,
+          phone: this.phonenonews,
           code: 1            //1为找回密码，0为登录
         }
       });
