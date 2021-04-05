@@ -107,7 +107,7 @@ export default {
       this.eye2 = this.eye2 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
     messageGet(){
-      this.$axios.post("/volunteer/user/updatePassword", qs.stringify({
+      this.$axios.post("/api/volunteer/user/updatePassword", qs.stringify({
         "tel": this.$route.query.phone,
       }),)
           .then(function (response) {

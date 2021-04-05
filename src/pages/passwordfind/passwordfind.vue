@@ -28,6 +28,7 @@ export default {
   components:{
     loginbottom,
   },
+
   data () {
     return {
       disabled:true,
@@ -35,6 +36,11 @@ export default {
     }
   },
   props:["phone"],
+  computed:{
+    phonenonews(){
+      return this.$route.query.phone.replaceAll(" ","")
+    }
+  },
   methods:{
     back(){
       this.$router.back();
@@ -43,6 +49,19 @@ export default {
       this.disabled=disabled;
     },
     messageget(){
+      this.$axios.get('/api/volunteer/user/getVerifyCode', {
+        params:{
+          "tel":this.phonenonews
+        }
+      })
+          .then((res) => {
+            if(res!=null)
+              this.response=res;
+            console.log(this.response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       this.$router.push({
         path: '/loginmessage',
         query: {

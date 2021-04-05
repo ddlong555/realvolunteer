@@ -72,11 +72,10 @@ export default {
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
       sign: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 3,
-      msg:{},
     }
   },
   created() {
-    this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
+    this.$axios.get("/volunteer/userInfo/getUserInfoByUserId",
         {
           params:{
             "userId": 1
@@ -84,8 +83,7 @@ export default {
         })
         .then((res) => {
           if(res!=null)
-            this.msg=res;
-          console.log(this.msg);
+          console.log(res);
         })
         .catch((error) => {
           console.log(error);
