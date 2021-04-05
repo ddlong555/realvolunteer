@@ -13,7 +13,7 @@
     </div>
     <div class="button-above" v-show="doubledisabled">
     </div>
-    <van-button color="linear-gradient(to right, #ff6034, #ee0a24)" class="button">
+    <van-button color="linear-gradient(to right, #ff6034, #ee0a24)" class="button" @click="passlogin">
       登录
     </van-button>
     <div class="function">
@@ -78,6 +78,7 @@ export default {
     passfind() {
       this.$router.push('/passwordfind')
     }
+
   }
 }
 </script>
