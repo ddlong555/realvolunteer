@@ -1,5 +1,7 @@
 <template>
   <div class="pages">
+    <top2 title=""></top2>
+    <div style="height: 50px"></div>
     <van-cell-group>
       <van-cell title="手机号码" value="158888888" />
       <van-cell title="密码管理" value="" is-link/>
@@ -19,7 +21,12 @@
   </div>
 </template>
 <script>
+import top2 from "@/pages/upload/content/top2";
+
 export default {
+  components: {
+    top2
+  },
   name: "setting",
   data() {
     return {
