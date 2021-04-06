@@ -1,5 +1,7 @@
 <template>
   <div class="pages">
+    <top2 title=""></top2>
+    <div style="height: 50px"></div>
     <van-field
       v-model="titles"
       rows="2"
@@ -10,25 +12,7 @@
       placeholder="请填写标题"
       show-word-limit
     />
-    <van-cell title="标签*" is-link @click="selTag" :value="tags" />
-    <van-popup v-model="tagShow" position="bottom" round>
-      <div class="tagBtn">
-        <van-button type="primary" size="small" @click="saveTag"
-          >确 定</van-button
-        >
-      </div>
-      <div class="bottomTag">
-        <van-tag
-          type="primary"
-          v-for="(item, index) in tagData"
-          :key="index"
-          :plain="item.check ? false : true"
-          :color="item.check ? '#1989fa' : '#666'"
-          @click="item.check = !item.check"
-          >{{ item.name }}</van-tag
-        >
-      </div>
-    </van-popup>
+
     <van-field
       v-model="content"
       rows="6"
@@ -39,6 +23,10 @@
       placeholder="请填写动态内容"
       show-word-limit
     />
+
+    <van-uploader v-model="fileList" multiple :max-count="0b110" />
+
+
     <div class="sendBtn">
       <van-button type="info" round @click="send">发 布</van-button>
       <van-button type="info" round plain>存草稿</van-button>
@@ -47,7 +35,12 @@
 </template>
 
 <script>
+import top2 from "./content/top2"
+
 export default {
+  components: {
+    top2
+  },
   name: "score",
   data() {
     return {
@@ -57,13 +50,13 @@ export default {
       tags: "", //标签
       tagData: [], //标签数据
       tagShow: false, //底部弹出显示
+      title:'标题',
+      fileList:[]//
     };
   },
   mounted() {
     document.title = "发布";
-    for (var i = 0; i < 20; i++) {
-      this.tagData.push({ name: "标签" + i, check: false });
-    }
+
   },
   watch: {
     tagShow() {
@@ -91,6 +84,7 @@ export default {
       this.tagShow = false;
     },
     send() {
+
       // this.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
       //   "commentText": this.content,
       //   "commentPublisher":this.,
@@ -152,14 +146,23 @@ export default {
 }
 /deep/ .van-uploader {
   width: 100%;
-  height: 220px;
+  padding: 0 10px;
+  background: #ffffff;
+  margin-top: 10px;
+//  height: 220px;
 }
 
-/deep/ .van-uploader__upload {
-  width: 100%;
-  margin: 0;
-  height: 220px;
+///deep/ .van-uploader__upload {
+//  width: 100%;
+//  margin: 0;
+//  height: 220px;
+//}
+
+/deep/ .van-uploader__wrapper{
+  margin-top: 10px;
+
 }
+
 /deep/ .van-uploader__upload-icon {
   font-size: 42px;
 }

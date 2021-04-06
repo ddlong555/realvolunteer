@@ -1,5 +1,7 @@
 <template>
   <div class="pages">
+    <top2 title=""></top2>
+    <div style="height: 50px"></div>
     <div class="vadioBox" v-show="videoSrc == ''">
       <van-uploader
         ref="upload"
@@ -47,7 +49,11 @@
 
 <script>
 import qs from "qs"
+import top2 from "@/pages/upload/content/top2";
 export default {
+  components: {
+    top2
+  },
   name: "score",
   data() {
     return {
