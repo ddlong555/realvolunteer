@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { DropdownMenu, DropdownItem, List ,Swipe, SwipeItem,Lazyload ,Cell ,CellGroup ,Card ,Button ,Uploader ,Tag ,Field ,Radio ,RadioGroup ,Popup ,Toast  } from 'vant';
+import { Uploader ,DropdownMenu, DropdownItem, List ,Swipe, SwipeItem,Lazyload ,Cell ,CellGroup ,Card ,Button  ,Tag ,Field ,Radio ,RadioGroup ,Popup ,Toast  } from 'vant';
 
 Vue.use(Cell);
 Vue.use(DropdownMenu);
