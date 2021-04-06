@@ -26,7 +26,7 @@ module.exports = {
 
 // module.exports = {
 //     devServer: {
-//         host: "172.30.246.190",
+//         host: "192.168.2.153",
 //         port: 8080  //配置端口
 //     }
 // }
