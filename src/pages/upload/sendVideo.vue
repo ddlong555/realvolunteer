@@ -24,7 +24,7 @@
       autosize
       label="标题*"
       type="textarea"
-      maxlength="80"
+      maxlength="40"
       placeholder="请填写标题"
       show-word-limit
     />
@@ -36,7 +36,7 @@
       autosize
       label="发表动态"
       type="textarea"
-      maxlength="233"
+      maxlength="140"
       placeholder="请填写动态内容"
       show-word-limit
     />
