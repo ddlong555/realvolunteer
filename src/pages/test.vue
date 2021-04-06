@@ -15,6 +15,9 @@ export default {
   },
   mounted(){
     console.log(this.$store.getters.getToken);
+    console.log(this.$store.getters.getUser);
+    console.log(this.$store.getters.getLogin);
+
   },
   methods: {
     //这里通过isFixed去控制你的吸顶效果得实现

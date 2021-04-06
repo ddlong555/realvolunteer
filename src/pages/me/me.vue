@@ -9,13 +9,12 @@
         <div class="logo-img" :style="{backgroundImage:'url('+src+')'}">
           <!--            <img class="ad-img" src="../../assets/image/me/boy.svg" alt=""/>-->
         </div>
-        <div class="click-logo" v-if="!is_login" @click="gotologin">
+        <div class="click-logo" v-show="!is_login" @click="gotologin">
           <div class="click-logo-title">点击登录</div>
         </div>
-        <div v-else class="click-logo">
-          <div>
-            <div>龙正武</div>
-            <div>硬币:{{ count }}</div>
+        <div v-show="is_login" class="click-logo">
+          <div class="click-logo-title">
+            {{ user.userName }}
           </div>
         </div>
         <div class="toy">
@@ -30,7 +29,6 @@
 </template>
 
 <script>
-
 import advertisement from "@/components/common/advertisement/advertisement";
 import name from "@/pages/me/conent/name"
 import MeBottom from "@/pages/me/conent/MeBottom";
@@ -45,7 +43,8 @@ export default {
   data() {
     return {
       src: require("../../assets/image/test/ad.jpg"),
-      is_login: false,
+      is_login: this.$store.getters.getLogin,
+      user:this.$store.getters.getUser,
       toy:
         {
           boy: require('../../assets/image/me/boy.svg'),

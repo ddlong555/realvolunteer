@@ -22,7 +22,7 @@ export default {
 
 <style scoped>
 .top {
-  position: absolute;
+  position: relative;
   height: 7%;
   width: 100%;
   background-color: white;

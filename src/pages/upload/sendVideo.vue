@@ -95,7 +95,7 @@ export default {
     afterRead(file) {
       // 此时可以自行将文件上传至服务器
       console.log(file);
-      this.videoSrc = file.content;
+      this.videoSrc = file.file;
     },
     checkVadio() {
       this.$refs.upload.chooseFile();
@@ -106,18 +106,43 @@ export default {
     saveTag() {
       this.tagShow = false;
     },
-  //   send() {
-  //     this.$axios.post('/user', {
-  //       firstName: 'Fred',
-  //       lastName: 'Flintstone'
-  //     })
-  //         .then(function (response) {
-  //           console.log(response);
-  //         })
-  //         .catch(function (error) {
-  //           console.log(error);
-  //         });
-  //   },
+    send() {
+      let file=this.videoSrc
+      let formData = new FormData();
+      formData.append('videoText',this.content)
+      formData.append('videoTitle',this.titles)
+      formData.append('video_mp4',file)
+      this.$axios({
+        'url':"/api/volunteer/video/addVideo",
+        'method':'POST',
+        'data':formData,
+        headers:{
+          "token":this.$store.getters.getToken,
+          'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
+        }
+      });
+      // this.$axios.post("/api/volunteer/video/addVideo", qs.stringify({
+      //    "videoTitle": this.titles,
+      //    "videoText":this.content,
+      //    "video_mp4": this.videoSrc,
+      //  }),
+      //      {
+      //        headers:{
+      //          token:this.$store.getters.getToken,
+      //          "content-type":"multipart/form-data"
+      //        }
+      //      })
+      //      .then(function (response) {
+      //        console.log(response);
+      //      })
+      //      .catch(function (error) {
+      //        console.log(error);
+      //      });
+      //  console.log(this.titles)
+      //  console.log(this.content)
+       console.log(this.$store.getters.getToken)
+
+    },
   },
 };
 </script>

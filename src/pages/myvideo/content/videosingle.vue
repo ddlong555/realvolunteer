@@ -144,8 +144,7 @@ export default {
 
 <style scoped>
 .videosingle {
-  position: absolute;
-  top: 5%;
+  position: relative;
   width: 100%;
   height: 95%;
 }
@@ -157,7 +156,7 @@ export default {
   top: 4%;
   left: 4%;
   margin-right: 4%;
-  margin-bottom: 4%;
+  margin-bottom: 9%;
   float: left;
   border-radius: 8px;
   background-color: white;
@@ -165,9 +164,9 @@ export default {
 }
 
 .videosingle-content-block {
-  position: absolute;
+  position: relative;
   width: 100%;
-  height: 31%;
+  height: 39%;
   top: 70%;
   background-color: white;
   border-radius: 8px;
@@ -191,10 +190,11 @@ export default {
 }
 
 .videosingle-content-block-function {
-  position: relative;
+  position: absolute;
   display: flex;
   width: 100%;
   height: 25%;
+  top:60%
 }
 
 .videosingle-content-block-function-single {
