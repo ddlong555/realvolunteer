@@ -72,20 +72,31 @@ export default {
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
       sign: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 3,
-      msg:{},
+      data:{},
     }
   },
-  created() {
+  created(){
+    var that = this
     this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
         {
-          params:{
-            "userId": 1
+          headers: {
+            token: that.$store.getters.getToken
           }
         })
         .then((res) => {
-          if(res!=null)
-            this.msg=res;
-          console.log(this.msg);
+          if(res!=null){
+            console.log(res);
+            that.nickname = res.data.result.userName
+            that.place = res.data.result.address
+            that.declaration = res.data.result.introduction
+            that.sexual = res.data.result.gender
+            that.major = res.data.result.major
+            that.avatar = res.data.result.headPicture
+            that.month = res.data.result.birthday.getMonth()
+            that.day = res.data.result.birthday.getDay()
+            that.point = ""
+            // alert("hgagdjs")
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -93,7 +104,7 @@ export default {
   },
   methods:{
     back(){
-      this.$router.replace('/firstpage')
+      this.$router.back()
     }
   }
 }

@@ -74,7 +74,13 @@ export default {
                 if(that.$route.query.code == 0)
                    that.$router.push('/firstpage')
                 if(that.$route.query.code == 1)
-                  that.$router.push('/newpassword')
+                  that.$router.push(
+                      {
+                        path:'/newpassword',
+                        query:{
+                          phone:that.phone
+                        }
+                      })
               }
               console.log(that.$route.query.code)
               console.log(e);
@@ -83,7 +89,7 @@ export default {
               console.log(error);
             });
 
-        // if (this.$route.query.code === 0 && this.response.success) {
+        // if (this.$route.query.code === 0 && ) {
         //   this.$router.push('/firstpage')
         //   // alert(this.response.result.userName+"登陆成功")
         // } else {

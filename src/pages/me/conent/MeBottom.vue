@@ -122,6 +122,10 @@ export default {
   },
   methods: {
     Gotoperson() {
+      console.log(this.$store.getters.getToken)
+      // const jwt = require('jsonwebtoken')
+      // const decode = jwt.decode('token')
+      // console.log(decode)
       this.$router.push('/personalInformation')
     },
     Gotomessage() {

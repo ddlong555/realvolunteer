@@ -34,6 +34,7 @@
 
 <script>
 import Logintop from "@/pages/login/logintop";
+import qs from 'qs'
 export default {
   name: "newpassword",
   components: {Logintop},
@@ -59,7 +60,7 @@ export default {
   watch: {
     password1() {
       console.log(this.passDisabled1)
-      if (this.password1.length === 0) {
+      if (this.password1.length <= 8 || this.password1.length >=20) {
         this.passDisabled1 = false
       } else {
         this.passDisabled1 = true
@@ -72,7 +73,7 @@ export default {
     },
     password2() {
       console.log(this.passDisabled2)
-      if (this.password2.length === 0) {
+      if (this.password2.length <= 8 || this.password2.length >=20) {
         this.passDisabled2 = false
       } else {
         this.passDisabled2 = true
@@ -87,13 +88,13 @@ export default {
   methods: {
     inputClear1(){
       this.password1=""
-      this.inputclose1=false
-      this.passdisabled1=false
+      this.inputClose1=false
+      this.passDisabled1=false
     },
     inputClear2(){
       this.password2=""
-      this.inputclose2=false
-      this.passdisabled2=false
+      this.inputClose2=false
+      this.passDisabled2=false
     },
     changeType1() {
       console.log(this.pwdType1);
@@ -106,7 +107,22 @@ export default {
       this.eye2 = this.eye2 == require("../../assets/image/me/login/eyeopen.svg") ? require("../../assets/image/me/login/eyeclose.svg") : require("../../assets/image/me/login/eyeopen.svg");
     },
     messageGet(){
-      this.$router.push('/firstpage')
+      var that = this;
+      this.$axios.post("/api/volunteer/user/updatePassword", qs.stringify({
+        "tel": that.$route.query.phone,"newPassword": that.password1
+      }),)
+          .then(function (response) {
+            if(response.data.success == true){
+              that.$router.push('/firstpage')
+            }
+            else{
+              alert("修改失败");
+            }
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
   }
 }
