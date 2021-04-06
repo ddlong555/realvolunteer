@@ -29,10 +29,10 @@
     </div>
     <div :class="{'fixed' : isFixed}"></div>
     <div class="act-nav" id="boxFixed" :class="{'is_fixed' : isFixed}" >
-        <a href="javascript:void(0);" @click="goAnchor('followed')">已关注</a>
-        <a href="javascript:void(0);" @click="goAnchor('booked')">已报名</a>
-        <a href="javascript:void(0);" @click="goAnchor('released')">已发布</a>
-        <a href="javascript:void(0);" @click="goAnchor('participated')">已参加</a>
+        <a href="javascript:void(0);" @click="goAnchor1('followed')" ref="a">已关注</a>
+        <a href="javascript:void(0);" @click="goAnchor2('booked')" ref="b">已报名</a>
+        <a href="javascript:void(0);" @click="goAnchor3('released')" ref="c">已发布</a>
+        <a href="javascript:void(0);" @click="goAnchor4('participated')" ref="d">已参加</a>
     </div>
     <div class="act" >
       <div class="Anchorpoint" id="followed"></div>
@@ -78,6 +78,9 @@
         </div>
       </div>
     </div>
+    <div class="block">
+
+    </div>
   </div>
 </template>
 
@@ -106,6 +109,9 @@ export default {
   watch:{
 
   },
+  created() {
+
+  },
   mounted() {
     window.addEventListener('scroll', this.initHeight);
     this.$nextTick(() => {
@@ -127,12 +133,48 @@ export default {
     test() {
       this.$router.push('/test')
     },
-    goAnchor(e) {
+    goAnchor1(e) {
       document.getElementById(e).scrollIntoView({
         behavior: "smooth",  // 平滑过渡
         block: "start"  // 上边框与视窗顶部平齐。默认值
       });
+      this.$refs.a.style.fontWeight='bold';
+      this.$refs.b.style.fontWeight='normal';
+      this.$refs.c.style.fontWeight='normal';
+      this.$refs.d.style.fontWeight='normal';
+
     },
+    goAnchor2(e) {
+      document.getElementById(e).scrollIntoView({
+        behavior: "smooth",  // 平滑过渡
+        block: "start"  // 上边框与视窗顶部平齐。默认值
+      });
+      this.$refs.a.style.fontWeight='normal';
+      this.$refs.b.style.fontWeight='bold';
+      this.$refs.c.style.fontWeight='normal';
+      this.$refs.d.style.fontWeight='normal';
+    },
+    goAnchor3(e) {
+      document.getElementById(e).scrollIntoView({
+        behavior: "smooth",  // 平滑过渡
+        block: "start"  // 上边框与视窗顶部平齐。默认值
+      });
+      this.$refs.a.style.fontWeight='normal';
+      this.$refs.b.style.fontWeight='normal';
+      this.$refs.c.style.fontWeight='bold';
+      this.$refs.d.style.fontWeight='normal';
+    },
+    goAnchor4(e) {
+      document.getElementById(e).scrollIntoView({
+        behavior: "smooth",  // 平滑过渡
+        block: "start"  // 上边框与视窗顶部平齐。默认值
+      });
+      this.$refs.a.style.fontWeight='normal';
+      this.$refs.b.style.fontWeight='normal';
+      this.$refs.c.style.fontWeight='normal';
+      this.$refs.d.style.fontWeight='bold';
+    },
+
     initHeight() {
       // 设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 (被卷曲的高度)
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -193,7 +235,6 @@ export default {
 
 .act {
   width: 96%;
-  height: 60%;
   position: relative;
   left: 2%;
 }
@@ -269,5 +310,8 @@ export default {
   height: 0;
   width: 100%;
 }
-
+.block{
+  height:20%;
+  width:100%;
+}
 </style>

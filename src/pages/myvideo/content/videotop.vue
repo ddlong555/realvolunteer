@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="videotop-children">
-      <div class="list"  v-for="(item, index) in nav"  :key="index" @click="clicknav(item)" :class="{'listClick' : isClick}">{{item}}</div>
+      <div class="list"  v-for="(item, index) in nav"  :key="index" @click="clicknav(item,index)" :class="{'listClick' : isClick+index}">{{item}}</div>
     </div>
   </div>
 </template>
@@ -29,19 +29,12 @@ export default {
   created() {
 
   },
-  computed:{
-    isClick(){
-      console.log(this.$route.path.indexOf(this.path))
-      return this.$route.path.indexOf(this.path)!=-1
-    }
-  },
   methods:{
     Gotosendvideo(){
       this.$router.push('/sendVideo')
     },
     clicknav(e){
-
-      console.log(this.nav[e])
+      console.log("a",this.nav[e])
     }
   }
 }
