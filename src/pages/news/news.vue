@@ -29,7 +29,7 @@ export default {
   },
   data(){
     return{
-      src:'/pdf/newshow.pdf'
+      src:this.$route.query.pdf
     }
   }
 }

@@ -5,27 +5,25 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state:{
-    pathName: "",
-    currDbSource: {},
     user: {},
     Token:"",
+    is_login:false
   },
   getters:{
     getToken(state){
       return state.Token
     },
-    getuser(state){
+    getUser(state){
       return state.user
+    },
+    getLogin(state){
+      return state.is_login
     }
   },
   mutations:{
     // 保存当前菜单栏的路径
     savePath(state,pathName){
       state.pathName = pathName;
-    },
-    // 保存当前点击的数据源
-    saveCurrDbSource(state,currDbSource){
-      state.currDbSource = currDbSource;
     },
     // 保存当前点击的元数据
     saveUser(state,user){
@@ -34,6 +32,9 @@ export default new Vuex.Store({
     // 保存所有数据源
     saveToken(state,Token){
       state.Token = Token;
+    },
+    saveLogin(state,is_login){
+      state.is_login = is_login;
     }
   },
   plugins: [createPersistedState({

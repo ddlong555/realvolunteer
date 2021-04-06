@@ -55,23 +55,23 @@ export default {
 
 <style  lang="stylus" scoped>
 .videomain{
-  position absolute
+  position relative
   width: 100%;
   height: 80%;
-  top:12%;
   overflow: scroll;
 }
 .videomain-search{
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 5%;
 }
 
 .videomain-search input {
   position relative
+  display inline-block
   width: 90%;
-  height: 100%;
-  left:5%;
+  height: 115%;
+  left:2%;
   -webkit-appearance none;
   background-color: #eff1f4;
   background-image: none;
@@ -91,9 +91,9 @@ export default {
 }
 
 .videomain-search img {
-  position: absolute;
-  left: 28%;
-  top: 28%;
+  position: relative;
+  display inline-block
+  left:29%
   height: 13px;
   width: 13px;
   z-index 1
