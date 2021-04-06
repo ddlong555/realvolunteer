@@ -1,5 +1,7 @@
 <template>
   <div class="pages">
+    <top2 title=""></top2>
+    <div style="height: 50px"></div>
     <div class="vadioBox" v-show="videoSrc == ''">
       <van-uploader
         ref="upload"
@@ -22,7 +24,7 @@
       autosize
       label="标题*"
       type="textarea"
-      maxlength="80"
+      maxlength="40"
       placeholder="请填写标题"
       show-word-limit
     />
@@ -51,7 +53,7 @@
       autosize
       label="发表动态"
       type="textarea"
-      maxlength="233"
+      maxlength="140"
       placeholder="请填写动态内容"
       show-word-limit
     />
@@ -63,7 +65,12 @@
 </template>
 
 <script>
+import qs from "qs"
+import top2 from "@/pages/upload/content/top2";
 export default {
+  components: {
+    top2
+  },
   name: "score",
   data() {
     return {
