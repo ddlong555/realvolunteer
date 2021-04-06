@@ -34,10 +34,10 @@
         推荐活动
       </div>
       <div class="act-gather">
-        <div class="act-single" >
-          <img src="../../../assets/image/test/ad.jpg" alt=""/>
+        <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
+          <img :src=item.activityPictureList[1].pictureUrl alt=""/>
           <div >
-            华东师范大学志愿者招募
+            {{item.activityName}}
           </div>
         </div>
 
@@ -46,13 +46,12 @@
         新闻专区
       </div>
       <div class="act-gather">
-        <div class="act-single" @click="newshow" v-for="(item,index) in msg" :key="index">
-          <img src="../../../assets/image/test/ad.jpg" alt=""/>
+        <div class="act-single" @click="newshow(index)" v-for="(item,index) in news" :key="index" >
+          <img :src=item.newsPictureList[0].pictureUrl alt=""/>
           <div >
-            {{ item.newsContent}}
+            {{ item.newsTitle}}
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -60,6 +59,7 @@
 
 <script>
 import swiper from "@/components/common/swiper/my3dswiper";
+// import activity from "@/pages/activity/activity";
 
 export default {
   name: "top",
@@ -68,13 +68,28 @@ export default {
   },
   data(){
     return {
-      activityId: 1,
-      msg:{}
+      news:{},
+      activity:{},
     }
   },
   methods:{
-    newshow(){
-      this.$router.push('/news')
+    newshow(e){
+      console.log(e)
+      this.$router.push({
+        path:'/news',
+        query:{
+          activity:this.news[e]
+        }
+      })
+
+    },
+    activityshow(e){
+      this.$router.push({
+        path:'/activityDisplayactivity',
+        query:{
+          pdf:this.activity[e]
+        }
+      })
     },
     Gototeam(){
       this.$router.push('/team')
@@ -91,16 +106,30 @@ export default {
     }
   },
   created() {
-    this.$axios.get("/api/volunteer/activityNews/getActivityNewsByActivityId",
+    this.$axios.get("/api/volunteer/activityNews/getActivityNewsByNumber",
         {
           params:{
-            "activityId":1
+            "number":5
           }
         })
         .then((res) => {
           if(res!=null)
-            this.msg=res.data.result;
-          console.log(this.msg);
+            this.news=res.data.result;
+          console.log(this.news);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    this.$axios.get("/api/volunteer/activity/getActivityByNumber",
+        {
+          params:{
+            "number":10
+          }
+        })
+        .then((res) => {
+          if(res!=null)
+            this.activity=res.data.result;
+          console.log(this.activity);
         })
         .catch((error) => {
           console.log(error);
@@ -152,6 +181,7 @@ export default {
   width: 95%;
   height: 100px;
   border-radius: 5px;
+  object-fit: cover;
 }
 .act-single div{
   position relative

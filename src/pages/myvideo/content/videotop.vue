@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="videotop-children">
-      <div class="list"  v-for="(item, index) in nav"  :key="index" @click="clicknav" :class="{'listClick' : isClick}">{{item}}</div>
+      <div class="list"  v-for="(item, index) in nav"  :key="index" @click="clicknav(item)" :class="{'listClick' : isClick}">{{item}}</div>
     </div>
   </div>
 </template>
@@ -19,20 +19,29 @@ export default {
   name: "videotop",
   data() {
     return {
-      nav: ['技术援助','教育','待定1','待定2','待定3','待定2','待定3'],
-      currentIndex: 1,
-      isClick:true,
+      nav: ['技术援助','教育','共同富裕','动物救治'],
+      isClick1:false,
+      isClick2:false,
+      isClick3:false,
+      isClick4:false,
     }
   },
   created() {
 
   },
+  computed:{
+    isClick(){
+      console.log(this.$route.path.indexOf(this.path))
+      return this.$route.path.indexOf(this.path)!=-1
+    }
+  },
   methods:{
     Gotosendvideo(){
       this.$router.push('/sendVideo')
     },
-    clicknav(){
+    clicknav(e){
 
+      console.log(this.nav[e])
     }
   }
 }
@@ -41,14 +50,14 @@ export default {
 <style scoped>
 
 .videotop{
-  position: absolute;
+  position: relative;
   width:100%;
   height:12%;
   /*background-color: #e04438;*/
   /*color:white;*/
 }
 .videotop-top {
-  position: absolute;
+  position: relative;
   height: 40%;
   width: 100%;
 }
@@ -75,11 +84,11 @@ export default {
   top: 25%;
 }
 .videotop-children{
-  position: absolute;
+  position: relative;
   width:100%;
   height:30%;
+  margin-top: 5%;
   /*background-color: #5bffcc;*/
-  top:63%;
   display: flex;
   overflow-x:scroll;
   overflow-y:hidden;
