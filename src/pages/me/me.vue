@@ -6,7 +6,7 @@
     </div>
     <div class="main-bottom">
       <div class="logo">
-        <div class="logo-img" :style="{backgroundImage:'url('+src+')'}">
+        <div class="logo-img" :style="{backgroundImage:'url('+headPic+')'}">
           <!--            <img class="ad-img" src="../../assets/image/me/boy.svg" alt=""/>-->
         </div>
         <div class="click-logo" v-show="!is_login" @click="gotologin">
@@ -40,10 +40,12 @@ export default {
     name,
     MeBottom,
   },
+  created() {
+
+  },
   data() {
     return {
       src: require("../../assets/image/test/ad.jpg"),
-      user:this.$store.getters.getUser,
       toy:
         {
           boy: require('../../assets/image/me/boy.svg'),
@@ -52,6 +54,16 @@ export default {
     }
   },
   computed:{
+    headPic(){
+      if(this.user.headPicture==null){
+        return require("../../assets/image/test/ad.jpg")
+      }
+      else
+        return this.user.headPicture
+    },
+    user(){
+      return this.$store.getters.getUser
+    },
     is_login(){
       return this.$store.getters.getLogin
     }
@@ -63,8 +75,8 @@ export default {
       });
     },
   },
-  created() {
-    console.log(this.is_login)
+  activated() {
+    console.log(this.headPic)
   }
 }
 </script>

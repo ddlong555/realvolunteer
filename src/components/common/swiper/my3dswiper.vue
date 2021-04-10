@@ -2,8 +2,8 @@
   <div class="content">
     <div class="imglist" @click="addEventListener" ref="imglist">
       <ul>
-        <li :class="'list'+i" ref="li" v-for="(item,i) in pic" :key="i">
-          <img :src=item alt="">
+        <li :class="'list'+i" ref="li" v-for="(item,i) in banners" :key="i">
+          <img :src=item.swiperPicture alt="">
         </li>
       </ul>
     </div>
@@ -21,9 +21,9 @@ export default {
     return {
       index: 0,
       aListName: ["list0", "list1", "list2", "list3", "list4"],
-      pic: [require("../../../assets/image/test/ad.jpg"), require("../../../assets/image/test/a.jpg"), require("../../../assets/image/test/d.jpg"), require("../../../assets/image/test/b.jpg"), require("../../../assets/image/test/c.jpg")]
     }
   },
+  props:['banners'],
   computed: {
     aSpan() {
       return this.$refs.span
@@ -79,7 +79,9 @@ export default {
       if (this.index < 0)
         this.index = this.len - 1;
       this.setLine();
-    }
+    },
+  },
+  updated() {
   }
 }
 </script>

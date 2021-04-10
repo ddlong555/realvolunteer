@@ -56,6 +56,6 @@ export default {
   width: 24px;
 }
 .active{
-  color:green;
+  color:#fa8950;
 }
 </style>

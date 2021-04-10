@@ -1,6 +1,6 @@
 <template>
   <div class="main1">
-    <swiper>
+    <swiper :banners="swiper">
     </swiper>
 
     <div class="main-widget">
@@ -35,10 +35,10 @@
       </div>
       <div class="act-gather">
         <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
-          <img :src=item.activityPictureList[0].pictureUrl alt="" />
-<!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
-          <div >
-            {{item.activityName}}
+          <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+          <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
+          <div>
+            {{ item.activityName }}
           </div>
         </div>
       </div>
@@ -46,10 +46,10 @@
         新闻专区
       </div>
       <div class="act-gather">
-        <div class="act-single" @click="newshow(index)" v-for="(item,index) in news" :key="index" >
+        <div class="act-single" @click="newshow(index)" v-for="(item,index) in news" :key="index">
           <img :src=item.newsPictureList[0].pictureUrl alt=""/>
-          <div >
-            {{ item.newsTitle}}
+          <div>
+            {{ item.newsTitle }}
           </div>
         </div>
       </div>
@@ -66,55 +66,70 @@ export default {
   components: {
     swiper
   },
-  data(){
+  data() {
     return {
-      news:{},
-      activity:{},
+      news: {},
+      activity: {},
+      swiper: []
     }
   },
-  methods:{
-    newshow(e){
+  methods: {
+    newshow(e) {
       console.log(e)
       this.$router.push({
-        path:'/news',
-        query:{
-          pdf:this.news[e].newsContent
+        path: '/news',
+        query: {
+          pdf: this.news[e].newsContent
         }
       })
-
     },
-    activityshow(e){
+    activityshow(e) {
       this.$router.push({
-        path:'/activityDisplayactivity',
-        query:{
-          pdf:this.activity[e]
+        path: '/activityDisplayactivity',
+        query: {
+          pdf: this.activity[e]
         }
       })
     },
-    Gototeam(){
+    Gototeam() {
       this.$router.push('/team')
     },
-    Gototeamdis(){
+    Gototeamdis() {
       this.$router.push('/teamdis')
     },
-    Gotoinforchange(){
+    Gotoinforchange() {
       this.$router.push('/informationChange')
     },
-    GotoTest(){
+    GotoTest() {
       this.$router.push('/test')
 
     }
   },
   created() {
-    this.$axios.get("/api/volunteer/activityNews/getActivityNewsByNumber",
+    this.$axios.get("/api/volunteer/swiper/getSwiperByNumber",
         {
-          params:{
-            "number":5
+          params: {
+            "number": 5
           }
         })
         .then((res) => {
-          if(res!=null)
-            this.news=res.data.result;
+          if (res != null)
+            for (let i in res.data.result)
+              this.swiper.push(res.data.result[i]);
+          console.log(this.swiper);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    this.$axios.get("/api/volunteer/activityNews/getActivityNewsByNumber",
+        {
+          params: {
+            "number": 5
+          }
+        })
+        .then((res) => {
+          if (res != null)
+            this.news = res.data.result;
           console.log(this.news);
         })
         .catch((error) => {
@@ -122,13 +137,13 @@ export default {
         });
     this.$axios.get("/api/volunteer/activity/getActivityByNumber",
         {
-          params:{
-            "number":8
+          params: {
+            "number": 8
           }
         })
         .then((res) => {
-          if(res!=null)
-            this.activity=res.data.result;
+          if (res != null)
+            this.activity = res.data.result;
           console.log(this.activity);
         })
         .catch((error) => {
@@ -148,13 +163,15 @@ export default {
   overflow-y: scroll;
   overflow-x hidden
 }
-.act{
+
+.act {
   position: relative
 
   width: 100%;
   height: 50%;
   text-align: center;
 }
+
 .act-gather {
 
 }
@@ -183,13 +200,15 @@ export default {
   border-radius: 5px;
   object-fit: cover;
 }
-.act-single div{
+
+.act-single div {
   position relative
   font-size 13px
   text-align left
   left 3%
   letter-spacing 1px
 }
+
 .main-widget {
   display: flex;
   width: 96%;
