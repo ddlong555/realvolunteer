@@ -241,14 +241,9 @@ export default {
       // console.log(this.form.file)
       var that = this;
       let dat = new Date(that.form.month + ' ' + that.form.date + ',2000');
-      let file=this.file;
-      let deviceFile = ""  //选择的图片数组
+      let file = this.form.file;
       let formData = new FormData();
-      deviceFile = file
-      deviceFile.map((item)=>{
-        //files是后台参数name字段对应值
-        formData.append('file', item.file);
-      })
+      formData.append("headPicture",file.file);
       // var params = new URLSearchParams();
       // params.append('birthday',dat);
       this.$axios.post("/api/volunteer/userInfo/updateUserInfoByUserId",JSON.stringify({
@@ -282,14 +277,20 @@ export default {
           .catch(function (error) {
             console.log(error);
           });
-
       this.$axios({
         'url':"/api/volunteer/userInfo/updateHeadPicture",
         'method':'POST',
         'data':formData,
         headers:{
           "token":this.$store.getters.getToken,
-          'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
+          'Content-Type':'multipart/form-data',
+        }
+      }).then((res)=>{
+        if(res.data.success == true){
+          alert("上传头像成功！")
+        }
+        else{
+          alert("头像失败！")
         }
       });
     },

@@ -75,8 +75,6 @@ export default {
       });
     },
   },
-  activated() {
-    console.log(this.headPic)
   }
 }
 </script>

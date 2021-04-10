@@ -40,7 +40,7 @@ export default {
   },
   methods:{
     back(){
-      this.$router.replace('/teamdis')
+      this.$router.back()
     }
 }
 

@@ -30,8 +30,6 @@
         :max-count="4"
         :after-read="afterRead"
     />
-
-
     <div class="sendBtn">
       <van-button type="info" round @click="send">发 布</van-button>
       <van-button type="info" round plain>存草稿</van-button>
@@ -57,7 +55,6 @@ export default {
   },
   mounted() {
     document.title = "发布";
-
   },
   // watch: {
   //   tagShow() {

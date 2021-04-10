@@ -8,7 +8,7 @@
         <h>{{ title }}</h>
       </div>
       <div class="people">
-        <h>发起人:{{ name }}</h>
+        <h>参加人数:{{ name }}</h>
       </div>
       <div class="place">
         <h>{{ place }}</h>
@@ -39,6 +39,35 @@ export default {
       evaluate:"这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。",
       yesoryes: false,
     }
+  },
+  created(){
+    var that = this
+    // console.log("1:",that.$route.query.activityId);
+    this.$axios.get("/api/volunteer/activity/getActivityByActivityId",
+        {
+          params:{
+            activityId: this.$route.query.activityId
+          },
+          headers: {
+            token: that.$store.getters.getToken
+          }
+        })
+        .then((res) => {
+          if(res!=null){
+            console.log(res);
+            that.title = res.data.result.activityName
+            that.place = res.data.result.activityPlace
+            that.evaluate = res.data.result.activityContent
+            that.name = res.data.result.enrolledNumber
+            that.background = this.$route.query.PictureList
+          }
+          else{
+            alert("?")
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   },
   methods:{
     change(){

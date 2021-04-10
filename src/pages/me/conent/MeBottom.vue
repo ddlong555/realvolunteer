@@ -4,7 +4,7 @@
       <div class="widget-part" @click="Gotoperson">
         <img src="../../../assets/image/me/score.svg" alt=""/>
         <div class="widget-part-title">
-          个人信息
+          信息修改
         </div>
       </div>
       <div class="widget-part" @click="test">
@@ -196,12 +196,12 @@ export default {
     }
   },
   methods: {
-    Gotoperson() {
+    GotoinforC() {
       console.log(this.$store.getters.getToken)
       // const jwt = require('jsonwebtoken')
       // const decode = jwt.decode('token')
       // console.log(decode)
-      this.$router.push('/personalInformation')
+      this.$router.push('/informationChange')
     },
     Gotomessage() {
       this.$router.push('/message')

@@ -15,7 +15,7 @@
           @load="onLoad"
       >
         <div v-for="(i,x) in activity" :key="x">
-          <div v-for="(item,index) in activity[x].data" :key="index" class="content-line">
+          <div v-for="(item,index) in activity[x].data" :key="index" class="content-line" @click="gotoactDis(activity[x].data[index].activityId,activity[x].data[index].activityPictureList[0].pictureUrl)">
             <img :src=item.activityPictureList[0].pictureUrl class="actimg"/>
             <p class="line-title">{{ item.activityName }}</p>
             <p class="line-bottom">
@@ -75,7 +75,6 @@ export default {
       // 异步更新数据
       // setTimeout 仅做示例，真实场景中一般为 ajax 请求
       setTimeout(() => {
-
         this.$axios.get("/api/volunteer/activity/getActivityByNumber",
             {
               params: {
@@ -112,6 +111,10 @@ export default {
       //   }
       // }, 1000);
     },
+    gotoactDis(e,f){
+      console.log(e)
+      this.$router.push({path: '/activityDisplay', query: {activityId: e,PictureList:f}})
+    }
   },
   watch: {//监听搜索
     address() {

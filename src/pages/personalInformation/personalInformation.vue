@@ -72,7 +72,6 @@ export default {
       avatar: require('../../assets/image/personalInformation/avatar.jpg'),
       sign: require('../../assets/image/personalInformation/xingzuo.svg'),
       point: 3,
-      data:{},
     }
   },
   created(){
@@ -96,6 +95,7 @@ export default {
             that.day = res.data.result.birthday.getDay()
             that.point = ""
             // alert("hgagdjs")
+
           }
         })
         .catch((error) => {

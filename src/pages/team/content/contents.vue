@@ -1,19 +1,25 @@
 <template>
   <div class="contents">
     <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="团队姓名">
-          <el-input v-model="form.name" placeholder="请输入团队姓名"></el-input>
+      <el-form-item label="活动姓名">
+          <el-input v-model="form.name" placeholder="请输入活动姓名"></el-input>
       </el-form-item>
-      <el-form-item label="创建时间">
-          <el-input v-model="form.time" placeholder="请输入创建时间"></el-input>
+      <el-form-item label="活动类型">
+          <el-input v-model="form.type" placeholder="请输入活动类型"></el-input>
       </el-form-item>
-      <el-form-item label="创建者">
-          <el-input v-model="form.author" placeholder="请输入创建者"></el-input>
+      <el-form-item label="组织者ID">
+          <el-input v-model="form.author" placeholder="请输入组织者ID"></el-input>
       </el-form-item>
-      <el-form-item label="地点">
-          <el-input v-model="form.place" placeholder="请输入地点"></el-input>
+      <el-form-item label="活动时间">
+          <el-input v-model="form.time" placeholder="请输入活动时间"></el-input>
       </el-form-item>
-      <el-form-item label="宣言">
+      <el-form-item label="报名人数">
+        <el-input v-model="form.num" placeholder="请输入活动时间"></el-input>
+      </el-form-item>
+      <el-form-item label="活动地点">
+        <el-input v-model="form.place" placeholder="请输入活动时间"></el-input>
+      </el-form-item>
+      <el-form-item label="活动内容">
         <el-col class="declaration" :span="50">
           <el-input
             type="textarea"
@@ -38,8 +44,10 @@ export default {
     return{
       form:{
         name:'',
+        type:'',
         time:'',
         author:'',
+        num:'',
         place:'',
         textarea:''
       },
@@ -50,6 +58,35 @@ export default {
       alert("保存成功！")
     },
     submit(){
+      var that = this;
+      this.$axios.post("/api/volunteer/activity/addActivity",JSON.stringify({
+        "activityList": [{
+          "activityName": that.form.name,
+          "activityContent": that.form.textarea,
+          "activityOrganizer": that.form.author,
+          "enrolledNumber": null,
+          "requestedNumber": that.form.num,
+          "activityType": that.form.type,
+          "activityPlace": that.form.place,
+          "isActivityPicture": false,
+            }]
+          }),{
+            headers: {token: that.$store.getters.getToken,"Content-Type": "application/json;charset=utf-8"}
+          }
+      )
+          .then(function (response) {
+            if(response.data.success == true){
+              alert("修改成功")
+              that.$router.push('/activityDisplay')
+            }
+            else{
+              alert("修改失败")
+            }
+            console.log(that)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       alert("提交成功！")
     },
   }
