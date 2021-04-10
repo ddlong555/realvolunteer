@@ -27,7 +27,7 @@
         v-model="fileList"
         multiple
         :disabled='active==0'
-        :max-count="9"
+        :max-count="4"
         :after-read="afterRead"
     />
 
@@ -52,6 +52,7 @@ export default {
       picSrc: "",
       content: "",
       fileList:[],
+      active:1,
     };
   },
   mounted() {
@@ -84,16 +85,17 @@ export default {
     //   this.tagShow = false;
     // },
     send() {
-      let file=this.picSrc;
+      let file=this.fileList;
       let deviceFile = []  //选择的图片数组
       let formData = new FormData();
+
       if(Array.isArray(file)){ //因为该组件单选是对象，多选是数组
         deviceFile = file
       }else{
         deviceFile.push(file)
       }
       deviceFile.map((item)=>{
-      //files是后台参数name字段对应值
+        //files是后台参数name字段对应值
         formData.append('commentPicture', item.file);
       })
       formData.append('commentText',this.content)
@@ -105,10 +107,9 @@ export default {
            "token":this.$store.getters.getToken,
           'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
         }
-      }).catch((error)=>{
-        console.log(this.$store.getters.getToken)
-         console.log(error)
-
+      }).then((res)=>{
+        alert("上传成功")
+         console.log(res)
        });
 
       // // this.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
