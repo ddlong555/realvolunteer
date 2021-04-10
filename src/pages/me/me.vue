@@ -43,7 +43,6 @@ export default {
   data() {
     return {
       src: require("../../assets/image/test/ad.jpg"),
-      user:this.$store.getters.getUser,
       toy:
         {
           boy: require('../../assets/image/me/boy.svg'),
@@ -52,6 +51,9 @@ export default {
     }
   },
   computed:{
+    user(){
+      return this.$store.getters.getUser
+    },
     is_login(){
       return this.$store.getters.getLogin
     }
@@ -63,8 +65,9 @@ export default {
       });
     },
   },
-  created() {
+  mounted() {
     console.log(this.is_login)
+    console.log(this.$store.getters.getUser)
   }
 }
 </script>

@@ -243,10 +243,7 @@ export default {
       let dat = new Date(that.form.month + ' ' + that.form.date + ',2000');
       let file = this.form.file;
       let formData = new FormData();
-      let deviceFile = Array.from(file);
-      deviceFile.map(item=>{
-        formData.append('picFile', item.file);
-      })
+      formData.append("headPicture",file.file);
       // var params = new URLSearchParams();
       // params.append('birthday',dat);
       this.$axios.post("/api/volunteer/userInfo/updateUserInfoByUserId",JSON.stringify({
@@ -287,6 +284,13 @@ export default {
         headers:{
           "token":this.$store.getters.getToken,
           'Content-Type':'multipart/form-data',
+        }
+      }).then((res)=>{
+        if(res.data.success == true){
+          alert("上传头像成功！")
+        }
+        else{
+          alert("头像失败！")
         }
       });
     },
