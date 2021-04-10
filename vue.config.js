@@ -1,5 +1,5 @@
 
-// 接口测试
+//接口测试
 module.exports = {
     outputDir: 'dist',   //build输出目录
     assetsDir: 'assets', //静态资源目录（js, css, img）
@@ -22,11 +22,11 @@ module.exports = {
     }
 }
 
-// 本机测试，页面测试
+//本机测试，页面测试
 
 // module.exports = {
 //     devServer: {
-//         host: "172.30.249.91",
+//         host: "192.168.2.153",
 //         port: 8080  //配置端口
 //     }
 // }

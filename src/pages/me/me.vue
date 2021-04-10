@@ -43,7 +43,6 @@ export default {
   data() {
     return {
       src: require("../../assets/image/test/ad.jpg"),
-      is_login: this.$store.getters.getLogin,
       user:this.$store.getters.getUser,
       toy:
         {
@@ -52,12 +51,20 @@ export default {
         }
     }
   },
+  computed:{
+    is_login(){
+      return this.$store.getters.getLogin
+    }
+  },
   methods:{
     gotologin(){
       this.$router.push({
         path: '/login',
       });
     },
+  },
+  created() {
+    console.log(this.is_login)
   }
 }
 </script>

@@ -1,5 +1,9 @@
 <template>
   <div class="forms">
+    <div class="form-upload">
+      <span>上传头像</span>
+      <van-uploader v-model="form.fileList" multiple :max-count="1" :after-read="afterRead"/>
+    </div>
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="昵称">
         <el-col class="nickname" :span="20">
@@ -222,21 +226,74 @@ export default {
         place:'',
         major:'',
         textarea:'',
+        fileList:[],
+        file:"",
       },
     }
   },
   methods:{
+    afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      console.log(file);
+      this.form.file = file;
+    },
     success(){
-      alert("保存成功！")
+      // console.log(this.form.file)
+      var that = this;
+      let dat = new Date(that.form.month + ' ' + that.form.date + ',2000');
+      let file=this.file;
+      let deviceFile = ""  //选择的图片数组
+      let formData = new FormData();
+      deviceFile = file
+      deviceFile.map((item)=>{
+        //files是后台参数name字段对应值
+        formData.append('file', item.file);
+      })
+      // var params = new URLSearchParams();
+      // params.append('birthday',dat);
+      this.$axios.post("/api/volunteer/userInfo/updateUserInfoByUserId",JSON.stringify({
+            "userName":that.form.nickname,
+            "priority":null,
+            "gender":that.form.sexual,
+            "mailaddress":null,
+            "headPicture":null,
+            "introduction":that.form.textarea,
+            "address":that.form.place,
+            "major":that.form.major,
+            "birthday": dat,
+            "fax":null,
+            "qq":null,
+            "tel":null,
+            "credits":0
+      }),{
+        headers: {token: that.$store.getters.getToken,"Content-Type": "application/json;charset=utf-8"}
+      }
+      )
+          .then(function (response) {
+            if(response.data.success == true){
+              alert("修改成功")
+              that.$router.push('/personalInformation')
+            }
+            else{
+              alert("修改失败")
+            }
+            console.log(that)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+      this.$axios({
+        'url':"/api/volunteer/userInfo/updateHeadPicture",
+        'method':'POST',
+        'data':formData,
+        headers:{
+          "token":this.$store.getters.getToken,
+          'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
+        }
+      });
     },
     code() {
-      // this.nickname = ''
-      // this.sexual = ''
-      // this.month = ''
-      // this.date = ''
-      // this.place = ''
-      // this.textarea = ''
-      // this.major = ''
       location.reload()
     }
   }
@@ -248,6 +305,7 @@ export default {
   position:absolute;
   width: 100%;
   top:15%;
+  left: 0%;
 }
 .buttons{
   left:22%;

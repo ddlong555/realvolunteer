@@ -35,12 +35,12 @@
       </div>
       <div class="act-gather">
         <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
-          <img :src=item.activityPictureList[1].pictureUrl alt=""/>
+          <img :src=item.activityPictureList[0].pictureUrl alt="" />
+<!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
           <div >
             {{item.activityName}}
           </div>
         </div>
-
       </div>
       <div class="act-title">
         新闻专区
@@ -78,7 +78,7 @@ export default {
       this.$router.push({
         path:'/news',
         query:{
-          activity:this.news[e]
+          pdf:this.news[e].newsContent
         }
       })
 
@@ -123,7 +123,7 @@ export default {
     this.$axios.get("/api/volunteer/activity/getActivityByNumber",
         {
           params:{
-            "number":10
+            "number":8
           }
         })
         .then((res) => {
