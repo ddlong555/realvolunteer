@@ -18,7 +18,7 @@
       autosize
       label="发表动态"
       type="textarea"
-      maxlength="140"
+      maxlength="300"
       placeholder="请填写动态内容"
       show-word-limit
     />
@@ -50,11 +50,7 @@ export default {
   data() {
     return {
       picSrc: "",
-      content: "", //内容
-      // //  tags: "",
-      // // tagData: [], //标签数据
-      // // tagShow: false, //底部弹出显示
-      // title:'标题',
+      content: "",
       fileList:[],
     };
   },
@@ -98,7 +94,7 @@ export default {
       }
       deviceFile.map((item)=>{
       //files是后台参数name字段对应值
-        formData.append('files', item.file);
+        formData.append('commentPicture', item.file);
       })
       formData.append('commentText',this.content)
        this.$axios({
@@ -108,10 +104,13 @@ export default {
          headers:{
            "token":this.$store.getters.getToken,
           'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
-
-      // console.log(fileList);
         }
-      });
+      }).catch((error)=>{
+        console.log(this.$store.getters.getToken)
+         console.log(error)
+
+       });
+
       // // this.$axios.post("/api/volunteer/user/signUpByTel", qs.stringify({
       //   "commentText": this.content,
       //   "commentPublisher":this.,

@@ -1,4 +1,7 @@
 <template>
+<!--  <div class="pages">-->
+<!--    <top2 title=""></top2>-->
+<!--    <div style="height: 50px"></div>-->
   <div class="pages">
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -31,8 +34,13 @@
   </div>
 </template>
 
-<script>
+<!--<script>-->
+<!--import top2 from "./content/top2"-->
+
 export default {
+<!--components: {-->
+<!--top2-->
+<!--},-->
   name: "score",
   data() {
     return {

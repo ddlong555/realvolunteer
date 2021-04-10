@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import qs from "qs"
+// import qs from "qs"
 import top2 from "@/pages/upload/content/top2";
 export default {
   components: {
