@@ -13,7 +13,7 @@
       </tab-bar-item>
       <tab-bar-item path="/myvideo">
         <img slot="item-icon" src="../src/assets/image/TabBar/myvideo.png" alt=""/>
-        <img slot="item-icon-active" src="../src/assets/image/TabBar/myvideo.png" alt=""/>
+        <img slot="item-icon-active" src="../src/assets/image/TabBar/myvideo.png" class="video_class" alt=""/>
         <div slot="item-text">视频</div>
       </tab-bar-item>
       <tab-bar-item path="/discussion">
@@ -60,6 +60,10 @@ export default {
   height: 100%;
   width: 100%;
   background-color: #f7f7f7;
+}
+.video_class{
+  width: 50px ;
+  height:50px ;
 }
 </style>
 

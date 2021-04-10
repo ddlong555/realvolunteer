@@ -1,7 +1,7 @@
 <template>
   <div class="me-bottom">
-    <div class="widget" >
-      <div class="widget-part" @click="GotoinforC" >
+    <div class="widget">
+      <div class="widget-part" @click="Gotoperson">
         <img src="../../../assets/image/me/score.svg" alt=""/>
         <div class="widget-part-title">
           信息修改
@@ -28,13 +28,13 @@
       </div>
     </div>
     <div :class="{'fixed' : isFixed}"></div>
-    <div class="act-nav" id="boxFixed" :class="{'is_fixed' : isFixed}" >
-        <a href="javascript:void(0);" @click="goAnchor1('followed')" ref="a">已关注</a>
-        <a href="javascript:void(0);" @click="goAnchor2('booked')" ref="b">已报名</a>
-        <a href="javascript:void(0);" @click="goAnchor3('released')" ref="c">已发布</a>
-        <a href="javascript:void(0);" @click="goAnchor4('participated')" ref="d">已参加</a>
+    <div class="act-nav" id="boxFixed" :class="{'is_fixed' : isFixed}">
+      <a href="javascript:void(0);" @click="goAnchor1('followed')" ref="a">已关注</a>
+      <a href="javascript:void(0);" @click="goAnchor2('booked')" ref="b">已报名</a>
+      <a href="javascript:void(0);" @click="goAnchor3('released')" ref="c">已发布</a>
+      <a href="javascript:void(0);" @click="goAnchor4('participated')" ref="d">已参加</a>
     </div>
-    <div class="act" >
+    <div class="act">
       <div class="Anchorpoint" id="followed"></div>
       <div v-for="count in 7" :key="count">
         <div class="act-part">
@@ -85,30 +85,30 @@
 </template>
 
 <script>
-function offset(obj,direction){
+function offset(obj, direction) {
   //将top,left首字母大写,并拼接成offsetTop,offsetLeft
-  var offsetDir = 'offset'+ direction[0].toUpperCase()+direction.substring(1);
+  var offsetDir = 'offset' + direction[0].toUpperCase() + direction.substring(1);
 
   var realNum = obj[offsetDir];
   var positionParent = obj.offsetParent;  //获取上一级定位元素对象
 
-  while(positionParent != null){
+  while (positionParent != null) {
     realNum += positionParent[offsetDir];
     positionParent = positionParent.offsetParent;
   }
   return realNum;
 }
+
 export default {
   name: "MeBottom",
-  data(){
-    return{
+  data() {
+    return {
       isFixed: false,
-      offsetTop: 0
+      offsetTop: 0,
+      activity: []
     }
   },
-  watch:{
-
-  },
+  watch: {},
   created() {
 
   },
@@ -116,9 +116,84 @@ export default {
     window.addEventListener('scroll', this.initHeight);
     this.$nextTick(() => {
       //获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置
-      this.offsetTop = offset(document.querySelector('#boxFixed'),'top');
+      this.offsetTop = offset(document.querySelector('#boxFixed'), 'top');
       // console.log(document.querySelector('#boxFixed').offsetParent.offsetTop);
     })
+  },
+  activated() {
+    var that = this
+    //活动接口
+    if (this.$store.getters.getLogin == true) {
+      this.activity=[]
+      this.$axios.get("/api/volunteer/activityUser/getActivityStateByNumber",
+          {
+            params: {
+              number: 0,
+            },
+            headers: {
+              token: that.$store.getters.getToken
+            }
+          })
+          .then((res) => {
+            if (res != null)
+              // this.activity.push(res.data.result);
+            console.log("act", res);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      this.$axios.get("/api/volunteer/activityUser/getActivityStateByNumber",
+          {
+            params: {
+              number: 1,
+            },
+            headers: {
+              token: that.$store.getters.getToken
+            }
+          })
+          .then((res) => {
+            if (res != null)
+              this.activity.push(res.data.result);
+            console.log("act", this.activity);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      this.$axios.get("/api/volunteer/activityUser/getActivityStateByNumber",
+          {
+            params: {
+              number: 2,
+            },
+            headers: {
+              token: that.$store.getters.getToken
+            }
+          })
+          .then((res) => {
+            if (res != null)
+              this.activity.push(res.data.result);
+            console.log("act", this.activity);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      this.$axios.get("/api/volunteer/activityUser/getActivityStateByNumber",
+          {
+            params: {
+              number: 3,
+            },
+            headers: {
+              token: that.$store.getters.getToken
+            }
+          })
+          .then((res) => {
+            if (res != null)
+              this.activity.push(res.data.result);
+            console.log("act", this.activity);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    }
   },
   methods: {
     GotoinforC() {
@@ -142,10 +217,10 @@ export default {
         behavior: "smooth",  // 平滑过渡
         block: "start"  // 上边框与视窗顶部平齐。默认值
       });
-      this.$refs.a.style.fontWeight='bold';
-      this.$refs.b.style.fontWeight='normal';
-      this.$refs.c.style.fontWeight='normal';
-      this.$refs.d.style.fontWeight='normal';
+      this.$refs.a.style.fontWeight = 'bold';
+      this.$refs.b.style.fontWeight = 'normal';
+      this.$refs.c.style.fontWeight = 'normal';
+      this.$refs.d.style.fontWeight = 'normal';
 
     },
     goAnchor2(e) {
@@ -153,30 +228,30 @@ export default {
         behavior: "smooth",  // 平滑过渡
         block: "start"  // 上边框与视窗顶部平齐。默认值
       });
-      this.$refs.a.style.fontWeight='normal';
-      this.$refs.b.style.fontWeight='bold';
-      this.$refs.c.style.fontWeight='normal';
-      this.$refs.d.style.fontWeight='normal';
+      this.$refs.a.style.fontWeight = 'normal';
+      this.$refs.b.style.fontWeight = 'bold';
+      this.$refs.c.style.fontWeight = 'normal';
+      this.$refs.d.style.fontWeight = 'normal';
     },
     goAnchor3(e) {
       document.getElementById(e).scrollIntoView({
         behavior: "smooth",  // 平滑过渡
         block: "start"  // 上边框与视窗顶部平齐。默认值
       });
-      this.$refs.a.style.fontWeight='normal';
-      this.$refs.b.style.fontWeight='normal';
-      this.$refs.c.style.fontWeight='bold';
-      this.$refs.d.style.fontWeight='normal';
+      this.$refs.a.style.fontWeight = 'normal';
+      this.$refs.b.style.fontWeight = 'normal';
+      this.$refs.c.style.fontWeight = 'bold';
+      this.$refs.d.style.fontWeight = 'normal';
     },
     goAnchor4(e) {
       document.getElementById(e).scrollIntoView({
         behavior: "smooth",  // 平滑过渡
         block: "start"  // 上边框与视窗顶部平齐。默认值
       });
-      this.$refs.a.style.fontWeight='normal';
-      this.$refs.b.style.fontWeight='normal';
-      this.$refs.c.style.fontWeight='normal';
-      this.$refs.d.style.fontWeight='bold';
+      this.$refs.a.style.fontWeight = 'normal';
+      this.$refs.b.style.fontWeight = 'normal';
+      this.$refs.c.style.fontWeight = 'normal';
+      this.$refs.d.style.fontWeight = 'bold';
     },
 
     initHeight() {
@@ -184,8 +259,8 @@ export default {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       //如果被卷曲的高度大于吸顶元素到顶端位置 的距离
       this.isFixed = scrollTop > this.offsetTop ? true : false;
-      console.log("offset:",this.offsetTop);
-      console.log(scrollTop);
+      // console.log("offset:",this.offsetTop);
+      // console.log(scrollTop);
     },
 
   },
@@ -219,7 +294,8 @@ export default {
   height: 8%;
   left: 2%;
 }
-.fixed{
+
+.fixed {
   width: 96%;
   position: relative;
   height: 8%;
@@ -284,16 +360,18 @@ export default {
   height: 60px;
   width: 22%;
 }
-.is_fixed{
+
+.is_fixed {
   position: fixed;
   top: 0;
   z-index: 999;
-  margin:0;
+  margin: 0;
   left: 0%;
-  width:100%;
-  height:7%;
+  width: 100%;
+  height: 7%;
   background-color: white;
 }
+
 .widget-part img {
   position: relative;
   left: 20px;
@@ -314,8 +392,9 @@ export default {
   height: 0;
   width: 100%;
 }
-.block{
-  height:20%;
-  width:100%;
+
+.block {
+  height: 20%;
+  width: 100%;
 }
 </style>
