@@ -18,12 +18,12 @@
       </tab-bar-item>
       <tab-bar-item path="/discussion">
         <img slot="item-icon" src="../src/assets/image/TabBar/discussion.png" alt=""/>
-        <img slot="item-icon-active" src="../src/assets/image/TabBar/discussion.png" alt=""/>
+        <img slot="item-icon-active" src="../src/assets/image/TabBar/discussion1.png" alt=""/>
         <div slot="item-text">讨论</div>
       </tab-bar-item>
       <tab-bar-item path="/me">
         <img slot="item-icon" src="../src/assets/image/TabBar/me.png" alt=""/>
-        <img slot="item-icon-active" src="../src/assets/image/TabBar/me.png" alt=""/>
+        <img slot="item-icon-active" src="../src/assets/image/TabBar/me1.png" alt=""/>
         <div slot="item-text">我的</div>
       </tab-bar-item>
     </tab-bar>

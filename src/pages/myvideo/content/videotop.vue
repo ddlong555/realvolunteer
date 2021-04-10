@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="videotop-children">
-      <div class="list"  v-for="(item, index) in nav"  :key="index" @click="clicknav(item,index)" :class="{'listClick' : isClick+index}">{{item}}</div>
+      <div class="list" v-for="(item,index) in nav" :key="index" @click="clicknav(item,index)" :class="{is_Click: click[index]}">{{ item }}</div>
     </div>
   </div>
 </template>
@@ -19,22 +19,36 @@ export default {
   name: "videotop",
   data() {
     return {
-      nav: ['技术援助','教育','共同富裕','动物救治'],
-      isClick1:false,
-      isClick2:false,
-      isClick3:false,
-      isClick4:false,
+      nav: ['技术援助', '教育', '共同富裕', '动物救治'],
+      video: {},
+      click:[false,false,false,false],
     }
   },
   created() {
 
   },
-  methods:{
-    Gotosendvideo(){
+  methods: {
+    Gotosendvideo() {
       this.$router.push('/sendVideo')
     },
-    clicknav(e){
-      console.log("a",this.nav[e])
+    clicknav(e, index) {
+      this.$axios.get("/api/volunteer/video/getVideoByRelativeText",
+          {
+            params: {
+              "relativeText": e
+            }
+          })
+          .then((res) => {
+            if (res != null)
+              this.video = res.data.result;
+            console.log("video", this.video);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
+      this.click=[false,false,false,false]
+      this.click[index]=true;
     }
   }
 }
@@ -42,13 +56,14 @@ export default {
 
 <style scoped>
 
-.videotop{
+.videotop {
   position: relative;
-  width:100%;
-  height:12%;
+  width: 100%;
+  height: 12%;
   /*background-color: #e04438;*/
   /*color:white;*/
 }
+
 .videotop-top {
   position: relative;
   height: 40%;
@@ -76,29 +91,33 @@ export default {
   left: 35%;
   top: 25%;
 }
-.videotop-children{
+
+.videotop-children {
   position: relative;
-  width:100%;
-  height:30%;
+  width: 100%;
+  height: 30%;
   margin-top: 5%;
   /*background-color: #5bffcc;*/
   display: flex;
-  overflow-x:scroll;
-  overflow-y:hidden;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
+
 .videotop-children::-webkit-scrollbar {
   display: none;
 }
-.list{
+
+.list {
   white-space: nowrap;
   position: relative;
   font-size: 13px;
-  width:50%;
-  height:100%;
+  width: 50%;
+  height: 100%;
   margin-right: 5%;
   margin-left: 5%;
 }
-.listClick{
 
+.is_Click {
+  font-weight: bold ;
 }
 </style>
