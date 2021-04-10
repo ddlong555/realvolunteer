@@ -83,7 +83,7 @@ export default {
 .passwordfind{
   position: absolute;
   height:100%;
-  width:100%;
+  width:100%
   background-color: #ffffff;
 
 }
