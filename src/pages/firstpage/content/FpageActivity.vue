@@ -5,9 +5,9 @@
 
     <div class="main-widget">
       <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" @click="GotopInfor"/>
+        <img src="../../../assets/image/me/score.svg" alt="" />
         <div class="main-widget-part-title">
-          个人展示
+          无
         </div>
       </div>
       <div class="main-widget-part">
@@ -17,9 +17,9 @@
         </div>
       </div>
       <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" @click="Gotoactidis"/>
+        <img src="../../../assets/image/me/score.svg" alt="" />
         <div class="main-widget-part-title">
-          活动展示
+          无
         </div>
       </div>
       <div class="main-widget-part">
@@ -97,9 +97,6 @@ export default {
 
     Gototeamdis() {
       this.$router.push('/teamdis')
-    },
-    Gotoinforchange() {
-      this.$router.push('/informationChange')
     },
     GotoTest() {
       this.$router.push('/test')
