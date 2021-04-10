@@ -28,7 +28,7 @@
       placeholder="请填写标题"
       show-word-limit
     />
-    <van-cell title="标签*" is-link @click="selTag" :value="tags" />
+<!--    <van-cell title="标签*" is-link @click="selTag" :value="tags" />-->
     <van-popup v-model="tagShow" position="bottom" round>
       <div class="tagBtn">
         <van-button type="primary" size="small" @click="saveTag"
@@ -120,14 +120,17 @@ export default {
       formData.append('videoTitle',this.titles)
       formData.append('video_mp4',file)
       this.$axios({
-        'url':"/api/volunteer/video/addVideo",
-        'method':'POST',
-        'data':formData,
-        headers:{
-          "token":this.$store.getters.getToken,
-          'Content-Type':'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
+        'url': "/api/volunteer/video/addVideo",
+        'method': 'POST',
+        'data': formData,
+        headers: {
+          "token": this.$store.getters.getToken,
+          'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryVCFSAonTuDbVCoAN',
         }
-      });
+      }).then((res)=>{
+          alert("上传成功")
+          console.log(res)
+        });
       // this.$axios.post("/api/volunteer/video/addVideo", qs.stringify({
       //    "videoTitle": this.titles,
       //    "videoText":this.content,
@@ -147,7 +150,7 @@ export default {
       //      });
       //  console.log(this.titles)
       //  console.log(this.content)
-       console.log(this.$store.getters.getToken)
+      //  console.log(this.$store.getters.getToken)
 
     },
   },
