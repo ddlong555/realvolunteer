@@ -5,21 +5,21 @@
 
     <div class="main-widget">
       <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" @click="Gotoinforchange"/>
+        <img src="../../../assets/image/me/score.svg" alt="" @click="GotopInfor"/>
         <div class="main-widget-part-title">
-          信息修改
+          个人展示
         </div>
       </div>
       <div class="main-widget-part">
         <img src="../../../assets/image/me/score.svg" alt="" @click="Gototeam"/>
         <div class="main-widget-part-title">
-          team
+          发布活动
         </div>
       </div>
       <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" @click="Gototeamdis"/>
+        <img src="../../../assets/image/me/score.svg" alt="" @click="Gotoactidis"/>
         <div class="main-widget-part-title">
-          teamdis
+          活动展示
         </div>
       </div>
       <div class="main-widget-part">
@@ -94,11 +94,11 @@ export default {
     Gototeam(){
       this.$router.push('/team')
     },
-    Gototeamdis(){
-      this.$router.push('/teamdis')
+    Gotoactidis(){
+      this.$router.push('/activityDisplay')
     },
-    Gotoinforchange(){
-      this.$router.push('/informationChange')
+    GotopInfor(){
+      this.$router.push('/personalInformation')
     },
     GotoTest(){
       this.$router.push('/test')
