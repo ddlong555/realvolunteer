@@ -25,6 +25,7 @@
       </advertisement>
       <me-bottom></me-bottom>
     </div>
+
   </div>
 </template>
 
@@ -32,7 +33,6 @@
 import advertisement from "@/components/common/advertisement/advertisement";
 import name from "@/pages/me/conent/name"
 import MeBottom from "@/pages/me/conent/MeBottom";
-
 export default {
   name: "me",
   components: {
@@ -50,7 +50,8 @@ export default {
         {
           boy: require('../../assets/image/me/boy.svg'),
           girl: require('../../assets/image/me/girl.svg')
-        }
+        },
+
     }
   },
   computed:{
@@ -66,7 +67,8 @@ export default {
     },
     is_login(){
       return this.$store.getters.getLogin
-    }
+    },
+
   },
   methods:{
     gotologin(){
@@ -74,6 +76,7 @@ export default {
         path: '/login',
       });
     },
+
   },
 }
 </script>

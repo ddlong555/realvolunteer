@@ -7,7 +7,7 @@
         <input type="text" placeholder="华东师范大学招募"/>
       </div>
       <div class="main-top-right">
-        <img src="../../../assets/image/firstpage/add.svg" @click="change" alt="">
+        <img src="../../../assets/image/firstpage/add.svg" alt="">
       </div>
     </div>
   </div>
@@ -21,11 +21,6 @@ export default {
   data() {
     return {}
   },
-  methods:{
-    change(){
-      this.$router.push('/team');
-    }
-  }
 }
 </script>
 

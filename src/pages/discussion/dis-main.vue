@@ -115,7 +115,8 @@ export default {
       head: require("../../assets/image/me/boy.svg"),
       number: 55,
       inputvalue:"",
-      inputshow:false
+      inputshow:false,
+      discuss:[]
     }
   },
   methods:{
@@ -133,6 +134,23 @@ export default {
     GoDiscuss(){
 
     }
+  },
+  created() {
+    this.$axios.get("/api/volunteer/swiper/getCommentByNumber",
+        {
+          params: {
+            "number": 5
+          }
+        })
+        .then((res) => {
+          if (res != null)
+            // for (let i in res.data.result)
+              // this.discuss.push(res);
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   }
 }
 </script>
