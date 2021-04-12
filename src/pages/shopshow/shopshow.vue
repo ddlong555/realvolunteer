@@ -1,12 +1,8 @@
 <template>
   <div class="shopshow">
-    <shopshowtop>
-    </shopshowtop>
+   <shopshowtop>
+   </shopshowtop>
     <div class="content">
-      <div class="swiper">
-        <swiper :banners="pic">
-        </swiper>
-      </div>
       <div class="name">
         <div class="title">
           海绵宝宝玩偶
@@ -29,14 +25,14 @@
     </div>
     <div class="bottom">
       <div class="border"></div>
-      <div class="know">
-        <div class="text">
-          购买须知
-        </div>
-      </div>
+<!--      <div class="know">-->
+<!--        <div class="text">-->
+<!--          兑换须知-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="buy">
         <div class="text1">
-          立即购买
+          立即兑换
         </div>
       </div>
     </div>
@@ -50,13 +46,12 @@ import shopshowtop from "@/pages/shopshow/shopshowtop";
 export default {
   name: "shopshow",
   components: {
-    Swiper,
     shopshowtop
   }, methods: {},
 
   data() {
     return {
-      introduction: [require("../../assets/image/me/shop/show1.png"), require("../../assets/image/me/shop/show2.png"), require("../../assets/image/me/shop/kone.jpg")],
+      introduction: [require("../../assets/image/me/shop/show1.png"), require("../../assets/image/me/shop/show2.png")],
       pic: [{
         link: "",
         image: require("../../assets/image/test/a.jpg")
