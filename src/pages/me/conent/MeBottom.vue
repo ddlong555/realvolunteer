@@ -36,45 +36,35 @@
     </div>
     <div class="act">
       <div class="Anchorpoint" id="followed"></div>
-      <div v-for="count in 7" :key="count">
-        <div class="act-part">
-          <img src="../../../assets/image/me/sun.svg" alt=""/>
-          <div class="act-part-title">
-            华师大垃圾分类监督员
-          </div>
-          <div class="act-part-number">
-            5
-          </div>
+      <div class="act-single" @click="activityPerson(index)" v-for="(item,index) in activity" :key="index">
+        <img :src=item[0].activityPictureList alt=""/>
+        <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
+        <div>
+          {{ item.activityName }}
         </div>
       </div>
       <div class="Anchorpoint" id="booked"></div>
-      <div class="act-part">
-        <img src="../../../assets/image/me/sun.svg" alt=""/>
-        <div class="act-part-title">
-          华师大垃圾分类监督员
-        </div>
-        <div class="act-part-number">
-          5
+      <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
+        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+        <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
+        <div>
+          {{ item.activityName }}
         </div>
       </div>
       <div class="Anchorpoint" id="released"></div>
-      <div class="act-part">
-        <img src="../../../assets/image/me/sun.svg" alt=""/>
-        <div class="act-part-title">
-          华师大垃圾分类监督员
-        </div>
-        <div class="act-part-number">
-          5
+      <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
+        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+        <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
+        <div>
+          {{ item.activityName }}
         </div>
       </div>
       <div class="Anchorpoint" id="participated"></div>
-      <div class="act-part">
-        <img src="../../../assets/image/me/sun.svg" alt=""/>
-        <div class="act-part-title">
-          华师大垃圾分类监督员
-        </div>
-        <div class="act-part-number">
-          5
+      <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
+        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+        <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
+        <div>
+          {{ item.activityName }}
         </div>
       </div>
     </div>
@@ -105,7 +95,7 @@ export default {
     return {
       isFixed: false,
       offsetTop: 0,
-      activity: []
+      activity: [{},{},{},{}]
     }
   },
   watch: {},
@@ -136,8 +126,8 @@ export default {
           })
           .then((res) => {
             if (res != null)
-              // this.activity.push(res.data.result);
-            console.log("act", res);
+              this.activity[0]=res.data.result;
+            console.log("act", this.activity[0]);
           })
           .catch((error) => {
             console.log(error);
@@ -153,7 +143,7 @@ export default {
           })
           .then((res) => {
             if (res != null)
-              this.activity.push(res.data.result);
+              this.activity[1]=res.data.result;
             console.log("act", this.activity);
           })
           .catch((error) => {
@@ -170,7 +160,8 @@ export default {
           })
           .then((res) => {
             if (res != null)
-              this.activity.push(res.data.result);
+              this.activity[2]=res.data.result;
+
             console.log("act", this.activity);
           })
           .catch((error) => {
@@ -187,7 +178,7 @@ export default {
           })
           .then((res) => {
             if (res != null)
-              this.activity.push(res.data.result);
+              this.activity[3]=res.data.result;
             console.log("act", this.activity);
           })
           .catch((error) => {
@@ -196,7 +187,7 @@ export default {
     }
   },
   methods: {
-    GotoinforC() {
+    Gotoperson() {
       console.log(this.$store.getters.getToken)
       // const jwt = require('jsonwebtoken')
       // const decode = jwt.decode('token')
