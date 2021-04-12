@@ -31,8 +31,9 @@
       </el-form-item>
     </el-form>
     <el-row class="buttons">
+      <input type="file" style="display: none;" id="file" ref="myFile" multiple="multiple" @click="upload">
+      <el-button type="info" plain @click="goFile()">上传文件</el-button>
       <el-button type="primary" plain @click="submit">提交信息</el-button>
-      <el-button type="info" plain @click="success">保存信息</el-button>
     </el-row>
   </div>
 </template>
@@ -54,8 +55,20 @@ export default {
     }
   },
   methods:{
-    success(){
-      alert("保存成功！")
+    goFile() {
+      this.$refs.myFile.click();
+    },
+    upload(){
+
+      let myFile = this.$refs.myFile;
+      let files = myFile.files;
+      var formData = new FormData();
+      for(var i = 0;i < files.length; i++){
+        formData.append("file",files[i]);
+
+      }
+      // var filename = document.getElementById('file');
+      // document.getElementById('file').innerHTML=filename.files[0].name;
     },
     submit(){
       var that = this;
@@ -77,7 +90,7 @@ export default {
           .then(function (response) {
             if(response.data.success == true){
               alert("修改成功")
-              that.$router.push('/activityDisplay')
+              that.$router.push('/firstpage')
             }
             else{
               alert("修改失败")
