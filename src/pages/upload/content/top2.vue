@@ -10,7 +10,7 @@
         </el-dialog>
       </div>
       <div class="top2-title">
-        <h>{{ title }}</h>
+        <p>{{ title }}</p>
       </div>
 <!--      <div class="top2-img2">-->
 <!--        <img @click="dialogVisible = true" src="../../../assets/image/teamdis/share.svg" alt=""/>-->

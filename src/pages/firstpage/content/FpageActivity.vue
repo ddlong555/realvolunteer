@@ -2,7 +2,6 @@
   <div class="main1">
     <swiper :banners="swiper">
     </swiper>
-
     <div class="main-widget">
       <div class="main-widget-part">
         <img src="../../../assets/image/me/score.svg" alt="" />

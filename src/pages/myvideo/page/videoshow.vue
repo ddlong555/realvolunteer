@@ -115,16 +115,16 @@ export default {
     this.bodyHeight = document.documentElement.clientHeight
   },
   created() {
-    this.$axios.get("/api/volunteer/commentResponse/getVideoCommentResponseByCommentId",
+    this.$axios.get("/api/volunteer/video/getVideoByRelativeText",
         {
-          params:{
-            commentId:1,
+          params: {
+            "relativeText": 1
           }
         })
         .then((res) => {
-          if(res!=null)
-            this.msg=res;
-          console.log(this.msg);
+          if (res != null)
+            this.video = res.data.result;
+          console.log("video", this.video);
         })
         .catch((error) => {
           console.log(error);
