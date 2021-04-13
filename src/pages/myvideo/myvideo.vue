@@ -88,7 +88,7 @@ export default {
           .then((res) => {
             if (res != null)
               this.video = res.data.result;
-            console.log(res);
+            console.log(this.video);
           })
           .catch((error) => {
             console.log(error);
