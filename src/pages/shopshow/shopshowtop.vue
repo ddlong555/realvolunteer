@@ -4,7 +4,7 @@
       <img src="../../assets/image/discussion/back.png" alt="">
     </div>
     <div class="top-title">
-      商品详情
+      兑换详情
     </div>
     <div class="top-add">
       <img src="../../assets/image/video/share3.svg" alt="">
