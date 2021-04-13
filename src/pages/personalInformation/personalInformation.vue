@@ -76,7 +76,7 @@ export default {
   },
   created(){
     var that = this
-    this.$axios.get("/api/volunteer/userInfo/getUserInfoByToken",
+    this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
         {
           headers: {
             token: that.$store.getters.getToken

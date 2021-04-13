@@ -8,7 +8,28 @@
           <el-input v-model="form.type" placeholder="请输入活动类型"></el-input>
       </el-form-item>
       <el-form-item label="活动时间">
-          <el-input v-model="form.time" placeholder="请输入活动时间"></el-input>
+        <el-col class="month" :span="8">
+          <el-select v-model="form.month" placeholder="" clearable>
+            <el-option
+                v-for="item in month"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col class="line" :span="2">月</el-col>
+        <el-col class="date" :span="8">
+          <el-select v-model="form.date" placeholder="" clearable>
+            <el-option
+                v-for="item in date"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+        <el-col class="line" :span="1">日</el-col>
       </el-form-item>
       <el-form-item label="报名人数">
         <el-input v-model="form.num" placeholder="请输入报名人数"></el-input>
@@ -17,7 +38,7 @@
         <el-input v-model="form.place" placeholder="请输入活动地点"></el-input>
       </el-form-item>
       <el-form-item label="活动内容">
-        <el-col class="declaration" :span="50">
+        <el-col class="declaration" :span="150">
           <el-input
             type="textarea"
             :rows="4"
@@ -66,11 +87,143 @@ export default {
   name: "contents",
   data(){
     return{
+      month:[{
+        value:'1',
+        label:'1'
+      },{
+        value:'2',
+        label:'2'
+      },{
+        value:'3',
+        label:'3'
+      },{
+        value:'4',
+        label:'4'
+      },{
+        value:'5',
+        label:'5'
+      },{
+        value:'6',
+        label:'6'
+      },{
+        value:'7',
+        label:'7'
+      },{
+        value:'8',
+        label:'8'
+      },{
+        value:'9',
+        label:'9'
+      },{
+        value:'10',
+        label:'10'
+      },{
+        value:'11',
+        label:'11'
+      },{
+        value:'12',
+        label:'12'
+      },],
+      date:[{
+        value:'1',
+        label:'1'
+      },{
+        value:'2',
+        label:'2'
+      },{
+        value:'3',
+        label:'3'
+      },{
+        value:'4',
+        label:'4'
+      },{
+        value:'5',
+        label:'5'
+      },{
+        value:'6',
+        label:'6'
+      },{
+        value:'7',
+        label:'7'
+      },{
+        value:'8',
+        label:'8'
+      },{
+        value:'9',
+        label:'9'
+      },{
+        value:'10',
+        label:'10'
+      },{
+        value:'11',
+        label:'11'
+      },{
+        value:'12',
+        label:'12'
+      },{
+        value:'13',
+        label:'13'
+      },{
+        value:'14',
+        label:'13'
+      },{
+        value:'15',
+        label:'15'
+      },{
+        value:'16',
+        label:'16'
+      },{
+        value:'17',
+        label:'17'
+      },{
+        value:'18',
+        label:'18'
+      },{
+        value:'19',
+        label:'19'
+      },{
+        value:'20',
+        label:'20'
+      },{
+        value:'21',
+        label:'21'
+      },{
+        value:'22',
+        label:'22'
+      },{
+        value:'23',
+        label:'23'
+      },{
+        value:'24',
+        label:'24'
+      },{
+        value:'25',
+        label:'25'
+      },{
+        value:'26',
+        label:'26'
+      },{
+        value:'27',
+        label:'27'
+      },{
+        value:'28',
+        label:'28'
+      },{
+        value:'29',
+        label:'29'
+      },{
+        value:'30',
+        label:'30'
+      },{
+        value:'31',
+        label:'31'
+      },],
       form:{
         name:'',
         type:'',
-        time:'',
-        num:'',
+        date:'',
+        month:'',
+        num: 0,
         place:'',
         textarea:'',
         fileList: [],
@@ -92,17 +245,16 @@ export default {
       console.log(this.$store.getters.getUser.userId);
     },
     submit(){
+      console.log(this.$store.getters.getToken)
       var that = this;
       let formData = new FormData();
+      let dat = new Date(that.form.month + ' ' + that.form.date + ',2000');
       formData.append("activityName",that.form.name);
       formData.append("activityContent",that.form.textarea);
-      formData.append("enrolledNumber",0);
       formData.append("requestedNumber",that.form.num);
-      formData.append("activityOrganizer",this.$store.getters.getUser.userId)
       formData.append("activityType",that.form.type);
       formData.append("activityPlace",that.form.place);
-      formData.append("isActivityPicture",true);
-      formData.append("isSignFileModel",true);
+      formData.append("activityDate",dat);
       // that.$refs.upload.uploadFiles.map((item)=> {
       //   formData.append("signFileModel", item.raw,item.name);
       // })
@@ -112,45 +264,24 @@ export default {
       that.form.picList.map((item)=> {
         formData.append(" activityPicture", item.raw);
       })
-      let config = {
-        "token":this.$store.getters.getToken,
-        'Content-Type':'multipart/form-data',
-      };
-      console.log(that.form.fileList)
-      this.$axios.post('/api/volunteer/activity/addActivity', formData, config)
-          .then(function (response) {
-            if (response.data.status == 1) {
-              that.$message({
-                message: `${that.form.fileList.length}个文件(上传/更新)成功`,
-                type: 'success'
-              });
-            } else {
-              that.$message({
-                message: response.data.msg,
-                type: 'error'
-              });
-            }
-          }).catch(function (error) {
-        console.log(error);
+      this.$axios({
+        'url':"/api/volunteer/activity/addActivity",
+        'method':'POST',
+        'data':formData,
+        headers:{
+          "token":this.$store.getters.getToken,
+          'Content-Type':'multipart/form-data',
+        }
+      }).then((res)=>{
+        console.log(res);
+        if(res.data.success == true){
+          alert("上传文件成功！")
+          console.log(formData);
+        }
+        else{
+          alert("失败！")
+        }
       })
-      // this.$axios({
-      //   'url':"/api/volunteer/activity/addActivity",
-      //   'method':'POST',
-      //   'data':formData,
-      //   headers:{
-      //     "token":this.$store.getters.getToken,
-      //     'Content-Type':'multipart/form-data',
-      //   }
-      // }).then((res)=>{
-      //   console.log(res);
-      //   if(res.data.success == true){
-      //     alert("上传文件成功！")
-      //     console.log(formData);
-      //   }
-      //   else{
-      //     alert("失败！")
-      //   }
-      // })
       // this.$axios.post("/api/volunteer/activity/addActivity",JSON.stringify({
       //   "activityList": [{
       //     "activityName": that.form.name,

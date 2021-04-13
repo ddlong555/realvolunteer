@@ -7,10 +7,10 @@
           信息修改
         </div>
       </div>
-      <div class="widget-part" @click="test">
+      <div class="widget-part" @click="GotoInfo">
         <img src="../../../assets/image/me/score.svg" alt=""/>
         <div class="widget-part-title">
-          我的积分
+          个人信息
         </div>
       </div>
       <div class="widget-part" @click="Gotomessage">
@@ -207,8 +207,8 @@ export default {
     Gotoshop() {
       this.$router.push('/score')
     },
-    test() {
-      this.$router.push('/test')
+    GotoInfo() {
+      this.$router.push('/personalInformation')
     },
     goAnchor1(e) {
       document.getElementById(e).scrollIntoView({
