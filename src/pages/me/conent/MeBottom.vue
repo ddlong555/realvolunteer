@@ -2,19 +2,19 @@
   <div class="me-bottom">
     <div class="widget">
       <div class="widget-part" @click="Gotoperson">
-        <img src="../../../assets/image/me/score.svg" alt=""/>
+        <img src="../../../assets/image/me/xiugai.svg" alt=""/>
         <div class="widget-part-title">
           信息修改
         </div>
       </div>
-      <div class="widget-part" @click="GotoInfo">
-        <img src="../../../assets/image/me/score.svg" alt=""/>
+      <div class="widget-part" @click="test">
+        <img src="../../../assets/image/me/duihuan.svg" alt=""/>
         <div class="widget-part-title">
-          个人信息
+          兑换记录
         </div>
       </div>
       <div class="widget-part" @click="Gotomessage">
-        <img src="../../../assets/image/me/score.svg" alt=""/>
+        <img src="../../../assets/image/me/message.svg" alt=""/>
         <div class="widget-part-title">
           我的消息
         </div>
@@ -207,8 +207,8 @@ export default {
     Gotoshop() {
       this.$router.push('/score')
     },
-    GotoInfo() {
-      this.$router.push('/personalInformation')
+    test() {
+      this.$router.push('/test')
     },
     goAnchor1(e) {
       document.getElementById(e).scrollIntoView({

@@ -3,7 +3,7 @@
     <top2 title=""></top2>
     <div style="height: 50px"></div>
     <van-cell-group>
-      <van-cell title="手机号码" value="158888888" />
+      <van-cell title="手机号码" :value="this.$store.getters.getUser.tel" />
       <van-cell title="忘记密码" value="" is-link @click="forgetpass"/>
       <van-cell title="账号注销" value="" is-link/>
     </van-cell-group>

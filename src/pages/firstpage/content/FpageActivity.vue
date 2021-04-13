@@ -2,38 +2,12 @@
   <div class="main1">
     <swiper :banners="swiper">
     </swiper>
-    <div class="main-widget">
-      <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" />
-        <div class="main-widget-part-title">
-          无
-        </div>
-      </div>
-      <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" @click="Gototeam"/>
-        <div class="main-widget-part-title">
-          发布活动
-        </div>
-      </div>
-      <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" />
-        <div class="main-widget-part-title">
-          无
-        </div>
-      </div>
-      <div class="main-widget-part">
-        <img src="../../../assets/image/me/score.svg" alt="" @click="GotoTest"/>
-        <div class="main-widget-part-title">
-          测试页面
-        </div>
-      </div>
-    </div>
     <div class="act">
       <div class="act-title">
         推荐活动
       </div>
       <div class="act-gather">
-        <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
+        <div class="act-single" @click="activityshow(item.activityId,item.activityPictureList[0].pictureUrl)" v-for="(item,index) in activity" :key="index">
           <img :src=item.activityPictureList[0].pictureUrl alt=""/>
           <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
           <div>
@@ -82,12 +56,12 @@ export default {
         }
       })
     },
-    activityshow(e) {
+    activityshow(e,f) {
       this.$router.push({
-        path: '/activityDisplayactivity',
+        path: '/activityDisplay',
         query: {
-          pdf: this.activity[e]
-        }
+          activityId: e,
+          PictureList:f}
       })
     },
     Gototeam() {

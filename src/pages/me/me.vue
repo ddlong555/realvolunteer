@@ -20,12 +20,12 @@
         <div class="toy">
           <img :src="toy.boy" alt=""/>
         </div>
+        <advertisement :src="this.src" class="ad">
+        </advertisement>
       </div>
-      <advertisement :src="this.src" class="ad">
-      </advertisement>
+
       <me-bottom></me-bottom>
     </div>
-
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      src: require("../../assets/image/test/ad.jpg"),
+      src: require("../../assets/image/me/ad.jpg"),
       toy:
         {
           boy: require('../../assets/image/me/boy.svg'),
@@ -56,7 +56,7 @@ export default {
   computed:{
     headPic(){
       if(this.user.headPicture==null){
-        return require("../../assets/image/test/ad.jpg")
+        return require("../../assets/image/video/headpic.png")
       }
       else
         return this.user.headPicture
@@ -111,9 +111,9 @@ export default {
 .ad {
   position: absolute;
   width:90%;
-  height:13%;
+  height:40%;
   left: 5%;
-  top:17%;
+  top:49%;
   background-size: 100% 100%;
   border-radius: 50px;
 }
@@ -121,7 +121,7 @@ export default {
   position: relative;
   background-color: white;
   width: 100%;
-  height: 32%;
+  height: 40%;
 }
 
 .click-logo {

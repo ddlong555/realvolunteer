@@ -19,7 +19,7 @@
         <input type="text" placeholder="华东师范大学招募"/>
       </div>
       <div class="videosingle" >
-        <div class="videosingle-content" v-for="(item,index) in video" :key="index" :style="{backgroundImage:'url('+src+')'}" @click="videoshow">
+        <div class="videosingle-content" v-for="(item,index) in video" :key="index" :style="{backgroundImage:'url('+src+')'}" @click="videoshow(item)">
           <div class="videosingle-content-block">
             <div class="block"></div>
             <div class="videosingle-content-block-name">
@@ -88,7 +88,7 @@ export default {
           .then((res) => {
             if (res != null)
               this.video = res.data.result;
-            console.log(res);
+            console.log(this.video);
           })
           .catch((error) => {
             console.log(error);
@@ -96,8 +96,15 @@ export default {
       this.click=[false,false,false,false]
       this.click[index]=true;
     },
-    videoshow() {
-      this.$router.push('/videoshow')
+    videoshow(item) {
+      this.$router.push(
+          {
+            path: '/videoshow',
+            query: {
+              video:item
+            }
+          }
+        )
     }
   }
 }

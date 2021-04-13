@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="img">
-      <pdf ref="pdf" :src="src">
+      <pdf ref="pdf" :src="this.$route.query.pdf">
       </pdf>
     </div>
   </div>
@@ -31,6 +31,9 @@ export default {
     return{
       src:this.$route.query.pdf
     }
+  },
+  created() {
+    console.log(this.$route.query.pdf)
   }
 }
 </script>

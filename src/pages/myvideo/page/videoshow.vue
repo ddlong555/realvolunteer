@@ -6,15 +6,15 @@
     <d-player ref="player" id="player" :options="options" class="player"></d-player>
     <div class="introduction">
       <div class="title">
-        日本某乐队倾情演唱
+        {{ this.video.videoTitle }}
       </div>
       <div class="words">
-        <div class="author" :style="{backgroundImage:'url('+src+')'}">
+        <div class="author" :style="{backgroundImage:'url('+src+')',backgroundSize:'100% 100%'}">
         </div>
         <div class="time">
-          龙正武
+          {{ this.video.videoPublisher.userName }}
         </div>
-        <div class="time">2021-02-26</div>
+        <div class="time">{{ this.video.videoDate }}</div>
         <div class="detail">
           <div class="decorate">
           </div>
@@ -22,7 +22,7 @@
             简介
           </div>
           <div class="txt">
-            {{content}}
+            {{ this.video.videoText }}
           </div>
         </div>
       </div>
@@ -35,8 +35,12 @@
           评论
         </div>
       </div>
-      <div class="dis-part">
-
+      <div class="dis-part" v-for="(item,index) in this.video.videoCommentDTOList" :key="index">
+        <div class="comment1">
+          <img src="../../../assets/image/video/headpic.png" alt=""/>
+          <p class="username">{{ item.commentPublisher.userName }}</p>
+        </div>
+        <p class="comment">{{ item.commentText }}</p>
       </div>
     </div>
     <div class="dis-function">
@@ -59,16 +63,18 @@ export default {
   name: "about",
   data() {
     return {
-      msg:{},
-      shlist:{
+      msg: {},
+      video: {},
+      year: "",
+      shlist: {
         appId: 1,
         timestamp: '2021.01.16',
         nonceStr: 'ddd',
-        signature:'龙正武',
+        signature: '龙正武',
       },
       content: '这个乐队我也不知道什么名字，但里面有个男生唱歌很好听。这个乐队我也不知道什么名字，但里面有个男生唱歌很好听。',
       videoactive: false,
-      src: require('../../../assets/image/test/b.jpg'),
+      src: require('../../../assets/image/video/headpic.png'),
       bodyHeight: 0,
       options: {
         playbackSpeed: [0.5, 0.75, 1, 1.25, 1.5, 2, 3], //可选的播放速度，可自定义
@@ -89,9 +95,9 @@ export default {
         volume: 0.7,
         mutex: true,
         video: {
-          url: 'https://api.dogecloud.com/player/get.mp4?vcode=5ac682e6f8231991&userId=17&ext=.mp4',                                         // Required, video url
-          pic: require('../../../assets/image/test/ad.jpg'),// Optional, music picture
-          thumbnails: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606462956126&di=2d87964d4faf656af55d09d938640d97&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2Fattachments2%2F201310%2F10%2F150326y7dzdd8d4kpjjdsd.jpg',
+          url: this.$route.query.video.videoUrl,                                         // Required, video url
+          pic: require('../../../assets/image/video/videopic.jpg'),// Optional, music picture
+          thumbnails: '../../../assets/image/video/videopic.jpg',
           type: 'auto',
         },
         // danmaku: {
@@ -109,26 +115,18 @@ export default {
       } else {
         return "收起"
       }
-    }
+    },
   },
   mounted() {
     this.bodyHeight = document.documentElement.clientHeight
   },
   created() {
-    this.$axios.get("/api/volunteer/video/getVideoByRelativeText",
-        {
-          params: {
-            "relativeText": 1
-          }
-        })
-        .then((res) => {
-          if (res != null)
-            this.video = res.data.result;
-          console.log("video", this.video);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    this.video = this.$route.query.video
+    let date = new Date(this.video.videoDate)
+    let M = date.getMonth() + 1
+    let D = date.getDay()
+    let Y = date.getFullYear()
+    this.video.videoDate = Y + "-" + M + "-" + D
   },
   methods: {
     videoreturn() {
@@ -138,7 +136,7 @@ export default {
       this.videoactive = !this.videoactive
       alert(this.videoactive)
     },
-    share(){
+    share() {
       const self = this
 
       var nativeShare = new NativeShare({
@@ -161,7 +159,7 @@ export default {
         icon: 'http://www.zh8zh8.com/uploads/20200515/1383cbec15b3f604c9299f565669fb14.jpg',
         link: window.location.href,
         title: '知会教育',
-        desc:self.title,
+        desc: self.title,
         from: '@fa-ge',
       })
 
@@ -171,7 +169,7 @@ export default {
         // 如果是分享到微信则需要 nativeShare.call('wechatFriend')
         // 类似的命令下面有介绍
         console.log('支持')
-      } catch(err) {
+      } catch (err) {
         // 如果不支持，你可以在这里做降级处理
         self.$toast('不支持该浏览器自动分享,请您手动分享')
       }
@@ -366,7 +364,34 @@ export default {
   font-size: 14px;
   font-weight: 500;
 }
-.clear{
-  clear:both
+
+.clear {
+  clear: both
+  width:100%;
+  height:12%
 }
+
+.username {
+  margin-left 40px;
+  margin-top 17px;
+  color #fa8950
+  font-size 12px
+}
+
+.comment {
+  margin:0 0 0 35px
+  font-size 15px
+}
+.comment1{
+  position relative
+  display inline-block
+}
+.dis-part img {
+  height: 23px;
+  width: 23px;
+  margin-top: 15px;
+  margin-left: 10px;
+  float: left;
+}
+
 </style>
