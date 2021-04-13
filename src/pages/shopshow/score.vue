@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       images: [
-        require("../../assets/image/test/e.jpg"),require("../../assets/image/test/b.jpg")
+        require("../../assets/image/test/e.jpg"),require("../../assets/image/test/f.jpg")
       ]
 
     };
