@@ -71,8 +71,8 @@ export default {
     return {
       images: [
         require("../../assets/image/test/e.jpg"),require("../../assets/image/test/f.jpg")
-      ]
-
+      ],
+      index:0
     };
   },
   mounted() {

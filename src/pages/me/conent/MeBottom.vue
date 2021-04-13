@@ -8,13 +8,13 @@
         </div>
       </div>
       <div class="widget-part" @click="test">
-        <img src="../../../assets/image/me/duihuan.svg" alt=""/>
+        <img src="../../../assets/image/me/infor.svg" alt=""/>
         <div class="widget-part-title">
-          兑换记录
+          个人信息
         </div>
       </div>
-      <div class="widget-part" @click="Gotomessage">
-        <img src="../../../assets/image/me/message.svg" alt=""/>
+      <div class="widget-part" @click="Gotomessage" >
+        <img src="../../../assets/image/me/message.svg" alt="" />
         <div class="widget-part-title">
           我的消息
         </div>
@@ -34,9 +34,9 @@
       <a href="javascript:void(0);" @click="goAnchor3('released')" ref="c">已发布</a>
       <a href="javascript:void(0);" @click="goAnchor4('participated')" ref="d">已参加</a>
     </div>
-    <div class="act" v-if="this.islogin">
+    <div class="act" v-if="this.islogin&&this.i==4">
       <div class="Anchorpoint" id="followed"></div>
-      <div class="act-single" @click="activityPerson(index)" v-for="(item,index) in activity[0]" :key="index+'a'">
+      <div class="act-single"  v-for="(item,index) in activity[0]" :key="index+'a'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
         <img :src=item.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
@@ -44,7 +44,7 @@
         </div>
       </div>
       <div class="Anchorpoint" id="booked"></div>
-      <div class="act-single" @click="activityshow(index1)" v-for="(item1,index1) in activity[1]" :key="index1+'b'">
+      <div class="act-single" v-for="(item1,index1) in activity[1]" :key="index1+'b'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
         <img :src=item1.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="Anchorpoint" id="released"></div>
-      <div class="act-single" @click="activityshow(index2)" v-for="(item2,index2) in activity[2]" :key="index2+'c'" >
+      <div class="act-single"  v-for="(item2,index2) in activity[2]" :key="index2+'c'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
         <img :src=item2.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
@@ -60,7 +60,7 @@
         </div>
       </div>
       <div class="Anchorpoint" id="participated"></div>
-      <div class="act-single" @click="activityshow(index3)" v-for="(item3,index3) in activity[3]" :key="index3+'d'">
+      <div class="act-single" v-for="(item3,index3) in activity[3]" :key="index3+'d'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
         <img :src=item3.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
@@ -105,9 +105,6 @@ export default {
     }
   },
   watch: {
-    activity(){
-      this.i++;
-    }
   },
   mounted() {
     window.addEventListener('scroll', this.initHeight);
@@ -121,6 +118,7 @@ export default {
     var that = this
     //活动接口
     if (this.$store.getters.getLogin == true) {
+      this.i=0;
       this.activity=[]
       this.$axios.get("/api/volunteer/activityUser/getActivityStateByNumber",
           {
@@ -132,8 +130,10 @@ export default {
             }
           })
           .then((res) => {
-            if (res != null)
+            if (res != null){
               this.activity[0]=res.data.result;
+              this.i++;
+            }
             console.log(this.islogin);
           })
           .catch((error) => {
@@ -149,8 +149,10 @@ export default {
             }
           })
           .then((res) => {
-            if (res != null)
+            if (res != null){
               this.activity[1]=res.data.result;
+              this.i++;
+            }
             console.log("act", this.activity);
           })
           .catch((error) => {
@@ -166,9 +168,10 @@ export default {
             }
           })
           .then((res) => {
-            if (res != null)
+            if (res != null){
               this.activity[2]=res.data.result;
-
+              this.i++;
+            }
             console.log("act", this.activity);
           })
           .catch((error) => {
@@ -184,8 +187,10 @@ export default {
             }
           })
           .then((res) => {
-            if (res != null)
+            if (res != null){
+              this.i++;
               this.activity[3]=res.data.result;
+            }
             console.log("act", this.activity);
           })
           .catch((error) => {
@@ -260,8 +265,16 @@ export default {
       // console.log("offset:",this.offsetTop);
       // console.log(scrollTop);
     },
-
+    Gotoact(e,f){
+      this.$router.push({
+        path: '/activityDisplay',
+        query: {
+          activityId: e,
+          PictureList:f}
+      })
+    },
   },
+
   destroyed() {
     window.removeEventListener('scroll', this.handle)
   }

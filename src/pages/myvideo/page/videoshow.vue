@@ -44,9 +44,11 @@
       </div>
     </div>
     <div class="dis-function">
-      <input class="input" placeholder="欢迎在这里提出你的想法"/>
-      <img src="../../../assets/image/video/goodblack.svg" alt=""/>
-      <img src="../../../assets/image/video/share3.svg" alt="" @click="share()"/>
+      <input class="input" placeholder="欢迎在这里提出你的想法" v-model="inputvalue"/>
+      <div @click="comment(inputvalue)">发送</div>
+      <img src="../../../assets/image/discussion/good.png" alt="" @click="changeGood()" v-if="!good"/>
+      <img src="../../../assets/image/discussion/good1.png" alt="" @click="changeGood()" v-if="good" />
+      <!--      <img src="../../../assets/image/video/share3.svg" alt="" @click="share()"/>-->
     </div>
     <div class="clear"></div>
   </div>
@@ -56,13 +58,16 @@
 import Vue from "vue";
 import VueDPlayer from "vue-dplayer";
 import "vue-dplayer/dist/vue-dplayer.css";
-import NativeShare from "nativeshare";
+import { Bus } from "../../../assets/js/event-bus";
+// import NativeShare from "nativeshare";
 
 Vue.use(VueDPlayer);
 export default {
   name: "about",
   data() {
     return {
+      inputvalue:"",
+      good:false,
       msg: {},
       video: {},
       year: "",
@@ -127,6 +132,7 @@ export default {
     let D = date.getDay()
     let Y = date.getFullYear()
     this.video.videoDate = Y + "-" + M + "-" + D
+    console.log(this.video)
   },
   methods: {
     videoreturn() {
@@ -136,45 +142,70 @@ export default {
       this.videoactive = !this.videoactive
       alert(this.videoactive)
     },
-    share() {
-      const self = this
-
-      var nativeShare = new NativeShare({
-        wechatConfig: {
-          appId: self.shlist.appId,
-          timestamp: self.shlist.timestamp,
-          nonceStr: self.shlist.nonceStr,
-          signature: self.shlist.signature,
+    comment(e){
+      let comment={
+        commentPublisher:{
+          userName:this.$store.getters.getUser.userName
         },
-        // 让你修改的分享的文案同步到标签里，比如title文案会同步到<title>标签中
-        // 这样可以让一些不支持分享的浏览器也能修改部分文案，默认都不会同步
-        syncDescToTag: false,
-        syncIconToTag: false,
-        syncTitleToTag: false,
-      })
-
-
-// 设置分享文案
-      nativeShare.setShareData({
-        icon: 'http://www.zh8zh8.com/uploads/20200515/1383cbec15b3f604c9299f565669fb14.jpg',
-        link: window.location.href,
-        title: '知会教育',
-        desc: self.title,
-        from: '@fa-ge',
-      })
-
-// 唤起浏览器原生分享组件(如果在微信中不会唤起，此时call方法只会设置文案。类似setShareData)
-      try {
-        nativeShare.call()
-        // 如果是分享到微信则需要 nativeShare.call('wechatFriend')
-        // 类似的命令下面有介绍
-        console.log('支持')
-      } catch (err) {
-        // 如果不支持，你可以在这里做降级处理
-        self.$toast('不支持该浏览器自动分享,请您手动分享')
+        commentText:e
       }
-      // this.showShare = false;
+      this.video.videoCommentDTOList.push(comment)
+      this.inputvalue=""
+      console.log(this.video)
+    },
+    changeGood(){
+      if(this.good==false){
+        this.video.videoLike=this.video.videoLike+1;
+        this.good=!this.good
+      }
+      else{
+        this.video.videoLike=this.video.videoLike-1;
+        this.good=!this.good
+      }
+      Bus.$emit("changeGood", {
+        like:this.video.videoLike,
+        index:this.$route.query.index
+      });
     }
+    // share() {
+    //   const self = this
+    //
+    //   var nativeShare = new NativeShare({
+    //     wechatConfig: {
+    //       appId: self.shlist.appId,
+    //       timestamp: self.shlist.timestamp,
+    //       nonceStr: self.shlist.nonceStr,
+    //       signature: self.shlist.signature,
+    //     },
+    //     // 让你修改的分享的文案同步到标签里，比如title文案会同步到<title>标签中
+    //     // 这样可以让一些不支持分享的浏览器也能修改部分文案，默认都不会同步
+    //     syncDescToTag: false,
+    //     syncIconToTag: false,
+    //     syncTitleToTag: false,
+    //   })
+
+
+// // 设置分享文案
+//       nativeShare.setShareData({
+//         icon: '',
+//         link: window.location.href,
+//         title: '支援帮',
+//         desc: self.title,
+//         from: '@fa-ge',
+//       })
+
+// // 唤起浏览器原生分享组件(如果在微信中不会唤起，此时call方法只会设置文案。类似setShareData)
+//       try {
+//         nativeShare.call()
+//         // 如果是分享到微信则需要 nativeShare.call('wechatFriend')
+//         // 类似的命令下面有介绍
+//         console.log('支持')
+//       } catch (err) {
+//         // 如果不支持，你可以在这里做降级处理
+//         self.$toast('不支持该浏览器自动分享,请您手动分享')
+//       }
+//       // this.showShare = false;
+//     }
   },
 };
 </script>
@@ -334,11 +365,19 @@ export default {
   box-shadow: 0 -2px 5px rgba(20, 20, 20, .1);
 }
 
-.dis-function img {
+.dis-function div {
+  float right
   position relative
-  top 23%
-  left 9%
-  margin 0 0 0 7%
+  top 16%
+  left -15%
+  height 22px
+  width 50px
+}
+.dis-function img {
+  float right
+  position relative
+  top 16%
+  left 7%
   height 22px
   width 22px
 }

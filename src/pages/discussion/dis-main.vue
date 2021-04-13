@@ -40,13 +40,13 @@
           <img src="../../assets/image/discussion/zhuanfa.svg" alt="">
           <div>0</div>
         </div>
-        <div class="dmain-single-function-single" @click="inputfoucs">
+        <div class="dmain-single-function-single" @click="inputfoucs(index)">
           <img src="../../assets/image/discussion/say.svg" alt="">
           <div>{{item.commentResponseList.length}}</div>
         </div>
         <div>
           <input :class="inputshow?'showinput':'noshowinput'" ref="input" v-model="inputvalue" @blur="inputblur"/>
-          <p ref="text" :class="inputshow?'showp':'noshowp'" @click="GoDiscuss">发送</p>
+          <p ref="text" :class="inputshow?'showp':'noshowp'" @click="GoDiscuss(inputvalue)" >发送</p>
         </div>
         <div class="dmain-single-function-single" @click="GoodAdd(index)">
           <img src="../../assets/image/discussion/good.png" alt="" v-if="!good[index]">
@@ -75,6 +75,7 @@ export default {
       inputshow: false,
       discuss: [],
       date: [],
+      say:0
     }
   },
   computed:{
@@ -83,20 +84,28 @@ export default {
     }
   },
   methods: {
-    inputfoucs() {
+    inputfoucs(e) {
       this.inputshow = !this.inputshow
       this.$nextTick(function () {
         //DOM 更新了
         this.$refs.input.focus()
       })
-      console.log(this.$refs)
+      this.say=e
+      // console.log(this.say)
     },
     inputblur() {
       this.inputshow = !this.inputshow
     },
 
-    GoDiscuss(){
-
+    GoDiscuss(e){
+      let comment={
+        responsePublisher:{
+          userName:this.$store.getters.getUser.userName
+        },
+        responseText:e
+      }
+      this.discuss[this.say].commentResponseList.push(comment)
+      console.log(this.discuss)
     },
     GoodAdd(e){
       if(this.good[e]==true){
@@ -128,7 +137,7 @@ export default {
             }
           }
           this.$previewRefresh();
-          console.log(res);
+          console.log(this.discuss);
         })
         .catch((error) => {
           console.log(error);

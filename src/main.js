@@ -7,14 +7,15 @@ import "vue-dplayer/dist/vue-dplayer.css";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/js/rem.js';
-Vue.use(ElementUI);
+import './components.js'
+import VueAxios from 'vue-axios'
+import store from './store/index'
 import axios from 'axios'
 Vue.prototype.$axios = axios;
 console.log(Vue.prototype.$axios)
-import VueAxios from 'vue-axios'
-import store from './store/index'
 Vue.use(VueAxios,axios)
-import './components.js'
+Vue.prototype.$EventBus = new Vue()
+Vue.use(ElementUI);
 Vue.use(VueDPlayer);
 //图片放大
 import preview from 'vue-photo-preview'

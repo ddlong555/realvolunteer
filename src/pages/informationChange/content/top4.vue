@@ -38,7 +38,7 @@ export default {
   },
   methods:{
     back(){
-      this.$router.replace('/personalInformation')
+      this.$router.back()
     }
   }
 }

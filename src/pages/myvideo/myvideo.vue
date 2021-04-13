@@ -19,7 +19,7 @@
         <input type="text" placeholder="华东师范大学招募"/>
       </div>
       <div class="videosingle" >
-        <div class="videosingle-content" v-for="(item,index) in video" :key="index" :style="{backgroundImage:'url('+src+')'}" @click="videoshow(item)">
+        <div class="videosingle-content" v-for="(item,index) in video" :key="index" :style="{backgroundImage:'url('+src+')'}" @click="videoshow(item,index)">
           <div class="videosingle-content-block">
             <div class="block"></div>
             <div class="videosingle-content-block-name">
@@ -31,8 +31,8 @@
                 <div>{{ item.videoPlayNum }}</div>
               </div>
               <div class="videosingle-content-block-function-single">
-                <img src="../../assets/image/discussion/good.png">
-                <div>{{item.videoLike}}</div>
+                <img src="../../assets/image/discussion/good.png" >
+                <div :key=item.videoLike>{{item.videoLike}}</div>
               </div>
             </div>
           </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-
+import { Bus } from "../../assets/js/event-bus.js";
 export default {
   name: "myvideo",
   components: {
@@ -57,6 +57,13 @@ export default {
       src: require("../../assets/image/test/a.jpg"),
     }
   },
+  activated() {
+    Bus.$on("changeGood", ({like,index}) => {
+      this.$nextTick(()=>{
+        this.video[index].videoLike=like
+      })
+    });
+  },
   created(){
     this.bodyHeight=document.documentElement.clientHeight;
     this.$axios.get("/api/volunteer/video/getVideoByRelativeText",
@@ -68,7 +75,7 @@ export default {
         .then((res) => {
           if (res != null)
             this.video = res.data.result;
-          console.log(res);
+          console.log(this.video);
         })
         .catch((error) => {
           console.log(error);
@@ -96,12 +103,13 @@ export default {
       this.click=[false,false,false,false]
       this.click[index]=true;
     },
-    videoshow(item) {
+    videoshow(item,index) {
       this.$router.push(
           {
             path: '/videoshow',
             query: {
-              video:item
+              video:item,
+              index:index
             }
           }
         )
