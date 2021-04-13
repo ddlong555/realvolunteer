@@ -34,37 +34,37 @@
       <a href="javascript:void(0);" @click="goAnchor3('released')" ref="c">已发布</a>
       <a href="javascript:void(0);" @click="goAnchor4('participated')" ref="d">已参加</a>
     </div>
-    <div class="act">
+    <div class="act" v-if="this.islogin">
       <div class="Anchorpoint" id="followed"></div>
-      <div class="act-single" @click="activityPerson(index)" v-for="(item,index) in activity" :key="index">
-        <img :src=item[0].activityPictureList alt=""/>
+      <div class="act-single" @click="activityPerson(index)" v-for="(item,index) in activity[0]" :key="index+'a'">
+        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
           {{ item.activityName }}
         </div>
       </div>
       <div class="Anchorpoint" id="booked"></div>
-      <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
-        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+      <div class="act-single" @click="activityshow(index1)" v-for="(item1,index1) in activity[1]" :key="index1+'b'">
+        <img :src=item1.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
-          {{ item.activityName }}
+          {{ item1.activityName }}
         </div>
       </div>
       <div class="Anchorpoint" id="released"></div>
-      <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
-        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+      <div class="act-single" @click="activityshow(index2)" v-for="(item2,index2) in activity[2]" :key="index2+'c'" >
+        <img :src=item2.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
-          {{ item.activityName }}
+          {{ item2.activityName }}
         </div>
       </div>
       <div class="Anchorpoint" id="participated"></div>
-      <div class="act-single" @click="activityshow(index)" v-for="(item,index) in activity" :key="index">
-        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+      <div class="act-single" @click="activityshow(index3)" v-for="(item3,index3) in activity[3]" :key="index3+'d'">
+        <img :src=item3.activityPictureList[0].pictureUrl alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
-          {{ item.activityName }}
+          {{ item3.activityName }}
         </div>
       </div>
     </div>
@@ -95,12 +95,19 @@ export default {
     return {
       isFixed: false,
       offsetTop: 0,
-      activity: [{},{},{},{}]
+      activity: [{},{},{},{}],
+      i:0
     }
   },
-  watch: {},
-  created() {
-
+  computed:{
+    islogin(){
+      return this.$store.getters.getLogin
+    }
+  },
+  watch: {
+    activity(){
+      this.i++;
+    }
   },
   mounted() {
     window.addEventListener('scroll', this.initHeight);
@@ -110,7 +117,7 @@ export default {
       // console.log(document.querySelector('#boxFixed').offsetParent.offsetTop);
     })
   },
-  activated() {
+  created() {
     var that = this
     //活动接口
     if (this.$store.getters.getLogin == true) {
@@ -127,7 +134,7 @@ export default {
           .then((res) => {
             if (res != null)
               this.activity[0]=res.data.result;
-            console.log("act", this.activity[0]);
+            console.log(this.islogin);
           })
           .catch((error) => {
             console.log(error);
@@ -261,7 +268,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 .me-bottom {
   width: 100%;
   position: relative;
@@ -387,5 +394,31 @@ export default {
 .block {
   height: 20%;
   width: 100%;
+}
+.act-single {
+  position: relative
+  left: 2%;
+  width: 96%;
+  height auto
+  margin-top: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.act-single img {
+  width: 95%;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.act-single div {
+  position relative
+  font-size 13px
+  text-align left
+  left 3%
+  letter-spacing 1px
 }
 </style>
