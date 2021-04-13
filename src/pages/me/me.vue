@@ -51,7 +51,6 @@ export default {
           boy: require('../../assets/image/me/boy.svg'),
           girl: require('../../assets/image/me/girl.svg')
         },
-
     }
   },
   computed:{

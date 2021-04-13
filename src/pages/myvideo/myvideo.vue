@@ -18,21 +18,21 @@
         <img src=../../assets/image/firstpage/search.svg alt="">
         <input type="text" placeholder="华东师范大学招募"/>
       </div>
-      <div class="videosingle" @click="videoshow">
-        <div class="videosingle-content" v-for="(index) in 7" :key="index" :style="{backgroundImage:'url('+src+')'}">
+      <div class="videosingle" >
+        <div class="videosingle-content" v-for="(item,index) in video" :key="index" :style="{backgroundImage:'url('+src+')'}" @click="videoshow">
           <div class="videosingle-content-block">
             <div class="block"></div>
             <div class="videosingle-content-block-name">
-              这是什么神仙班级，气势太强了,真的好强，真的好强，真的好强
+              {{ item.videoTitle }}
             </div>
             <div class="videosingle-content-block-function">
               <div class="videosingle-content-block-function-single">
                 <img src="../../assets/image/video/run.svg">
-                <div>300</div>
+                <div>{{ item.videoPlayNum }}</div>
               </div>
               <div class="videosingle-content-block-function-single">
-                <img src="../../assets/image/discussion/good.svg">
-                <div>200</div>
+                <img src="../../assets/image/discussion/good.png">
+                <div>{{item.videoLike}}</div>
               </div>
             </div>
           </div>
@@ -52,13 +52,27 @@ export default {
     return{
       nav: ['技术援助', '教育', '共同富裕', '动物救治'],
       video: {},
-      click:[false,false,false,false],
+      click:[true,false,false,false],
       bodyHeight:0,
-      src: require("../../assets/image/test/a.jpg")
+      src: require("../../assets/image/test/a.jpg"),
     }
   },
   created(){
-    this.bodyHeight=document.documentElement.clientHeight
+    this.bodyHeight=document.documentElement.clientHeight;
+    this.$axios.get("/api/volunteer/video/getVideoByRelativeText",
+        {
+          params: {
+            "relativeText": "技术援助"
+          }
+        })
+        .then((res) => {
+          if (res != null)
+            this.video = res.data.result;
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
   },
   methods: {
     Gotosendvideo() {
@@ -74,12 +88,11 @@ export default {
           .then((res) => {
             if (res != null)
               this.video = res.data.result;
-            console.log("video", this.video);
+            console.log(res);
           })
           .catch((error) => {
             console.log(error);
           });
-
       this.click=[false,false,false,false]
       this.click[index]=true;
     },
@@ -212,7 +225,7 @@ export default {
 .videosingle-content {
   position: relative;
   width: 44%;
-  height: 52%;
+  height: 42%;
   top: 4%;
   left: 4%;
   margin-right: 4%;

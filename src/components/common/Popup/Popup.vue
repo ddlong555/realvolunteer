@@ -68,7 +68,6 @@ export default {
   },
   methods:{
     CoverClose(){
-      this.isShow=false;
       this.$emit("ListenChild")
       console.log("b")
     }

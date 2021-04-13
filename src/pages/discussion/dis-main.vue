@@ -1,157 +1,140 @@
 <template>
   <div class="dmain">
-    <div class="dmain-single">
+    <div class="dmain-single" v-for="(item,index) in discuss" :key="index">
       <div class="dmain-single-top">
         <div class="dmain-single-top-name">
-          <div class="dmain-single-top-name-head" :style="{backgroundImage:'url('+head+')'}">
+          <div class="dmain-single-top-name-head" :style="{backgroundImage:item.commentPublisher.headPicture===null?'url('+head+')':'url('+item.commentPublisher.headPicture+')'}">
           </div>
           <div class="dmain-single-top-name-id">
             <div class="dmain-single-top-name-id-font">
-              {{ id }}
+              {{ item.commentPublisher.userName }}
             </div>
             <div class="dmain-single-top-name-id-time">
-              {{ time }}
+              {{ date[index] }}
             </div>
           </div>
         </div>
         <div class="dmain-single-top-passage">
-          {{ passage }}
+          {{ item.commentText }}
         </div>
       </div>
       <div class="dmain-single-photo">
-        <div class="dmain-single-photo-single" v-for="(item,index) in img" :key="index">
-          <img :src=item alt="" preview="0">
+        <div class="dmain-single-photo-single" v-for="(x,y) in item.commentPictureList" :key="y">
+            <img :src=x.pictureUrl alt="" preview="0" >
         </div>
         <div class="clear"></div>
       </div>
       <div class="comment">
-         <div class="comment-single">
-           <div class="comment-single-name">
-<!--             {{this.$store.getters.getUser}}:-->第一个人:
-           </div>
-           <p class="comment-single-text">
-<!--             {{this.inputvalue}}-->你是谁
-           </p>
-         </div>
-        <div class="comment-single">
+        <div class="comment-single" v-for="(i,j) in item.commentResponseList" :key="j">
           <div class="comment-single-name">
-            <!--             {{this.$store.getters.getUser}}:-->第一个人:
+            {{i.responsePublisher.userName}}:
           </div>
           <p class="comment-single-text">
-            <!--             {{this.inputvalue}}-->你是谁
+            {{i.responseText}}
           </p>
         </div>
+
       </div>
       <div class="dmain-single-function">
         <div class="dmain-single-function-single">
           <img src="../../assets/image/discussion/zhuanfa.svg" alt="">
-          <div>{{ number }}</div>
+          <div>0</div>
         </div>
         <div class="dmain-single-function-single" @click="inputfoucs">
           <img src="../../assets/image/discussion/say.svg" alt="">
-          <div>{{ number }}</div>
+          <div>{{item.commentResponseList.length}}</div>
         </div>
-        <div >
-          <input  :class="inputshow?'showinput':'noshowinput'" ref="input" v-model="inputvalue" @blur="inputblur" />
+        <div>
+          <input :class="inputshow?'showinput':'noshowinput'" ref="input" v-model="inputvalue" @blur="inputblur"/>
           <p ref="text" :class="inputshow?'showp':'noshowp'" @click="GoDiscuss">发送</p>
         </div>
-        <div class="dmain-single-function-single">
-          <img src="../../assets/image/discussion/good.svg" alt="">
-          <div>{{ number }}</div>
+        <div class="dmain-single-function-single" @click="GoodAdd(index)">
+          <img src="../../assets/image/discussion/good.png" alt="" v-if="!good[index]">
+          <img src="../../assets/image/discussion/good1.png" alt="" v-else>
+          <div>{{ item.commentLike }}</div>
         </div>
       </div>
+    </div>
 
-    </div>
-    <div class="dmain-single">
-      <div class="dmain-single-top">
-        <div class="dmain-single-top-name">
-          <div class="dmain-single-top-name-head" :style="{backgroundImage:'url('+head+')'}">
-          </div>
-          <div class="dmain-single-top-name-id">
-            <div class="dmain-single-top-name-id-font">
-              {{ id }}
-            </div>
-            <div class="dmain-single-top-name-id-time">
-              {{ time }}
-            </div>
-          </div>
-        </div>
-        <div class="dmain-single-top-passage">
-          {{ passage }}
-        </div>
-      </div>
-      <div class="dmain-single-photo">
-        <div class="dmain-single-photo-single" v-for="(item,index) in img" :key="index">
-          <img :src=item alt="" preview="1">
-        </div>
-      </div>
-      <div class="dmain-single-function">
-        <div class="dmain-single-function-single">
-          <img src="../../assets/image/discussion/zhuanfa.svg" alt="" >
-          <div>{{ number }}</div>
-        </div>
-        <div class="dmain-single-function-single">
-          <img src="../../assets/image/discussion/say.svg" alt="">
-          <div>{{ number }}</div>
-        </div>
-        <div class="dmain-single-function-single">
-          <img src="../../assets/image/discussion/good.svg" alt="">
-          <div>{{ number }}</div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "dmain",
   data() {
     return {
       passage: "第一条规定是这样的，那到底是怎么样的呢，是这样的，不是那样的，一定要这样",
-      img: [require("../../assets/image/test/ad.jpg"), require("../../assets/image/test/d.jpg"), require("../../assets/image/test/ad.jpg"), require("../../assets/image/test/d.jpg"), require("../../assets/image/test/ad.jpg"), require("../../assets/image/test/d.jpg"), require("../../assets/image/test/ad.jpg"), require("../../assets/image/test/d.jpg")],
       id: "张文瀚",
       time: "3分钟前",
       head: require("../../assets/image/me/boy.svg"),
-      number: 55,
-      inputvalue:"",
-      inputshow:false,
-      discuss:[]
+      good:[false,false,false,false,false],
+      number:0,
+      inputvalue: "",
+      inputshow: false,
+      discuss: [],
+      date: [],
     }
   },
-  methods:{
-    inputfoucs(){
-      this.inputshow=!this.inputshow
+  computed:{
+    discusslength(){
+      return this.discuss.length
+    }
+  },
+  methods: {
+    inputfoucs() {
+      this.inputshow = !this.inputshow
       this.$nextTick(function () {
         //DOM 更新了
         this.$refs.input.focus()
       })
       console.log(this.$refs)
     },
-    inputblur(){
-      this.inputshow=!this.inputshow
+    inputblur() {
+      this.inputshow = !this.inputshow
     },
+
     GoDiscuss(){
 
+    },
+    GoodAdd(e){
+      if(this.good[e]==true){
+        this.discuss[e].commentLike--;
+      }
+      else{
+        this.discuss[e].commentLike++;
+      }
+      this.good[e]=!this.good[e];
     }
   },
+
   created() {
-    this.$axios.get("/api/volunteer/swiper/getCommentByNumber",
+    this.$axios.get("/api/volunteer/comment/getCommentByNumber",
         {
           params: {
             "number": 5
           }
         })
         .then((res) => {
-          if (res != null)
-            // for (let i in res.data.result)
-              // this.discuss.push(res);
+          if (res != null) {
+            for (let i in res.data.result)
+              this.discuss.push(res.data.result[i]);
+            for (let i in this.discuss) {
+              let date = new Date(this.discuss[i].commentDate)
+              let M = date.getMonth() + 1
+              let D = date.getDay()
+              this.date[i] = M + "-" + D
+            }
+          }
+          this.$previewRefresh();
           console.log(res);
         })
         .catch((error) => {
           console.log(error);
         });
-  }
+    }
+
 }
 </script>
 
@@ -196,7 +179,7 @@ export default {
 .dmain-single-top-name-id {
   position: absolute;
   left: 15%;
-  top: 5%;
+  top: 12%;
 }
 
 .dmain-single-top-name-id-time {
@@ -216,14 +199,14 @@ export default {
 .dmain-single-top-passage {
   letter-spacing: 1px;
   position: relative;
-  margin-left: 7px;
+  margin-left: 15px;
   margin-right: 7px;
 }
 
 .dmain-single-photo {
   position: relative;
   width: 100%;
-  margin: 0 auto;
+  margin-top: 9px;
   left: 2%;
 }
 
@@ -241,6 +224,7 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 3;
 }
 
 .dmain-single-function {
@@ -264,29 +248,32 @@ export default {
   width: 18px;
   float: left;
 }
-.dmain-single-function-single div{
-  position:relative;
-  left:9%;
+
+.dmain-single-function-single div {
+  position: relative;
+  left: 9%;
   font-size: 17px;
   float: right;
   -webkit-transform-origin-x: 0;
   -webkit-transform: scale(0.80);
   color: #707070;
 }
-.noshowinput{
+
+.noshowinput {
   display: block;
   position: absolute;
   z-index: -1;
   left: -1000px;
   top: 0px;
 }
-.showinput{
+
+.showinput {
   position: fixed;
-  width:70%;
+  width: 70%;
   height: 6%;
   bottom: 0;
-  left:12%;
-  right:0;
+  left: 12%;
+  right: 0;
   z-index: 3;
   border-radius: 8px;
   border: 1px solid black;
@@ -295,41 +282,48 @@ export default {
   text-indent: 5px;
   font-size: 14px;
 }
-.noshowp{
+
+.noshowp {
   display: block;
   position: absolute;
   z-index: -1;
   left: -1000px;
   top: 0px;
 }
-.showp{
+
+.showp {
   position: fixed;
   bottom: -2%;
-  left:86%;
-  right:0;
+  left: 86%;
+  right: 0;
   z-index: 3;
 }
-.clear{
-  clear:both
+
+.clear {
+  clear: both
 }
-.comment{
+
+.comment {
   position: relative;
 }
-.comment-single{
+
+.comment-single {
   position: relative;
   margin-top: 4px;
   margin-left: 9px;
   letter-spacing: 2px;
   font-size: 14px;
 }
-.comment-single-name{
-  display:inline-block;
+
+.comment-single-name {
+  display: inline-block;
   position: relative;
-  color:#436082;
+  color: #436082;
 }
-.comment-single-text{
+
+.comment-single-text {
   margin: 0;
-  display:inline-block;
+  display: inline-block;
   position: relative;
 }
 </style>
