@@ -6,13 +6,13 @@
     <d-player ref="player" id="player" :options="options" class="player"></d-player>
     <div class="introduction">
       <div class="title">
-        日本某乐队倾情演唱
+        {{this.video.videoTitle}}
       </div>
       <div class="words">
         <div class="author" :style="{backgroundImage:'url('+src+')'}">
         </div>
         <div class="time">
-          龙正武
+          {{ this.video.videoDate }}
         </div>
         <div class="time">2021-02-26</div>
         <div class="detail">
@@ -60,6 +60,7 @@ export default {
   data() {
     return {
       msg:{},
+      video:{},
       shlist:{
         appId: 1,
         timestamp: '2021.01.16',
@@ -115,20 +116,11 @@ export default {
     this.bodyHeight = document.documentElement.clientHeight
   },
   created() {
-    this.$axios.get("/api/volunteer/video/getVideoByRelativeText",
-        {
-          params: {
-            "relativeText": 1
-          }
-        })
-        .then((res) => {
-          if (res != null)
-            this.video = res.data.result;
-          console.log("video", this.video);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    this.video=this.$route.query.video
+    let date = new Date(this.video.videoDate)
+    let M = date.getMonth() + 1
+    let D = date.getDay()
+    this.video.videoDate= M + "-" + D
   },
   methods: {
     videoreturn() {
