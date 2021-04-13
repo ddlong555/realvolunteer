@@ -85,7 +85,6 @@ export default {
       let file=this.fileList;
       let deviceFile = []  //选择的图片数组
       let formData = new FormData();
-
       if(Array.isArray(file)){ //因为该组件单选是对象，多选是数组
         deviceFile = file
       }else{

@@ -76,7 +76,7 @@ export default {
   },
   created(){
     var that = this
-    this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
+    this.$axios.get("/api/volunteer/userInfo/getUserInfoByToken",
         {
           headers: {
             token: that.$store.getters.getToken
@@ -92,7 +92,7 @@ export default {
             that.major = res.data.result.major
             that.avatar = res.data.result.headPicture
             var date =  new Date(res.data.result.birthday)
-            that.month = date.getMonth()
+            that.month = date.getMonth()+1
             that.day = date.getDay()
             that.point = ""
             console.log(res.data.result.birthday.getMonth())
