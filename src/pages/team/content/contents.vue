@@ -33,16 +33,29 @@
           class="upload-demo"
           ref="upload"
           action="#"
-          :on-change="handleChange"
-          :on-remove="handleRemove"
+          :on-change="handleChange1"
+          :on-remove="handleRemove1"
           :limit="3"
           multiple
           :file-list="form.fileList"
           :auto-upload="false">
         <el-button type="info" plain @click="upload">上传文件</el-button>
-        <el-button type="primary" plain @click="submit">提交信息</el-button>
         <div slot="tip" class="el-upload__tip">不能超过三个文件</div>
       </el-upload>
+      <el-upload
+          class="upload-demo"
+          ref="upload"
+          action="#"
+          :on-change="handleChange2"
+          :on-remove="handleRemove2"
+          :limit="3"
+          multiple
+          :file-list="form.picList"
+          :auto-upload="false">
+        <el-button type="info" plain @click="upload">上传图片</el-button>
+        <div slot="tip" class="el-upload__tip">不能超过三个文件</div>
+      </el-upload>
+      <el-button type="primary" plain @click="submit">提交信息</el-button>
     </el-row>
   </div>
 </template>
@@ -61,6 +74,7 @@ export default {
         place:'',
         textarea:'',
         fileList: [],
+        picList: [],
       },
     }
   },
@@ -80,7 +94,6 @@ export default {
     submit(){
       var that = this;
       let formData = new FormData();
-      console.log(that.$refs.upload);
       formData.append("activityName",that.form.name);
       formData.append("activityContent",that.form.textarea);
       formData.append("enrolledNumber",0);
@@ -90,9 +103,54 @@ export default {
       formData.append("activityPlace",that.form.place);
       formData.append("isActivityPicture",true);
       formData.append("isSignFileModel",true);
-      this.$refs.upload.uploadFiles.map((item)=> {
+      // that.$refs.upload.uploadFiles.map((item)=> {
+      //   formData.append("signFileModel", item.raw,item.name);
+      // })
+      that.form.fileList.map((item)=> {
         formData.append("signFileModel", item.raw);
       })
+      that.form.picList.map((item)=> {
+        formData.append(" activityPicture", item.raw);
+      })
+      let config = {
+        "token":this.$store.getters.getToken,
+        'Content-Type':'multipart/form-data',
+      };
+      console.log(that.form.fileList)
+      this.$axios.post('/api/volunteer/activity/addActivity', formData, config)
+          .then(function (response) {
+            if (response.data.status == 1) {
+              that.$message({
+                message: `${that.form.fileList.length}个文件(上传/更新)成功`,
+                type: 'success'
+              });
+            } else {
+              that.$message({
+                message: response.data.msg,
+                type: 'error'
+              });
+            }
+          }).catch(function (error) {
+        console.log(error);
+      })
+      // this.$axios({
+      //   'url':"/api/volunteer/activity/addActivity",
+      //   'method':'POST',
+      //   'data':formData,
+      //   headers:{
+      //     "token":this.$store.getters.getToken,
+      //     'Content-Type':'multipart/form-data',
+      //   }
+      // }).then((res)=>{
+      //   console.log(res);
+      //   if(res.data.success == true){
+      //     alert("上传文件成功！")
+      //     console.log(formData);
+      //   }
+      //   else{
+      //     alert("失败！")
+      //   }
+      // })
       // this.$axios.post("/api/volunteer/activity/addActivity",JSON.stringify({
       //   "activityList": [{
       //     "activityName": that.form.name,
@@ -121,31 +179,24 @@ export default {
       //     .catch(function (error) {
       //       console.log(error);
       //     });
-      this.$axios({
-        'url':"/api/volunteer/activity/addActivity",
-        'method':'POST',
-        'data':formData,
-        headers:{
-          "token":this.$store.getters.getToken,
-          'Content-Type':'multipart/form-data',
-        }
-      }).then((res)=>{
-        if(res.data.success == true){
-          alert("上传文件成功！")
-        }
-        else{
-          alert("失败！")
-        }
-      })
     },
-    handleChange(file, fileList) {
-      console.log(this.form.fileList);
+    handleChange1(file, fileList) {
+      // console.log(this.form.fileList);
       this.form.fileList = fileList
-      console.log(this.$refs.upload.uploadFiles);
-      console.log(file);
+      // console.log(this.$refs.upload.uploadFiles);
+      // console.log(file);
     },
-    handleRemove(file, fileList) {
+    handleRemove1(file, fileList) {
       console.log(file, fileList);
+    },
+    handleChange2(file, picList) {
+      // console.log(this.form.fileList);
+      this.form.picList = picList
+      // console.log(this.$refs.upload.uploadFiles);
+      // console.log(file);
+    },
+    handleRemove2(file, picList) {
+      console.log(file, picList);
     },
   }
 }

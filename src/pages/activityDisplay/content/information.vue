@@ -11,7 +11,7 @@
         <h>参加人数:{{ name }}</h>
       </div>
       <div class="place">
-        <h>{{ place }}</h>
+        <h>地点:{{ place }}</h>
       </div>
       <div class="evaluate">
         <p>活动详情：</p>
