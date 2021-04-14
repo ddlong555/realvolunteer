@@ -91,9 +91,12 @@ export default {
             that.sexual = res.data.result.gender
             that.major = res.data.result.major
             that.avatar = res.data.result.headPicture
-            that.month = res.data.result.birthday.getMonth()
-            that.day = res.data.result.birthday.getDay()
+            var date =  new Date(res.data.result.birthday)
+            that.month = date.getMonth()+1
+            that.day = date.getDay()
             that.point = ""
+            console.log(res.data.result.birthday.getMonth())
+            console.log(res.data.result.birthday.getDay())
             // alert("hgagdjs")
 
           }
