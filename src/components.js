@@ -1,0 +1,20 @@
+import Vue from 'vue';
+import { Uploader ,DropdownMenu, DropdownItem, List ,Swipe, SwipeItem,Lazyload ,Cell ,CellGroup ,Card ,Button  ,Tag ,Field ,Radio ,RadioGroup ,Popup ,Toast  } from 'vant';
+
+Vue.use(Cell);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
+Vue.use(List);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
+Vue.use(Lazyload);
+Vue.use(Card);
+Vue.use(Button);
+Vue.use(CellGroup);
+Vue.use(Uploader);
+Vue.use(Tag);
+Vue.use(Field);
+Vue.use(Radio);
+Vue.use(RadioGroup);
+Vue.use(Popup);
+Vue.use(Toast);

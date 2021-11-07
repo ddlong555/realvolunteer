@@ -1,0 +1,41 @@
+html {
+  height: 100%;
+  width: 100%;
+  /*font-family: siyuan;*/
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+input::-webkit-input-placeholder {
+  /*color:#F00 ; !*WebKit browsers*!*/
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #C0C0C0;
+}
+input::-moz-placeholder {
+  /*color: #F00 ; !*Mozilla Firefox 4 to 18 *!*/
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #C0C0C0;
+}
+input::-moz-placeholder {
+  /*color: #F00 ; !*Mozilla Firefox 19+ *!*/
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #C0C0C0;
+}
+input::-ms-input-placeholder {
+  /*color: #F00 ; !*Internet Explorer 10+*!*/
+  font-size: 15px;
+  letter-spacing: 2px;
+  color: #C0C0C0;
+}
+input[type="password"]::-ms-reveal{
+  display:none
+}
