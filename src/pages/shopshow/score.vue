@@ -2,8 +2,8 @@
   <div class="pages">
     <top2 title=""></top2>
     <van-swipe :autoplay="3000">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img v-lazy="image" />
+      <van-swipe-item v-for="(item, index) in images" :key="index">
+        <img v-lazy="item.swiperPicture" />
       </van-swipe-item>
     </van-swipe>
     <div class="myScore">
@@ -41,15 +41,23 @@ export default {
   data() {
     return {
       data:[{name:"海绵宝宝",intro:"可爱的",goodsPictureUrl:"",value:0,goodsId:0}],
-      images: [
-        require("../../assets/image/test/e.jpg"),require("../../assets/image/test/f.jpg")
-      ],
+      images: [{swiperId:0,swiperPicture:""}],
       ind:0,
       credits:0
     };
   },
   created(){
     var that = this
+    this.$axios.get("/api/volunteer/goodsSwiper/getSwiperByNumber?number=3")
+        .then((res) => {
+          if(res!=null){
+            console.log(res);
+            that.images = res.data.result
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     this.$axios.get("/api/volunteer/userInfo/getUserInfoByUserId",
         {
           headers: {
