@@ -7,12 +7,12 @@ module.exports = {
     devServer: {
         open: true, //是否自动弹出浏览器页面
         host: "localhost",
-        port: '1219',
+        port: '8080',
         https: false,
         hotOnly: false,
         proxy: {
             '/api': {
-                target: 'http://8.133.163.197:1219', //API服务器的地址
+                target: 'http://192.168.43.52:8080', //API服务器的地址
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''
@@ -26,7 +26,7 @@ module.exports = {
 
 // module.exports = {
 //     devServer: {
-//         host: "192.168.2.153",
+//         host: "192.168.1.105",
 //         port: 8080  //配置端口
 //     }
 // }

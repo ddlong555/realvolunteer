@@ -7,8 +7,8 @@
         推荐活动
       </div>
       <div class="act-gather">
-        <div class="act-single" @click="activityshow(item.activityId,item.activityPictureList[0].pictureUrl)" v-for="(item,index) in activity" :key="index">
-          <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+        <div class="act-single" v-for="(item,index) in activity" :key="index" @click="activityshow(item.activityId,item.activityPictureList[0].pictureUrl)" >
+          <img :src=GetUrl(item) alt=""/>
           <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
           <div>
             {{ item.activityName }}
@@ -43,7 +43,8 @@ export default {
     return {
       news: {},
       activity: {},
-      swiper: []
+      swiper: [],
+      ImgUrl:require("../../../assets/image/activity/firstPage.png")
     }
   },
   methods: {
@@ -74,6 +75,16 @@ export default {
     GotoTest() {
       this.$router.push('/test')
 
+    }
+  },
+  computed: {
+    GetUrl() {
+      return function ( item) {
+        console.log("d" + item);
+        if (item.activityPictureList.length == 0)
+          return this.ImgUrl
+        return item.activityPictureList[0].pictureUrl
+      }
     }
   },
   created() {
