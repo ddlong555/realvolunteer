@@ -206,6 +206,9 @@ export default {
             console.log(error);
           });
     }
+    else{
+      this.$router.push('/login')
+    }
   },
   methods: {
     Gotoperson() {
