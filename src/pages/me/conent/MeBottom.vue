@@ -37,7 +37,7 @@
     <div class="act" v-if="this.islogin&&this.i==4">
       <div class="Anchorpoint" id="followed"></div>
       <div class="act-single"  v-for="(item,index) in activity[0]" :key="index+'a'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
-        <img :src=item.activityPictureList[0].pictureUrl alt=""/>
+        <img :src=GetUrl(item) alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
           {{ item.activityName }}
@@ -45,7 +45,7 @@
       </div>
       <div class="Anchorpoint" id="booked"></div>
       <div class="act-single" v-for="(item1,index1) in activity[1]" :key="index1+'b'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
-        <img :src=item1.activityPictureList[0].pictureUrl alt=""/>
+        <img :src=GetUrl(item1) alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
           {{ item1.activityName }}
@@ -53,7 +53,7 @@
       </div>
       <div class="Anchorpoint" id="released"></div>
       <div class="act-single"  v-for="(item2,index2) in activity[2]" :key="index2+'c'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
-        <img :src=item2.activityPictureList[0].pictureUrl alt=""/>
+        <img :src=GetUrl(item2) alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
           {{ item2.activityName }}
@@ -61,7 +61,7 @@
       </div>
       <div class="Anchorpoint" id="participated"></div>
       <div class="act-single" v-for="(item3,index3) in activity[3]" :key="index3+'d'" @click="Gotoact(item.activityId,item.activityPictureList[0].pictureUrl)">
-        <img :src=item3.activityPictureList[0].pictureUrl alt=""/>
+        <img :src=GetUrl(item3) alt=""/>
         <!--          <img src="https://activity-picture.oss-cn-shanghai.aliyuncs.com/activityPicture_1/1.png" alt=""/>-->
         <div>
           {{ item3.activityName }}
@@ -96,12 +96,21 @@ export default {
       isFixed: false,
       offsetTop: 0,
       activity: [{},{},{},{}],
-      i:0
+      i:0,
+      ImgUrl:require("../../../assets/image/activity/firstPage.png")
     }
   },
   computed:{
     islogin(){
       return this.$store.getters.getLogin
+    },
+    GetUrl() {
+      return function ( item) {
+        console.log("d" + item);
+        if (item.activityPictureList.length == 0)
+          return this.ImgUrl
+        return item.activityPictureList[0].pictureUrl
+      }
     }
   },
   watch: {
@@ -196,6 +205,9 @@ export default {
           .catch((error) => {
             console.log(error);
           });
+    }
+    else{
+      this.$router.push('/login')
     }
   },
   methods: {

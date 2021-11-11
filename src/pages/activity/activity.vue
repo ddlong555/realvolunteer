@@ -14,9 +14,10 @@
           finished-text="---我是有底线的---"
           @load="onLoad"
       >
-        <div v-for="(i,x) in activity" :key="x">
-          <div v-for="(item,index) in activity[x].data" :key="index" class="content-line" @click="gotoactDis(activity[x].data[index].activityId,activity[x].data[index].activityPictureList[0].pictureUrl)">
-            <img :src=item.activityPictureList[0].pictureUrl class="actimg"/>
+        <div v-for="(i,x) in this.activity" :key="x">
+          <div v-for="(item,index) in i" :key="index" class="content-line"
+               @click="gotoactDis(i[index].activityId,i[index].activityPictureList[0].pictureUrl)">
+            <img :src=GetUrl(0,item) class="actimg"/>
             <p class="line-title">{{ item.activityName }}</p>
             <p class="line-bottom">
             <span>
@@ -46,6 +47,7 @@ export default {
       address: 0,
       type: 'a',
       filter: 0,
+      ImgUrl:require("../../assets/image/activity/firstPage.png"),
       addressOption: [
         {text: '地点', value: 0},
         {text: '徐汇', value: 1},
@@ -84,11 +86,12 @@ export default {
             .then((res) => {
               if (res != null) {
                 var obj = {};
-                obj.data = res.data.result;
+                obj = res.data.result;
                 this.activity.push(obj);
                 this.i++;
               }
-              console.log(this.activity);
+              console.log(this.activity[0][0]);
+              console.log("有数据");
             })
             .catch((error) => {
               console.log(error);
@@ -99,21 +102,10 @@ export default {
           this.finished = true;
         }
       }, 1000);
-      // setTimeout(() => {
-      //   for (let i = 0; i < 10; i++) {
-      //     this.list.push(this.list.length + 1);
-      //   }
-      //   // 加载状态结束
-      //   this.loading = false;
-      //   // 数据全部加载完成
-      //   if (this.list.length >= 30) {
-      //     this.finished = true;
-      //   }
-      // }, 1000);
     },
-    gotoactDis(e,f){
+    gotoactDis(e, f) {
       console.log(e)
-      this.$router.push({path: '/activityDisplay', query: {activityId: e,PictureList:f}})
+      this.$router.push({path: '/activityDisplay', query: {activityId: e, PictureList: f}})
     }
   },
   watch: {//监听搜索
@@ -134,6 +126,16 @@ export default {
       this.loading = true;
       this.list = []
       this.onLoad()
+    }
+  },
+  computed: {
+    GetUrl() {
+      return function (key, item) {
+        console.log("d" + item);
+        if (item.activityPictureList.length == 0)
+          return this.ImgUrl
+        return item.activityPictureList[0].pictureUrl
+      }
     }
   }
 };

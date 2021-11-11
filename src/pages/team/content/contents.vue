@@ -2,10 +2,10 @@
   <div class="contents">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="活动姓名">
-          <el-input v-model="form.name" placeholder="请输入活动姓名"></el-input>
+        <el-input v-model="form.name" placeholder="请输入活动姓名"></el-input>
       </el-form-item>
       <el-form-item label="活动类型">
-          <el-input v-model="form.type" placeholder="请输入活动类型"></el-input>
+        <el-input v-model="form.type" placeholder="请输入活动类型"></el-input>
       </el-form-item>
       <el-form-item label="活动时间">
         <el-col class="month" :span="8">
@@ -40,16 +40,16 @@
       <el-form-item label="活动内容">
         <el-col class="declaration" :span="150">
           <el-input
-            type="textarea"
-            :rows="4"
-            placeholder="请输入内容"
-            v-model="form.textarea">
+              type="textarea"
+              :rows="4"
+              placeholder="请输入内容"
+              v-model="form.textarea">
           </el-input>
         </el-col>
       </el-form-item>
     </el-form>
     <el-row class="buttons">
-<!--      <input type="file" style="display: none;" id="file" ref="myFile" multiple="multiple" @click="upload">-->
+      <!--      <input type="file" style="display: none;" id="file" ref="myFile" multiple="multiple" @click="upload">-->
       <el-upload
           class="upload-demo"
           ref="upload"
@@ -85,231 +85,207 @@
 <script>
 export default {
   name: "contents",
-  data(){
-    return{
-      month:[{
-        value:'1',
-        label:'1'
-      },{
-        value:'2',
-        label:'2'
-      },{
-        value:'3',
-        label:'3'
-      },{
-        value:'4',
-        label:'4'
-      },{
-        value:'5',
-        label:'5'
-      },{
-        value:'6',
-        label:'6'
-      },{
-        value:'7',
-        label:'7'
-      },{
-        value:'8',
-        label:'8'
-      },{
-        value:'9',
-        label:'9'
-      },{
-        value:'10',
-        label:'10'
-      },{
-        value:'11',
-        label:'11'
-      },{
-        value:'12',
-        label:'12'
+  data() {
+    return {
+      month: [{
+        value: '1',
+        label: '1'
+      }, {
+        value: '2',
+        label: '2'
+      }, {
+        value: '3',
+        label: '3'
+      }, {
+        value: '4',
+        label: '4'
+      }, {
+        value: '5',
+        label: '5'
+      }, {
+        value: '6',
+        label: '6'
+      }, {
+        value: '7',
+        label: '7'
+      }, {
+        value: '8',
+        label: '8'
+      }, {
+        value: '9',
+        label: '9'
+      }, {
+        value: '10',
+        label: '10'
+      }, {
+        value: '11',
+        label: '11'
+      }, {
+        value: '12',
+        label: '12'
       },],
-      date:[{
-        value:'1',
-        label:'1'
-      },{
-        value:'2',
-        label:'2'
-      },{
-        value:'3',
-        label:'3'
-      },{
-        value:'4',
-        label:'4'
-      },{
-        value:'5',
-        label:'5'
-      },{
-        value:'6',
-        label:'6'
-      },{
-        value:'7',
-        label:'7'
-      },{
-        value:'8',
-        label:'8'
-      },{
-        value:'9',
-        label:'9'
-      },{
-        value:'10',
-        label:'10'
-      },{
-        value:'11',
-        label:'11'
-      },{
-        value:'12',
-        label:'12'
-      },{
-        value:'13',
-        label:'13'
-      },{
-        value:'14',
-        label:'13'
-      },{
-        value:'15',
-        label:'15'
-      },{
-        value:'16',
-        label:'16'
-      },{
-        value:'17',
-        label:'17'
-      },{
-        value:'18',
-        label:'18'
-      },{
-        value:'19',
-        label:'19'
-      },{
-        value:'20',
-        label:'20'
-      },{
-        value:'21',
-        label:'21'
-      },{
-        value:'22',
-        label:'22'
-      },{
-        value:'23',
-        label:'23'
-      },{
-        value:'24',
-        label:'24'
-      },{
-        value:'25',
-        label:'25'
-      },{
-        value:'26',
-        label:'26'
-      },{
-        value:'27',
-        label:'27'
-      },{
-        value:'28',
-        label:'28'
-      },{
-        value:'29',
-        label:'29'
-      },{
-        value:'30',
-        label:'30'
-      },{
-        value:'31',
-        label:'31'
+      date: [{
+        value: '1',
+        label: '1'
+      }, {
+        value: '2',
+        label: '2'
+      }, {
+        value: '3',
+        label: '3'
+      }, {
+        value: '4',
+        label: '4'
+      }, {
+        value: '5',
+        label: '5'
+      }, {
+        value: '6',
+        label: '6'
+      }, {
+        value: '7',
+        label: '7'
+      }, {
+        value: '8',
+        label: '8'
+      }, {
+        value: '9',
+        label: '9'
+      }, {
+        value: '10',
+        label: '10'
+      }, {
+        value: '11',
+        label: '11'
+      }, {
+        value: '12',
+        label: '12'
+      }, {
+        value: '13',
+        label: '13'
+      }, {
+        value: '14',
+        label: '13'
+      }, {
+        value: '15',
+        label: '15'
+      }, {
+        value: '16',
+        label: '16'
+      }, {
+        value: '17',
+        label: '17'
+      }, {
+        value: '18',
+        label: '18'
+      }, {
+        value: '19',
+        label: '19'
+      }, {
+        value: '20',
+        label: '20'
+      }, {
+        value: '21',
+        label: '21'
+      }, {
+        value: '22',
+        label: '22'
+      }, {
+        value: '23',
+        label: '23'
+      }, {
+        value: '24',
+        label: '24'
+      }, {
+        value: '25',
+        label: '25'
+      }, {
+        value: '26',
+        label: '26'
+      }, {
+        value: '27',
+        label: '27'
+      }, {
+        value: '28',
+        label: '28'
+      }, {
+        value: '29',
+        label: '29'
+      }, {
+        value: '30',
+        label: '30'
+      }, {
+        value: '31',
+        label: '31'
       },],
-      form:{
-        name:'',
-        type:'',
-        date:'',
-        month:'',
+      form: {
+        name: '',
+        type: '',
+        date: '',
+        month: '',
         num: 0,
-        place:'',
-        textarea:'',
+        place: '',
+        textarea: '',
         fileList: [],
         picList: [],
       },
+      activityClass:{
+        activityName:"活动名字",
+        activityContent:"活动内容",
+        requestedNumber:0,
+        activityType:"援助",
+        activityPlace:"上海",
+        activityDate:""
+      }
     }
   },
-  methods:{
-    // beforeUpload (file,id) {
-    // let fd = new FormData()
-    // fd.append('file', file)
-    // fd.append('id',id)
-    // axios.post(url, fd, {
-    //
-    // })
-    // return false
-    // },
-    upload(){
+  methods: {
+    upload() {
       console.log(this.$store.getters.getUser.userId);
     },
-    submit(){
+    submit() {
       console.log(this.$store.getters.getToken)
       var that = this;
       let formData = new FormData();
-      let dat = new Date(that.form.month + ' ' + that.form.date + ',2000');
+      if(that.form.month==''){
+        that.form.month=new Date().getMonth()+1;
+      }
+      if(that.form.date==''){
+        that.form.date=new Date().getDate();
+      }
       formData.append("activityName",that.form.name);
       formData.append("activityContent",that.form.textarea);
       formData.append("requestedNumber",that.form.num);
       formData.append("activityType",that.form.type);
       formData.append("activityPlace",that.form.place);
-      formData.append("activityDate",dat);
+      formData.append("activityDate","2021-"+that.form.month+"-"+that.form.date);
       // that.$refs.upload.uploadFiles.map((item)=> {
       //   formData.append("signFileModel", item.raw,item.name);
       // })
-      that.form.fileList.map((item)=> {
-        formData.append("signFileModel", item.raw);
+      that.form.fileList.map((item) => {
+        formData.append("uploadSignFileModel", item.raw);
       })
-      that.form.picList.map((item)=> {
-        formData.append(" activityPicture", item.raw);
+      that.form.picList.map((item) => {
+        formData.append(" uploadActivityPicture", item.raw);
       })
       this.$axios({
-        'url':"/api/volunteer/activity/addActivity",
-        'method':'POST',
-        'data':formData,
-        headers:{
-          "token":this.$store.getters.getToken,
-          'Content-Type':'multipart/form-data',
+        'url': "/api/volunteer/activity/addActivity",
+        'method': 'POST',
+        'data': formData,
+        headers: {
+          "token": this.$store.getters.getToken,
+          'Content-Type': 'multipart/form-data',
         }
-      }).then((res)=>{
+      }).then((res) => {
         console.log(res);
-        if(res.data.success == true){
+        if (res.data.success == true) {
           alert("上传文件成功！")
           console.log(formData);
-        }
-        else{
+        } else {
           alert("失败！")
         }
       })
-      // this.$axios.post("/api/volunteer/activity/addActivity",JSON.stringify({
-      //   "activityList": [{
-      //     "activityName": that.form.name,
-      //     "activityContent": that.form.textarea,
-      //     "activityOrganizer": that.form.author,
-      //     "enrolledNumber": null,
-      //     "requestedNumber": that.form.num,
-      //     "activityType": that.form.type,
-      //     "activityPlace": that.form.place,
-      //     "isActivityPicture": false,
-      //       }]
-      //     }),{
-      //       headers: {token: that.$store.getters.getToken,"Content-Type": "application/json;charset=utf-8"}
-      //     }
-      // )
-      //     .then(function (response) {
-      //       if(response.data.success == true){
-      //         alert("修改成功")
-      //         that.$router.push('/firstpage')
-      //       }
-      //       else{
-      //         alert("修改失败")
-      //       }
-      //       console.log(that)
-      //     })
-      //     .catch(function (error) {
-      //       console.log(error);
-      //     });
+
     },
     handleChange1(file, fileList) {
       // console.log(this.form.fileList);
@@ -334,13 +310,14 @@ export default {
 </script>
 
 <style scoped>
-.contents{
-  position:absolute;
-  top:10%;
-  left:5%;
+.contents {
+  position: absolute;
+  top: 10%;
+  left: 5%;
 }
-.buttons{
-  position:absolute;
-  left:20%;
+
+.buttons {
+  position: absolute;
+  left: 20%;
 }
 </style>

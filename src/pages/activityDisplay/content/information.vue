@@ -23,7 +23,7 @@
       <img v-if="!yesoryes" src="../../../assets/image/activity/H.svg" @click="change" alt="" />
       <img v-else src="../../../assets/image/activity/Heart.svg" @click="change" alt="" />
     </div>
-    <van-button class="button2" type="primary" color="black" block>下载报名表</van-button>
+    <van-button class="button2" type="primary" color="black" @click="ClickToUrl" block>下载报名表</van-button>
   </div>
 </template>
 
@@ -38,6 +38,7 @@ export default {
       place:"中国上海",
       evaluate:"这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。这活动挺好的。",
       yesoryes: false,
+      downloadUrl:""
     }
   },
   created(){
@@ -60,6 +61,12 @@ export default {
             that.evaluate = res.data.result.activityContent
             that.name = res.data.result.enrolledNumber
             that.background = this.$route.query.PictureList
+            if(res.data.result.activitySignFileModelList.length==0){
+              alert("暂无报名表");
+            }
+            else{
+              that.downloadUrl=res.data.result.activitySignFileModelList[0].fileModelUrl;
+            }
           }
           else{
             alert("?")
@@ -70,8 +77,12 @@ export default {
         });
   },
   methods:{
-    change(){
+    change() {
       this.yesoryes = !this.yesoryes
+    },
+    ClickToUrl(){
+      console.log("dd");
+      window.open(this.downloadUrl);
     }
   }
 }

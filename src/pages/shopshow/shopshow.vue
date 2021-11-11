@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import Swiper from "@/components/common/swiper/swiper";
+// import Swiper from "@/components/common/swiper/swiper";
 import shopshowtop from "@/pages/shopshow/shopshowtop";
 
 export default {
